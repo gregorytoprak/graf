@@ -10,12 +10,7 @@ class Node extends Component {
   }
 
   handleMouseDown = (e) => {
-    if (e.shiftKey) { return }
-    this.props.movingNode(this.props.id)
-  }
-
-  handleMouseUp = (e) => {
-    e.stopPropagation()
+    this.props.nodeGrabbed(this.props.id)
   }
 
   render () {
@@ -23,7 +18,6 @@ class Node extends Component {
       <circle id={this.props.id} cx={this.props.x} cy={this.props.y}
         onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
         fill='black' r='1'
       />
     )

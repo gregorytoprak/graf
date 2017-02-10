@@ -7,8 +7,7 @@
 - [x] Delete a given node
 - [x] Move a given node
   - [x] ... by dragging
-  - [ ] ... without it visibly teleporting
-- [ ] Edit a given node
-- [ ] Clicking two nodes in succession creates an edge between them
-- [ ] Edit menu comes up when a node or edge is selected
+  - [x] ... without it visibly teleporting
+- [ ] Create an edge between two nodes
+- [ ] Delete a given edge
 - [ ] Edit menu can modify style attributes of selected object
