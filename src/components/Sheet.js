@@ -3,6 +3,7 @@ import Node from './Node'
 
 class Sheet extends Component {
   state = {
+    dragging: { node: false, id: false },
     dims: { w: 100, h: 100 },
     rawDims: { x: 0, y: 0, w: 1, h: 1 },
     nodes: []
@@ -43,32 +44,42 @@ class Sheet extends Component {
     })
   }
 
-  // moveNode = (nodeId, rawNewLoc) => {
-  //   const newLoc = this.rawToReal(rawNewLoc)
-  //   this.setState({
-  //     nodes: this.state.nodes.map(node => {
-  //       if (node.id === nodeId) {
-  //         return {
-  //           id: node.id,
-  //           x: newLoc.x,
-  //           y: newLoc.y
-  //         }
-  //       } else {
-  //         return node
-  //       }
-  //     })
-  //   })
-  // }
+  movingNode = (nodeId) => {
+    this.setState({
+      dragging: { node: true, id: nodeId }
+    })
+  }
+
+  movedNode = (e) => {
+    if (!this.state.dragging.node) { return }
+    const newLoc = this.rawToReal({ x: e.pageX, y: e.pageY })
+    this.setState({
+      nodes: this.state.nodes.map(node => {
+        if (node.id === this.state.dragging.id) {
+          return {
+            ...node,
+            x: newLoc.x,
+            y: newLoc.y
+          }
+        } else {
+          return node
+        }
+      }),
+      dragging: { node: false, id: false }
+    })
+  }
 
   render () {
     const viewBox = `0 0 ${this.state.dims.w} ${this.state.dims.h}`
     return (
       <svg id='Sheet' className='Sheet' style={{ background: '#bbb' }} viewBox={viewBox}
-        onClick={this.createNode}
+        onDoubleClick={this.createNode}
+        onMouseUp={this.movedNode}
       >
         {this.state.nodes.map((node) =>
           <Node key={node.id} {...node}
             deleteNode={this.deleteNode}
+            movingNode={this.movingNode}
           />
         )}
       </svg>

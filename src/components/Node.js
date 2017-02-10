@@ -9,15 +9,21 @@ class Node extends Component {
     }
   }
 
-  // handleDrag = (e) => {
-  //   console.log(e)
-  // }
+  handleMouseDown = (e) => {
+    if (e.shiftKey) { return }
+    this.props.movingNode(this.props.id)
+  }
+
+  handleMouseUp = (e) => {
+    e.stopPropagation()
+  }
 
   render () {
     return (
       <circle id={this.props.id} cx={this.props.x} cy={this.props.y}
         onClick={this.handleClick}
-        // onDrag={this.handleDrag}
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
         fill='black' r='1'
       />
     )
