@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Node from './Node'
 
 class Sheet extends Component {
   constructor (props) {
@@ -10,8 +11,8 @@ class Sheet extends Component {
       nodes: []
     }
 
-    this.handleClick = this.handleClick.bind(this)
-    this.renderNode = this.renderNode.bind(this)
+    this.createNode = this.createNode.bind(this)
+    this.deleteNode = this.deleteNode.bind(this)
   }
 
   componentDidMount () {
@@ -25,29 +26,38 @@ class Sheet extends Component {
     this.setState({ rawSheetCoords })
   }
 
-  handleClick (event) {
-    event.persist()
-    const click = { x: event.pageX, y: event.pageY }
+  createNode (e) {
+    if (e.shiftKey) { return }
     const sheet = this.state.rawSheetCoords
     const node = {
-      key: this.state.nodes.length,
-      cx: (click.x - sheet.x) * this.state.realDims.w / sheet.w,
-      cy: (click.y - sheet.y) * this.state.realDims.h / sheet.h
+      id: Date.now(),
+      cx: (e.pageX - sheet.x) * this.state.realDims.w / sheet.w,
+      cy: (e.pageY - sheet.y) * this.state.realDims.h / sheet.h
     }
     this.setState({ nodes: [...this.state.nodes, node] })
   }
 
-  renderNode (node) {
-    return (
-      <circle key={node.key} fill='black' cx={node.cx} cy={node.cy} r='1' />
-    )
+  deleteNode (nodeId) {
+    this.setState({
+      nodes: this.state.nodes.filter(node => node.id !== nodeId)
+    })
   }
 
   render () {
     const viewBox = `0 0 ${this.state.realDims.w} ${this.state.realDims.h}`
     return (
-      <svg id='Sheet' className='Sheet' style={{ background: '#282' }} viewBox={viewBox} onClick={this.handleClick}>
-        {this.state.nodes.map(this.renderNode)}
+      <svg id='Sheet' className='Sheet' style={{ background: '#bbb' }} viewBox={viewBox}
+        onClick={this.createNode}
+      >
+        {this.state.nodes.map((node) =>
+          <Node
+            key={node.id}
+            id={node.id}
+            cx={node.cx}
+            cy={node.cy}
+            deleteNode={this.deleteNode}
+          />
+        )}
       </svg>
     )
   }

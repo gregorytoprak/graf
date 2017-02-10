@@ -16,8 +16,9 @@ class App extends Component {
             <Sheet />
           </Col>
           <Col xs={2}>
-            <h3>Sidebar</h3>
-            <p>Click around!</p>
+            <h3>Functionality</h3>
+            <p>Click to create a node.</p>
+            <p>Shift + click a node to delete it.</p>
           </Col>
         </Row>
       </Grid>
