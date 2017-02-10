@@ -17,8 +17,9 @@ class App extends Component {
           </Col>
           <Col xs={2}>
             <h3>Functionality</h3>
-            <p>Click to create a node.</p>
-            <p>Shift + click a node to delete it.</p>
+            <p>Double-click to create a node.</p>
+            <p>Shift-click a node to delete it.</p>
+            <p>Drag and drop a node to move it.</p>
           </Col>
         </Row>
       </Grid>

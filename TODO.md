@@ -2,9 +2,13 @@
 
 ## Todo
 
-- [x] Click the canvas to add a new node at that point
-- [x] Shift-click node to remove it
-- [ ] Dragging node moves it
+- [x] Create a node at a point
+  - [x] ... where you clicked
+- [x] Delete a given node
+- [x] Move a given node
+  - [x] ... by dragging
+  - [ ] ... without it visibly teleporting
+- [ ] Edit a given node
 - [ ] Clicking two nodes in succession creates an edge between them
 - [ ] Edit menu comes up when a node or edge is selected
 - [ ] Edit menu can modify style attributes of selected object
