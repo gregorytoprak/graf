@@ -5,25 +5,20 @@ class Graph extends Component {
   state = {
     dragging: { node: false, id: false },
     dims: { w: 100, h: 100 },
-    rawDims: { x: 0, y: 0, w: 1, h: 1 },
     nodes: []
   }
 
-  componentDidMount () {
-    const r = document.getElementById('Graph').getBoundingClientRect()
+  rawToReal = (rawLoc) => {
+    const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
     const rawDims = {
       x: r.left,
       y: r.top,
       w: r.right - r.left,
       h: r.bottom - r.top
     }
-    this.setState({ rawDims })
-  }
-
-  rawToReal = (rawLoc) => {
     return {
-      x: (rawLoc.x - this.state.rawDims.x) * (this.state.dims.w / this.state.rawDims.w),
-      y: (rawLoc.y - this.state.rawDims.y) * (this.state.dims.h / this.state.rawDims.h)
+      x: (rawLoc.x - rawDims.x) * (this.state.dims.w / rawDims.w),
+      y: (rawLoc.y - rawDims.y) * (this.state.dims.h / rawDims.h)
     }
   }
 
