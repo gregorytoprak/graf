@@ -3,23 +3,25 @@ import Node from './Node'
 
 class Graph extends Component {
   state = {
-    dragging: { node: false, id: false },
-    dims: { w: 100, h: 100 },
+    dims: { x: 0, y: 0, w: 20, h: 20 },
+    dragging: { type: 'NONE', id: null },
     nodes: []
   }
 
   rawToReal = (rawLoc) => {
     const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
     const rawDims = {
-      x: r.left,
-      y: r.top,
-      w: r.right - r.left,
-      h: r.bottom - r.top
+      x: r.left, y: r.top, w: r.right - r.left, h: r.bottom - r.top
     }
-    return {
-      x: (rawLoc.x - rawDims.x) * (this.state.dims.w / rawDims.w),
-      y: (rawLoc.y - rawDims.y) * (this.state.dims.h / rawDims.h)
+    const unitLoc = {
+      x: (rawLoc.x - rawDims.x) / rawDims.w,
+      y: (rawLoc.y - rawDims.y) / rawDims.h
     }
+    const loc = {
+      x: (unitLoc.x * this.state.dims.w) + this.state.dims.x,
+      y: (unitLoc.y * this.state.dims.h) + this.state.dims.y
+    }
+    return loc
   }
 
   createNode = (e) => {
@@ -41,12 +43,12 @@ class Graph extends Component {
 
   movingNode = (nodeId) => {
     this.setState({
-      dragging: { node: true, id: nodeId }
+      dragging: { type: 'NODE', id: nodeId }
     })
   }
 
   movedNode = (e) => {
-    if (!this.state.dragging.node) { return }
+    if (!this.state.dragging.type === 'NODE') { return }
     const newLoc = this.rawToReal({ x: e.pageX, y: e.pageY })
     this.setState({
       nodes: this.state.nodes.map(node => {
@@ -60,15 +62,15 @@ class Graph extends Component {
           return node
         }
       }),
-      dragging: { node: false, id: false }
+      dragging: { type: 'NONE', id: null }
     })
   }
 
   render () {
-    const viewBox = `0 0 ${this.state.dims.w} ${this.state.dims.h}`
+    const viewBox = `${this.state.dims.x} ${this.state.dims.y} ${this.state.dims.w} ${this.state.dims.h}`
     return (
       <svg id='Graph' className='Graph' style={{ background: '#bbb' }} viewBox={viewBox}
-        onDoubleClick={this.createNode}
+        onClick={this.createNode}
         onMouseUp={this.movedNode}
       >
         {this.state.nodes.map((node) =>
