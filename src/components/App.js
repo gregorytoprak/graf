@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Sheet from './Sheet'
+import Graph from './Graph'
 import { Grid, Row, Col, PageHeader } from 'react-bootstrap'
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
         </Row>
         <Row>
           <Col xs={8} xsOffset={1}>
-            <Sheet />
+            <Graph />
           </Col>
           <Col xs={2}>
             <h3>Functionality</h3>

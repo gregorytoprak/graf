@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Node from './Node'
 
-class Sheet extends Component {
+class Graph extends Component {
   state = {
     dragging: { node: false, id: false },
     dims: { w: 100, h: 100 },
@@ -10,7 +10,7 @@ class Sheet extends Component {
   }
 
   componentDidMount () {
-    const r = document.getElementById('Sheet').getBoundingClientRect()
+    const r = document.getElementById('Graph').getBoundingClientRect()
     const rawDims = {
       x: r.left,
       y: r.top,
@@ -72,7 +72,7 @@ class Sheet extends Component {
   render () {
     const viewBox = `0 0 ${this.state.dims.w} ${this.state.dims.h}`
     return (
-      <svg id='Sheet' className='Sheet' style={{ background: '#bbb' }} viewBox={viewBox}
+      <svg id='Graph' className='Graph' style={{ background: '#bbb' }} viewBox={viewBox}
         onDoubleClick={this.createNode}
         onMouseUp={this.movedNode}
       >
@@ -87,4 +87,4 @@ class Sheet extends Component {
   }
 }
 
-export default Sheet
+export default Graph
