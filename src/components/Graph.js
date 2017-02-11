@@ -5,7 +5,7 @@ import Edge from './Edge'
 class Graph extends Component {
   state = {
     dims: { x: 0, y: 0, w: 20, h: 20 },
-    grabbed: { type: 'EMPTY', id: null },
+    grabbed: { type: 'EMPTY', data: {} },
     nodes: [],
     edges: []
   }
@@ -28,12 +28,16 @@ class Graph extends Component {
   }
 
   handleDoubleClick = (e) => {
-    this.createNode(this.getLoc(e))
+    if (this.state.grabbed.type === 'EMPTY') {
+      this.createNode(this.getLoc(e))
+    }
   }
 
   handleMouseMove = (e) => {
     if (this.state.grabbed.type === 'NODE') {
-      this.moveNode(this.state.grabbed.id, this.getLoc(e))
+      this.moveNode(this.state.grabbed.data.id, this.getLoc(e))
+    } else if (this.state.grabbed.type === 'NEW_EDGE') {
+      this.moveNewEdge(this.state.grabbed.data.id, this.getLoc(e))
     }
   }
 
@@ -48,7 +52,7 @@ class Graph extends Component {
   nodeGrabbed = (nodeId) => {
     if (this.state.grabbed.type === 'EMPTY') {
       this.setState({
-        grabbed: { type: 'NODE', id: nodeId }
+        grabbed: { type: 'NODE', data: { id: nodeId } }
       })
     }
   }
@@ -56,30 +60,34 @@ class Graph extends Component {
   nodeReleased = () => {
     if (this.state.grabbed.type === 'NODE') {
       this.setState({
-        grabbed: { type: 'EMPTY', id: null }
+        grabbed: { type: 'EMPTY', data: {} }
       })
     }
   }
 
   edgeStarted = (startNodeId) => {
     if (this.state.grabbed.type === 'EMPTY') {
+      const newEdgeId = this.createEdge(startNodeId)
       this.setState({
-        grabbed: { type: 'NEW_EDGE', id: startNodeId }
+        grabbed: { type: 'NEW_EDGE', data: { id: newEdgeId, startNodeId: startNodeId } }
       })
     }
   }
 
   edgeEnded = (endNodeId) => {
     if (this.state.grabbed.type === 'NEW_EDGE') {
-      this.createEdge(this.state.grabbed.id, endNodeId)
-      this.edgeReleased()
+      this.completeEdge(this.state.grabbed.data.id, endNodeId)
+      this.setState({
+        grabbed: { type: 'EMPTY', data: {} }
+      })
     }
   }
 
   edgeReleased = () => {
     if (this.state.grabbed.type === 'NEW_EDGE') {
+      this.deleteEdge(this.state.grabbed.data.id)
       this.setState({
-        grabbed: { type: 'EMPTY', id: null }
+        grabbed: { type: 'EMPTY', data: {} }
       })
     }
   }
@@ -99,13 +107,13 @@ class Graph extends Component {
     })
   }
 
-  moveNode = (nodeId, newLoc) => {
+  moveNode = (nodeId, loc) => {
     this.setState({
       nodes: this.state.nodes.map(node => {
         if (node.id === nodeId) {
           return {
-            id: node.id,
-            loc: newLoc
+            ...node,
+            loc: loc
           }
         } else {
           return node
@@ -114,13 +122,46 @@ class Graph extends Component {
     })
   }
 
-  createEdge = (startNodeId, endNodeId) => {
+  createEdge = (startNodeId) => {
     const edge = {
       id: Date.now(),
-      startNodeId,
-      endNodeId
+      startNodeId: startNodeId,
+      endNodeId: null,
+      endLoc: this.state.nodes.find(node => node.id === startNodeId).loc
     }
     this.setState({ edges: [...this.state.edges, edge] })
+    return edge.id
+  }
+
+  moveNewEdge = (edgeId, loc) => {
+    this.setState({
+      edges: this.state.edges.map(edge => {
+        if (edge.id === edgeId) {
+          return {
+            ...edge,
+            endLoc: loc
+          }
+        } else {
+          return edge
+        }
+      })
+    })
+  }
+
+  completeEdge = (edgeId, endNodeId) => {
+    this.setState({
+      edges: this.state.edges.map(edge => {
+        if (edge.id === edgeId) {
+          return {
+            ...edge,
+            endNodeId: endNodeId,
+            endLoc: null
+          }
+        } else {
+          return edge
+        }
+      })
+    })
   }
 
   deleteEdge = (edgeId) => {
@@ -143,11 +184,17 @@ class Graph extends Component {
 
   renderEdge = (edge) => {
     const startNode = this.state.nodes.find(node => node.id === edge.startNodeId)
-    const endNode = this.state.nodes.find(node => node.id === edge.endNodeId)
+    let endLoc
+    if (edge.endNodeId !== null) {
+      const endNode = this.state.nodes.find(node => node.id === edge.endNodeId)
+      endLoc = endNode.loc
+    } else {
+      endLoc = edge.endLoc
+    }
     return (
       <Edge key={edge.id} id={edge.id}
         startLoc={startNode.loc}
-        endLoc={endNode.loc}
+        endLoc={endLoc}
         deleteEdge={this.deleteEdge}
       />
     )

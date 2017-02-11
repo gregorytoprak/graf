@@ -8,6 +8,7 @@
 - [x] Move a given node
   - [x] ... by dragging
   - [x] ... without it visibly teleporting
-- [ ] Create an edge between two nodes
-- [ ] Delete a given edge
+- [x] Create an edge between two nodes
+  - [ ] ... without teleportation
+- [x] Delete a given edge
 - [ ] Edit menu can modify style attributes of selected object

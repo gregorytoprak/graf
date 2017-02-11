@@ -19,6 +19,7 @@ class Node extends Component {
 
   handleMouseUp = (e) => {
     if (e.metaKey) {
+      e.stopPropagation()
       this.props.edgeEnded(this.props.id)
     }
   }
