@@ -1,27 +1,13 @@
 import React, { Component } from 'react'
 import Node from './Node'
+import Edge from './Edge'
 
 class Graph extends Component {
   state = {
     dims: { x: 0, y: 0, w: 20, h: 20 },
     grabbed: { type: 'EMPTY', id: null },
-    nodes: []
-  }
-
-  handleDoubleClick = (e) => {
-    this.createNode(this.getLoc(e))
-  }
-
-  handleMouseMove = (e) => {
-    if (this.state.grabbed.type === 'NODE') {
-      this.moveNode(this.state.grabbed.id, this.getLoc(e))
-    }
-  }
-
-  handleMouseUp = (e) => {
-    if (this.state.grabbed.type === 'NODE') {
-      this.nodeReleased()
-    }
+    nodes: [],
+    edges: []
   }
 
   getLoc = (e) => {
@@ -41,35 +27,22 @@ class Graph extends Component {
     return loc
   }
 
-  createNode = (loc) => {
-    const node = {
-      id: Date.now(),
-      x: loc.x,
-      y: loc.y
+  handleDoubleClick = (e) => {
+    this.createNode(this.getLoc(e))
+  }
+
+  handleMouseMove = (e) => {
+    if (this.state.grabbed.type === 'NODE') {
+      this.moveNode(this.state.grabbed.id, this.getLoc(e))
     }
-    this.setState({ nodes: [...this.state.nodes, node] })
   }
 
-  deleteNode = (nodeId) => {
-    this.setState({
-      nodes: this.state.nodes.filter(node => node.id !== nodeId)
-    })
-  }
-
-  moveNode = (nodeId, newLoc) => {
-    this.setState({
-      nodes: this.state.nodes.map(node => {
-        if (node.id === nodeId) {
-          return {
-            ...node,
-            x: newLoc.x,
-            y: newLoc.y
-          }
-        } else {
-          return node
-        }
-      })
-    })
+  handleMouseUp = (e) => {
+    if (this.state.grabbed.type === 'NODE') {
+      this.nodeReleased()
+    } else if (this.state.grabbed.type === 'NEW_EDGE') {
+      this.edgeReleased()
+    }
   }
 
   nodeGrabbed = (nodeId) => {
@@ -88,20 +61,108 @@ class Graph extends Component {
     }
   }
 
+  edgeStarted = (startNodeId) => {
+    if (this.state.grabbed.type === 'EMPTY') {
+      this.setState({
+        grabbed: { type: 'NEW_EDGE', id: startNodeId }
+      })
+    }
+  }
+
+  edgeEnded = (endNodeId) => {
+    if (this.state.grabbed.type === 'NEW_EDGE') {
+      this.createEdge(this.state.grabbed.id, endNodeId)
+      this.edgeReleased()
+    }
+  }
+
+  edgeReleased = () => {
+    if (this.state.grabbed.type === 'NEW_EDGE') {
+      this.setState({
+        grabbed: { type: 'EMPTY', id: null }
+      })
+    }
+  }
+
+  createNode = (loc) => {
+    const node = {
+      id: Date.now(),
+      loc: loc
+    }
+    this.setState({ nodes: [...this.state.nodes, node] })
+  }
+
+  deleteNode = (nodeId) => {
+    this.setState({
+      nodes: this.state.nodes.filter(node => node.id !== nodeId),
+      edges: this.state.edges.filter(edge => edge.startNodeId !== nodeId && edge.endNodeId !== nodeId)
+    })
+  }
+
+  moveNode = (nodeId, newLoc) => {
+    this.setState({
+      nodes: this.state.nodes.map(node => {
+        if (node.id === nodeId) {
+          return {
+            id: node.id,
+            loc: newLoc
+          }
+        } else {
+          return node
+        }
+      })
+    })
+  }
+
+  createEdge = (startNodeId, endNodeId) => {
+    const edge = {
+      id: Date.now(),
+      startNodeId,
+      endNodeId
+    }
+    this.setState({ edges: [...this.state.edges, edge] })
+  }
+
+  deleteEdge = (edgeId) => {
+    this.setState({
+      edges: this.state.edges.filter(edge => edge.id !== edgeId)
+    })
+  }
+
+  renderNode = (node) => {
+    return (
+      <Node key={node.id} id={node.id}
+        loc={node.loc}
+        deleteNode={this.deleteNode}
+        nodeGrabbed={this.nodeGrabbed}
+        edgeStarted={this.edgeStarted}
+        edgeEnded={this.edgeEnded}
+      />
+    )
+  }
+
+  renderEdge = (edge) => {
+    const startNode = this.state.nodes.find(node => node.id === edge.startNodeId)
+    const endNode = this.state.nodes.find(node => node.id === edge.endNodeId)
+    return (
+      <Edge key={edge.id} id={edge.id}
+        startLoc={startNode.loc}
+        endLoc={endNode.loc}
+        deleteEdge={this.deleteEdge}
+      />
+    )
+  }
+
   render () {
     const viewBox = `${this.state.dims.x} ${this.state.dims.y} ${this.state.dims.w} ${this.state.dims.h}`
     return (
-      <svg id='Graph' className='Graph' style={{ background: '#bbb' }} viewBox={viewBox}
+      <svg id='Graph' className='Graph' style={{ border: '1px solid black' }} viewBox={viewBox}
         onDoubleClick={this.handleDoubleClick}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
       >
-        {this.state.nodes.map((node) =>
-          <Node key={node.id} {...node}
-            deleteNode={this.deleteNode}
-            nodeGrabbed={this.nodeGrabbed}
-          />
-        )}
+        {this.state.edges.map(this.renderEdge)}
+        {this.state.nodes.map(this.renderNode)}
       </svg>
     )
   }
