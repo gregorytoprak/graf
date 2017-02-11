@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+h1 small {
+  color: #777;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  width: 80vmax;
+  height: 80vmax;
+}
+.Graph {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+}

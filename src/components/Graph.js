@@ -10,12 +10,19 @@ class Graph extends Component {
     edges: []
   }
 
+  getRawDims = () => {
+    const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
+    return {
+      x: r.left,
+      y: r.top,
+      w: r.right - r.left,
+      h: r.bottom - r.top
+    }
+  }
+
   getLoc = (e) => {
     const rawLoc = { x: e.clientX, y: e.clientY }
-    const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
-    const rawDims = {
-      x: r.left, y: r.top, w: r.right - r.left, h: r.bottom - r.top
-    }
+    const rawDims = this.getRawDims()
     const unitLoc = {
       x: (rawLoc.x - rawDims.x) / rawDims.w,
       y: (rawLoc.y - rawDims.y) / rawDims.h
@@ -203,7 +210,9 @@ class Graph extends Component {
   render () {
     const viewBox = `${this.state.dims.x} ${this.state.dims.y} ${this.state.dims.w} ${this.state.dims.h}`
     return (
-      <svg id='Graph' className='Graph' style={{ border: '1px solid black' }} viewBox={viewBox}
+      <svg className='Graph' viewBox={viewBox}
+        width={0}
+        height={0}
         onDoubleClick={this.handleDoubleClick}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
