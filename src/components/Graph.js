@@ -102,7 +102,8 @@ class Graph extends Component {
   createNode = (loc) => {
     const node = {
       id: Date.now(),
-      loc: loc
+      loc: loc,
+      selected: false
     }
     this.setState({ nodes: [...this.state.nodes, node] })
   }
@@ -111,6 +112,21 @@ class Graph extends Component {
     this.setState({
       nodes: this.state.nodes.filter(node => node.id !== nodeId),
       edges: this.state.edges.filter(edge => edge.startNodeId !== nodeId && edge.endNodeId !== nodeId)
+    })
+  }
+
+  toggleSelectNode = (nodeId) => {
+    this.setState({
+      nodes: this.state.nodes.map(node => {
+        if (node.id === nodeId) {
+          return {
+            ...node,
+            selected: !node.selected
+          }
+        } else {
+          return node
+        }
+      })
     })
   }
 
@@ -179,9 +195,9 @@ class Graph extends Component {
 
   renderNode = (node) => {
     return (
-      <Node key={node.id} id={node.id}
-        loc={node.loc}
+      <Node key={node.id} {...node}
         deleteNode={this.deleteNode}
+        toggleSelectNode={this.toggleSelectNode}
         nodeGrabbed={this.nodeGrabbed}
         edgeStarted={this.edgeStarted}
         edgeEnded={this.edgeEnded}
