@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Node from './Node'
 import Edge from './Edge'
+import { getLoc } from '../utils'
 
 class Graph extends Component {
   state = {
@@ -10,41 +11,17 @@ class Graph extends Component {
     edges: []
   }
 
-  getRawDims = () => {
-    const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
-    return {
-      x: r.left,
-      y: r.top,
-      w: r.right - r.left,
-      h: r.bottom - r.top
-    }
-  }
-
-  getLoc = (e) => {
-    const rawLoc = { x: e.clientX, y: e.clientY }
-    const rawDims = this.getRawDims()
-    const unitLoc = {
-      x: (rawLoc.x - rawDims.x) / rawDims.w,
-      y: (rawLoc.y - rawDims.y) / rawDims.h
-    }
-    const loc = {
-      x: (unitLoc.x * this.state.dims.w) + this.state.dims.x,
-      y: (unitLoc.y * this.state.dims.h) + this.state.dims.y
-    }
-    return loc
-  }
-
   handleDoubleClick = (e) => {
     if (this.state.grabbed.type === 'EMPTY') {
-      this.createNode(this.getLoc(e))
+      this.createNode(getLoc(e, this.state.dims))
     }
   }
 
   handleMouseMove = (e) => {
     if (this.state.grabbed.type === 'NODE') {
-      this.moveNode(this.state.grabbed.data.id, this.getLoc(e))
+      this.moveNode(this.state.grabbed.data.id, getLoc(e, this.state.dims), this.state.grabbed.data.relLoc)
     } else if (this.state.grabbed.type === 'NEW_EDGE') {
-      this.moveNewEdge(this.state.grabbed.data.id, this.getLoc(e))
+      this.moveNewEdge(this.state.grabbed.data.id, getLoc(e, this.state.dims))
     }
   }
 
@@ -56,20 +33,18 @@ class Graph extends Component {
     }
   }
 
-  nodeGrabbed = (nodeId) => {
+  nodeGrabbed = (nodeId, relLoc) => {
     if (this.state.grabbed.type === 'EMPTY') {
       this.setState({
-        grabbed: { type: 'NODE', data: { id: nodeId } }
+        grabbed: { type: 'NODE', data: { id: nodeId, relLoc } }
       })
     }
   }
 
   nodeReleased = () => {
-    if (this.state.grabbed.type === 'NODE') {
-      this.setState({
-        grabbed: { type: 'EMPTY', data: {} }
-      })
-    }
+    this.setState({
+      grabbed: { type: 'EMPTY', data: {} }
+    })
   }
 
   edgeStarted = (startNodeId) => {
@@ -91,12 +66,10 @@ class Graph extends Component {
   }
 
   edgeReleased = () => {
-    if (this.state.grabbed.type === 'NEW_EDGE') {
-      this.deleteEdge(this.state.grabbed.data.id)
-      this.setState({
-        grabbed: { type: 'EMPTY', data: {} }
-      })
-    }
+    this.deleteEdge(this.state.grabbed.data.id)
+    this.setState({
+      grabbed: { type: 'EMPTY', data: {} }
+    })
   }
 
   createNode = (loc) => {
@@ -130,13 +103,16 @@ class Graph extends Component {
     })
   }
 
-  moveNode = (nodeId, loc) => {
+  moveNode = (nodeId, travelLoc, relLoc) => {
     this.setState({
       nodes: this.state.nodes.map(node => {
         if (node.id === nodeId) {
           return {
             ...node,
-            loc: loc
+            loc: {
+              x: travelLoc.x + relLoc.x,
+              y: travelLoc.y + relLoc.y
+            }
           }
         } else {
           return node
@@ -196,6 +172,7 @@ class Graph extends Component {
   renderNode = (node) => {
     return (
       <Node key={node.id} {...node}
+        dims={this.state.dims}
         deleteNode={this.deleteNode}
         toggleSelectNode={this.toggleSelectNode}
         nodeGrabbed={this.nodeGrabbed}

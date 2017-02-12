@@ -18,7 +18,7 @@
 - [x] Move a given node
   - [x] ... by dragging
   - [x] ... without it visibly teleporting
-  - [ ] ... dragging from the relative location on the node, rather than automatically the center
+  - [x] ... dragging from the relative location on the node, rather than automatically the center
 - [x] Create an edge between two nodes
   - [x] ... without teleportation
 - [x] Delete a given edge
