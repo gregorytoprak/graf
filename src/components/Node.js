@@ -6,9 +6,9 @@ class Node extends Component {
 
   handleClick = (e) => {
     e.stopPropagation() // don't select the ground beneath this node
-    if (e.shiftKey) {
+    if (e.shiftKey && !e.metaKey) {
       this.props.deleteNode(this.props.id)
-    } else {
+    } else if (!e.shiftKey && !e.metaKey) {
       this.props.toggleSelectNode(this.props.id)
     }
   }
@@ -18,9 +18,9 @@ class Node extends Component {
   }
 
   handleMouseDown = (e) => {
-    if (e.metaKey) {
+    if (e.metaKey && !e.shiftKey) {
       this.props.edgeStarted(this.props.id)
-    } else {
+    } else if (!e.metaKey && !e.shiftKey) {
       const grabLoc = getLoc(e, this.props.dims)
       const relLoc = {
         x: this.props.loc.x - grabLoc.x,
@@ -31,7 +31,7 @@ class Node extends Component {
   }
 
   handleMouseUp = (e) => {
-    if (e.metaKey) {
+    if (e.metaKey && !e.shiftKey) {
       e.stopPropagation() // don't release an edge when it should be completed
       this.props.edgeEnded(this.props.id)
     }

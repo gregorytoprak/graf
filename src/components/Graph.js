@@ -12,7 +12,7 @@ class Graph extends Component {
   }
 
   handleDoubleClick = (e) => {
-    if (this.state.grabbed.type === 'EMPTY') {
+    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
       this.createNode(getLoc(e, this.state.dims))
     }
   }
