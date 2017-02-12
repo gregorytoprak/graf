@@ -13,7 +13,7 @@
     "react-dom": "^15.4.2"
   },
   "scripts": {
-    "deploy": "react-scripts build && surge ./build && open http://graph.gdt.io/",
+    "deploy": "react-scripts build && surge ./build graph.gdt.io && open http://graph.gdt.io/",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
