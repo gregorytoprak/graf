@@ -76,6 +76,7 @@ class Graph extends Component {
     const node = {
       id: Date.now(),
       loc: loc,
+      moving: false,
       selected: false
     }
     this.setState({ nodes: [...this.state.nodes, node] })
@@ -94,7 +95,8 @@ class Graph extends Component {
         if (node.id === nodeId) {
           return {
             ...node,
-            selected: !node.selected
+            moving: false,
+            selected: node.moving ? node.selected : !node.selected
           }
         } else {
           return node
@@ -109,6 +111,7 @@ class Graph extends Component {
         if (node.id === nodeId) {
           return {
             ...node,
+            moving: true,
             loc: {
               x: travelLoc.x + relLoc.x,
               y: travelLoc.y + relLoc.y

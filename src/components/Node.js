@@ -41,7 +41,7 @@ class Node extends Component {
     return (
       <circle id={this.props.id}
         cx={this.props.loc.x} cy={this.props.loc.y}
-        r='1' fill={this.props.selected ? 'skyBlue' : 'white'}
+        r='1' fill={this.props.selected ? 'black' : 'white'}
         stroke='black' strokeWidth='0.05'
         onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
