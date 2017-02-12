@@ -5,7 +5,7 @@ import { getLoc } from '../utils'
 
 class Graph extends Component {
   state = {
-    dims: { x: 0, y: 0, w: 20, h: 20 },
+    dims: { x: 0, y: 0, w: 30, h: 30 },
     grabbed: { type: 'EMPTY', data: {} },
     nodes: [],
     edges: []
