@@ -11,6 +11,7 @@ class App extends Component {
           <li>Double-click to create a node.</li>
           <li>Drag and drop a node to move it.</li>
           <li>Cmd-drag from one node to another to create an edge between them.</li>
+          <li>Drag and drop the ground to pan it.</li>
           <li>Click a node or edge to select it.</li>
           <li>Shift-click a node or edge to delete it.</li>
         </ul>

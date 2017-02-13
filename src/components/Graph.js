@@ -13,29 +13,60 @@ class Graph extends Component {
 
   // handlers
 
-  handleDoubleClick = (e) => {
-    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
-      this.createNode(getLoc(e, this.state.dims))
+  handleMouseDown = (e) => {
+    if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
+      const grabLoc = getLoc(e, this.state.dims)
+      this.groundGrabbed(grabLoc)
     }
   }
 
   handleMouseMove = (e) => {
-    if (this.state.grabbed.type === 'NODE') {
-      this.moveNode(this.state.grabbed.data.id, getLoc(e, this.state.dims), this.state.grabbed.data.relLoc)
-    } else if (this.state.grabbed.type === 'NEW_EDGE') {
-      this.moveNewEdge(this.state.grabbed.data.id, getLoc(e, this.state.dims))
+    const g = this.state.grabbed
+    const loc = getLoc(e, this.state.dims)
+    if (g.type === 'GROUND') {
+      this.moveGround(loc, g.data.grabLoc)
+    } else if (g.type === 'NODE') {
+      this.moveNode(loc, g.data.id, g.data.relLoc)
+    } else if (g.type === 'NEW_EDGE') {
+      this.moveNewEdge(g.data.id, loc)
     }
   }
 
   handleMouseUp = (e) => {
-    if (this.state.grabbed.type === 'NODE') {
+    if (this.state.grabbed.type === 'GROUND') {
+      this.groundReleased()
+    } else if (this.state.grabbed.type === 'NODE') {
       this.nodeReleased()
     } else if (this.state.grabbed.type === 'NEW_EDGE') {
       this.edgeReleased()
     }
   }
 
+  handleClick = (e) => {
+    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
+      // this.selectGround()
+    }
+  }
+
+  handleDoubleClick = (e) => {
+    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
+      this.createNode(getLoc(e, this.state.dims))
+    }
+  }
+
   // grabbing mechanics
+
+  groundGrabbed = (grabLoc) => {
+    this.setState({
+      grabbed: { type: 'GROUND', data: { grabLoc } }
+    })
+  }
+
+  groundReleased = () => {
+    this.setState({
+      grabbed: { type: 'EMPTY', data: {} }
+    })
+  }
 
   nodeGrabbed = (nodeId, relLoc) => {
     if (this.state.grabbed.type === 'EMPTY') {
@@ -76,6 +107,18 @@ class Graph extends Component {
     })
   }
 
+  // ground state
+
+  moveGround = (loc, grabLoc) => {
+    this.setState({
+      dims: {
+        ...this.state.dims,
+        x: this.state.dims.x + grabLoc.x - loc.x,
+        y: this.state.dims.y + grabLoc.y - loc.y
+      }
+    })
+  }
+
   // node state
 
   createNode = (loc) => {
@@ -111,7 +154,7 @@ class Graph extends Component {
     })
   }
 
-  moveNode = (nodeId, travelLoc, relLoc) => {
+  moveNode = (loc, nodeId, relLoc) => {
     this.setState({
       nodes: this.state.nodes.map(node => {
         if (node.id === nodeId) {
@@ -119,8 +162,8 @@ class Graph extends Component {
             ...node,
             moving: true,
             loc: {
-              x: travelLoc.x + relLoc.x,
-              y: travelLoc.y + relLoc.y
+              x: loc.x + relLoc.x,
+              y: loc.y + relLoc.y
             }
           }
         } else {
@@ -234,14 +277,15 @@ class Graph extends Component {
   }
 
   render () {
-    const viewBox = `${this.state.dims.x} ${this.state.dims.y} ${this.state.dims.w} ${this.state.dims.h}`
+    const d = this.state.dims
+    const viewBox = [d.x, d.y, d.w, d.h].join(' ')
     return (
       <svg className='Graph' viewBox={viewBox}
-        width={0}
-        height={0}
-        onDoubleClick={this.handleDoubleClick}
+        onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
+        onClick={this.handleClick}
+        onDoubleClick={this.handleDoubleClick}
       >
         {this.state.edges.map(this.renderEdge)}
         {this.state.nodes.map(this.renderNode)}

@@ -6,20 +6,8 @@ class Node extends Component {
 
   // handlers
 
-  handleClick = (e) => {
-    e.stopPropagation() // don't select the ground beneath this node
-    if (e.shiftKey && !e.metaKey) {
-      this.props.deleteNode(this.props.id)
-    } else if (!e.shiftKey && !e.metaKey) {
-      this.props.toggleSelectNode(this.props.id)
-    }
-  }
-
-  handleDoubleClick = (e) => {
-    e.stopPropagation() // don't create a node on top of this node
-  }
-
   handleMouseDown = (e) => {
+    e.stopPropagation() // don't grab the ground beneath this node
     if (e.metaKey && !e.shiftKey) {
       this.props.edgeStarted(this.props.id)
     } else if (!e.metaKey && !e.shiftKey) {
@@ -39,6 +27,19 @@ class Node extends Component {
     }
   }
 
+  handleClick = (e) => {
+    e.stopPropagation() // don't select the ground beneath this node
+    if (e.shiftKey && !e.metaKey) {
+      this.props.deleteNode(this.props.id)
+    } else if (!e.shiftKey && !e.metaKey) {
+      this.props.toggleSelectNode(this.props.id)
+    }
+  }
+
+  handleDoubleClick = (e) => {
+    e.stopPropagation() // don't create a node on top of this node
+  }
+
   // renders
 
   render () {
@@ -49,10 +50,10 @@ class Node extends Component {
         fill='white'
         stroke={this.props.selected ? 'dodgerblue' : 'black'}
         strokeWidth='0.05'
-        onClick={this.handleClick}
-        onDoubleClick={this.handleDoubleClick}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
+        onClick={this.handleClick}
+        onDoubleClick={this.handleDoubleClick}
       />
     )
   }

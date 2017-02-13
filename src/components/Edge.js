@@ -7,9 +7,9 @@ class Edge extends Component {
 
   handleClick = (e) => {
     e.stopPropagation() // don't select the ground beneath this edge
-    if (e.shiftKey) {
+    if (e.shiftKey && !e.metaKey) {
       this.props.deleteEdge(this.props.id)
-    } else if (!e.shiftKey) {
+    } else if (!e.shiftKey && !e.metaKey) {
       this.props.toggleSelectEdge(this.props.id)
     }
   }
