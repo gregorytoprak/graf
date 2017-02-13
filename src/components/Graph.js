@@ -11,6 +11,8 @@ class Graph extends Component {
     edges: []
   }
 
+  // handlers
+
   handleDoubleClick = (e) => {
     if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
       this.createNode(getLoc(e, this.state.dims))
@@ -32,6 +34,8 @@ class Graph extends Component {
       this.edgeReleased()
     }
   }
+
+  // grabbing mechanics
 
   nodeGrabbed = (nodeId, relLoc) => {
     if (this.state.grabbed.type === 'EMPTY') {
@@ -71,6 +75,8 @@ class Graph extends Component {
       grabbed: { type: 'EMPTY', data: {} }
     })
   }
+
+  // node state
 
   createNode = (loc) => {
     const node = {
@@ -124,15 +130,42 @@ class Graph extends Component {
     })
   }
 
+  // edge state
+
   createEdge = (startNodeId) => {
+    const startNode = this.state.nodes.find(node => node.id === startNodeId)
     const edge = {
       id: Date.now(),
       startNodeId: startNodeId,
       endNodeId: null,
-      endLoc: this.state.nodes.find(node => node.id === startNodeId).loc
+      endLoc: startNode.loc,
+      moving: false,
+      selected: false
     }
     this.setState({ edges: [...this.state.edges, edge] })
     return edge.id
+  }
+
+  deleteEdge = (edgeId) => {
+    this.setState({
+      edges: this.state.edges.filter(edge => edge.id !== edgeId)
+    })
+  }
+
+  toggleSelectEdge = (edgeId) => {
+    this.setState({
+      edges: this.state.edges.map(edge => {
+        if (edge.id === edgeId) {
+          return {
+            ...edge,
+            moving: false,
+            selected: edge.moving ? edge.selected : !edge.selected
+          }
+        } else {
+          return edge
+        }
+      })
+    })
   }
 
   moveNewEdge = (edgeId, loc) => {
@@ -166,11 +199,7 @@ class Graph extends Component {
     })
   }
 
-  deleteEdge = (edgeId) => {
-    this.setState({
-      edges: this.state.edges.filter(edge => edge.id !== edgeId)
-    })
-  }
+  // renders
 
   renderNode = (node) => {
     return (
@@ -195,10 +224,11 @@ class Graph extends Component {
       endLoc = edge.endLoc
     }
     return (
-      <Edge key={edge.id} id={edge.id}
+      <Edge key={edge.id} {...edge}
         startLoc={startNode.loc}
         endLoc={endLoc}
         deleteEdge={this.deleteEdge}
+        toggleSelectEdge={this.toggleSelectEdge}
       />
     )
   }

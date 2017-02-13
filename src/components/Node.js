@@ -4,6 +4,8 @@ import { getLoc } from '../utils'
 class Node extends Component {
   state = {}
 
+  // handlers
+
   handleClick = (e) => {
     e.stopPropagation() // don't select the ground beneath this node
     if (e.shiftKey && !e.metaKey) {
@@ -37,12 +39,16 @@ class Node extends Component {
     }
   }
 
+  // renders
+
   render () {
     return (
       <circle id={this.props.id}
         cx={this.props.loc.x} cy={this.props.loc.y}
-        r='1' fill={this.props.selected ? 'black' : 'white'}
-        stroke='black' strokeWidth='0.05'
+        r='1'
+        fill='white'
+        stroke={this.props.selected ? 'dodgerblue' : 'black'}
+        strokeWidth='0.05'
         onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
         onMouseDown={this.handleMouseDown}

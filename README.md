@@ -15,7 +15,7 @@
   - [x] ... without teleportation
 - [x] Delete a given edge
 - [x] Select a node
-- [ ] Select an edge
+- [x] Select an edge
   - [ ] Give edges some kind of hover-visible handle
 - [ ] Edit menu can modify style attributes of selected object
 - [ ] Pan on the graph
