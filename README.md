@@ -17,6 +17,14 @@
 - [x] Select a node
 - [x] Select an edge
   - [ ] Give edges some kind of hover-visible handle
-- [ ] Edit menu can modify style attributes of selected object
+- [ ] Drag an edge to give it some curvature
 - [ ] Pan on the graph
 - [ ] Zoom on the graph
+- [ ] Edit menu can modify style attributes of selected object
+- [ ] Proper selection: one thing at a time until another is cmd-clicked to add to selection
+- [ ] n-directional axes --- killer app
+- [ ] Undo, Redo functionality
+- [ ] Save everything to cookies all the time
+- [ ] Multiple tabs of graphs
+- [ ] Download, Upload to/from svg
+- [ ] Save, Load from tweetable string representation
