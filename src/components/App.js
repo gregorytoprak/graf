@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { PageHeader } from 'react-bootstrap'
 import Graph from './Graph'
 
 class App extends Component {
   render () {
     return (
       <div className='App'>
-        <h1>Graph Maker <small>graph.gdt.io</small></h1>
+        <PageHeader>Graph Maker <small>graph.gdt.io</small></PageHeader>
         <ul className='usage'>
           <li>Double-click to create a node.</li>
           <li>Drag and drop a node to move it.</li>

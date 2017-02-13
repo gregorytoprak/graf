@@ -1,22 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css');
 
 body {
-  background-color: white;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
 }
 
-h1, .usage {
+.App {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-}
-
-h1 small {
-  color: #777;
 }
 
 .container {
@@ -29,4 +23,5 @@ h1 small {
   border: 1px solid black;
   width: 100%;
   height: 100%;
+  cursor: crosshair;
 }
