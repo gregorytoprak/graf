@@ -5,7 +5,8 @@ import { getLoc } from '../utils'
 
 class Graph extends Component {
   state = {
-    dims: { x: 0, y: 0, w: 30, h: 30 },
+    dims: { x: -10, y: -10, w: 20, h: 20 },
+    cursor: 'crosshair',
     grabbed: { type: 'EMPTY', data: {} },
     nodes: [],
     edges: []
@@ -13,18 +14,29 @@ class Graph extends Component {
 
   // handlers
 
+  handleWheel = (e) => {
+    e.preventDefault()
+    if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
+      const zoomLoc = getLoc(e, this.state.dims)
+      this.groundZoomGrabbed()
+      this.zoomGround(zoomLoc, e.deltaY)
+    }
+  }
+
   handleMouseDown = (e) => {
     if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
       const grabLoc = getLoc(e, this.state.dims)
-      this.groundGrabbed(grabLoc)
+      this.groundPanGrabbed(grabLoc)
     }
   }
 
   handleMouseMove = (e) => {
     const g = this.state.grabbed
     const loc = getLoc(e, this.state.dims)
-    if (g.type === 'GROUND') {
-      this.moveGround(loc, g.data.grabLoc)
+    if (g.type === 'PAN_GROUND') {
+      this.panGround(loc, g.data.grabLoc)
+    } else if (g.type === 'ZOOM_GROUND') {
+      this.groundReleased()
     } else if (g.type === 'NODE') {
       this.moveNode(loc, g.data.id, g.data.relLoc)
     } else if (g.type === 'NEW_EDGE') {
@@ -33,7 +45,7 @@ class Graph extends Component {
   }
 
   handleMouseUp = (e) => {
-    if (this.state.grabbed.type === 'GROUND') {
+    if (this.state.grabbed.type === 'PAN_GROUND') {
       this.groundReleased()
     } else if (this.state.grabbed.type === 'NODE') {
       this.nodeReleased()
@@ -56,14 +68,21 @@ class Graph extends Component {
 
   // grabbing mechanics
 
-  groundGrabbed = (grabLoc) => {
+  groundPanGrabbed = (grabLoc) => {
     this.setState({
-      grabbed: { type: 'GROUND', data: { grabLoc } }
+      grabbed: { type: 'PAN_GROUND', data: { grabLoc } }
+    })
+  }
+
+  groundZoomGrabbed = () => {
+    this.setState({
+      grabbed: { type: 'ZOOM_GROUND', data: {} }
     })
   }
 
   groundReleased = () => {
     this.setState({
+      cursor: 'crosshair',
       grabbed: { type: 'EMPTY', data: {} }
     })
   }
@@ -109,12 +128,36 @@ class Graph extends Component {
 
   // ground state
 
-  moveGround = (loc, grabLoc) => {
+  panGround = (loc, grabLoc) => {
     this.setState({
+      cursor: 'all-scroll',
       dims: {
         ...this.state.dims,
         x: this.state.dims.x + grabLoc.x - loc.x,
         y: this.state.dims.y + grabLoc.y - loc.y
+      }
+    })
+  }
+
+  zoomGround = (zoomLoc, deltaY) => {
+    const zoomFactor = 1.25 ** deltaY
+    const cursor = deltaY > 0 ? 'zoom-out' : 'zoom-in'
+    const olds = this.state.dims
+    this.setState({
+      cursor,
+      dims: {
+        x: olds.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+        y: olds.y * zoomFactor + zoomLoc.y * (1 - zoomFactor),
+          // Consider the lines from the corners of the original view box to the location
+          // we're zooming in on. In order to maintain both the proportionality of
+          // the sides and the coordinates of the cursor, the new, zoomed, view box
+          // will be inset at the same proportion along all four of those lines. This
+          // gives us the parametric equation for the point t/1 between A and B as
+          // C(t) = (1-t)A + (t)B. From here, see that our 'zoom factor' of the width
+          // and height is actually proportional to the remaining distance (1-t) because
+          // of similar triangles... I don't have time to find a better explanation.
+        w: olds.w * zoomFactor,
+        h: olds.h * zoomFactor
       }
     })
   }
@@ -281,6 +324,9 @@ class Graph extends Component {
     const viewBox = [d.x, d.y, d.w, d.h].join(' ')
     return (
       <svg className='Graph' viewBox={viewBox}
+        style={{ cursor: this.state.cursor }}
+        onScroll={this.handleScroll}
+        onWheel={this.handleWheel}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
