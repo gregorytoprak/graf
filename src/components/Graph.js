@@ -4,7 +4,7 @@ import Edge from './Edge'
 
 class Graph extends Component {
   state = {
-    dims: { x: -10, y: -10, w: 20, h: 20 },
+    dims: { cx: 0, cy: 0, w: 25, h: 25 },
     cursor: 'crosshair',
     grabbed: { type: 'EMPTY', data: {} },
     nodes: [],
@@ -26,8 +26,8 @@ class Graph extends Component {
       y: (rawLoc.y - rawDims.y) / rawDims.h
     }
     return {
-      x: (unitLoc.x * this.state.dims.w) + this.state.dims.x,
-      y: (unitLoc.y * this.state.dims.h) + this.state.dims.y
+      x: (unitLoc.x * this.state.dims.w) + (this.state.dims.cx - this.state.dims.w / 2),
+      y: (unitLoc.y * this.state.dims.h) + (this.state.dims.cy - this.state.dims.h / 2)
     }
   }
 
@@ -148,8 +148,8 @@ class Graph extends Component {
       cursor: 'all-scroll',
       dims: {
         ...this.state.dims,
-        x: this.state.dims.x + grabLoc.x - loc.x,
-        y: this.state.dims.y + grabLoc.y - loc.y
+        cx: this.state.dims.cx + grabLoc.x - loc.x,
+        cy: this.state.dims.cy + grabLoc.y - loc.y
       }
     })
   }
@@ -159,8 +159,8 @@ class Graph extends Component {
     const olds = this.state.dims
     this.setState({
       dims: {
-        x: olds.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-        y: olds.y * zoomFactor + zoomLoc.y * (1 - zoomFactor),
+        cx: olds.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+        cy: olds.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor),
           // Consider the lines from the corners of the original view box to the location
           // we're zooming in on. In order to maintain both the proportionality of
           // the sides and the coordinates of the cursor, the new, zoomed, view box
@@ -333,7 +333,7 @@ class Graph extends Component {
 
   render () {
     const d = this.state.dims
-    const viewBox = [d.x, d.y, d.w, d.h].join(' ')
+    const viewBox = [d.cx - d.w / 2, d.cy - d.h / 2, d.w, d.h].join(' ')
     return (
       <svg className='Graph' viewBox={viewBox}
         style={{ cursor: this.state.cursor }}
