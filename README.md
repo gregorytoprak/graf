@@ -19,7 +19,7 @@
   - [ ] Give edges some kind of hover-visible handle
 - [ ] Drag an edge to give it some curvature
 - [x] Pan on the graph
-- [ ] Zoom on the graph
+- [x] Zoom on the graph
 - [ ] Edit menu can modify style attributes of selected object
 - [ ] Proper selection: one thing at a time until another is cmd-clicked to add to selection
   - [ ] Hitting escape clears selection

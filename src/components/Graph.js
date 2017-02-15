@@ -18,7 +18,6 @@ class Graph extends Component {
     e.preventDefault()
     if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
       const zoomLoc = getLoc(e, this.state.dims)
-      this.groundZoomGrabbed()
       this.zoomGround(zoomLoc, e.deltaY)
     }
   }
@@ -35,8 +34,6 @@ class Graph extends Component {
     const loc = getLoc(e, this.state.dims)
     if (g.type === 'PAN_GROUND') {
       this.panGround(loc, g.data.grabLoc)
-    } else if (g.type === 'ZOOM_GROUND') {
-      this.groundReleased()
     } else if (g.type === 'NODE') {
       this.moveNode(loc, g.data.id, g.data.relLoc)
     } else if (g.type === 'NEW_EDGE') {
@@ -71,12 +68,6 @@ class Graph extends Component {
   groundPanGrabbed = (grabLoc) => {
     this.setState({
       grabbed: { type: 'PAN_GROUND', data: { grabLoc } }
-    })
-  }
-
-  groundZoomGrabbed = () => {
-    this.setState({
-      grabbed: { type: 'ZOOM_GROUND', data: {} }
     })
   }
 
@@ -140,11 +131,9 @@ class Graph extends Component {
   }
 
   zoomGround = (zoomLoc, deltaY) => {
-    const zoomFactor = 1.25 ** deltaY
-    const cursor = deltaY > 0 ? 'zoom-out' : 'zoom-in'
+    const zoomFactor = 1.02 ** deltaY
     const olds = this.state.dims
     this.setState({
-      cursor,
       dims: {
         x: olds.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
         y: olds.y * zoomFactor + zoomLoc.y * (1 - zoomFactor),
