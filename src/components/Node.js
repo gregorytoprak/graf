@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { getLoc } from '../utils'
 
 class Node extends Component {
   state = {}
@@ -11,12 +10,7 @@ class Node extends Component {
     if (e.metaKey && !e.shiftKey) {
       this.props.edgeStarted(this.props.id)
     } else if (!e.metaKey && !e.shiftKey) {
-      const grabLoc = getLoc(e, this.props.dims)
-      const relLoc = {
-        x: this.props.loc.x - grabLoc.x,
-        y: this.props.loc.y - grabLoc.y
-      }
-      this.props.nodeGrabbed(this.props.id, relLoc)
+      this.props.nodeGrabbed(this.props.id, this.props.loc, e)
     }
   }
 

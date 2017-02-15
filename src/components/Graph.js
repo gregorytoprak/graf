@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Node from './Node'
 import Edge from './Edge'
-import { getLoc } from '../utils'
 
 class Graph extends Component {
   state = {
@@ -12,26 +11,46 @@ class Graph extends Component {
     edges: []
   }
 
+  getRawDims = () => {
+    const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
+    return {
+      x: r.left, y: r.top, w: r.width, h: r.height
+    }
+  }
+
+  getLoc = (event) => {
+    const rawLoc = { x: event.clientX, y: event.clientY }
+    const rawDims = this.getRawDims()
+    const unitLoc = {
+      x: (rawLoc.x - rawDims.x) / rawDims.w,
+      y: (rawLoc.y - rawDims.y) / rawDims.h
+    }
+    return {
+      x: (unitLoc.x * this.state.dims.w) + this.state.dims.x,
+      y: (unitLoc.y * this.state.dims.h) + this.state.dims.y
+    }
+  }
+
   // handlers
 
   handleWheel = (e) => {
     e.preventDefault()
     if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
-      const zoomLoc = getLoc(e, this.state.dims)
+      const zoomLoc = this.getLoc(e)
       this.zoomGround(zoomLoc, e.deltaY)
     }
   }
 
   handleMouseDown = (e) => {
     if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
-      const grabLoc = getLoc(e, this.state.dims)
+      const grabLoc = this.getLoc(e)
       this.groundPanGrabbed(grabLoc)
     }
   }
 
   handleMouseMove = (e) => {
     const g = this.state.grabbed
-    const loc = getLoc(e, this.state.dims)
+    const loc = this.getLoc(e)
     if (g.type === 'PAN_GROUND') {
       this.panGround(loc, g.data.grabLoc)
     } else if (g.type === 'NODE') {
@@ -59,7 +78,7 @@ class Graph extends Component {
 
   handleDoubleClick = (e) => {
     if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
-      this.createNode(getLoc(e, this.state.dims))
+      this.createNode(this.getLoc(e))
     }
   }
 
@@ -78,8 +97,13 @@ class Graph extends Component {
     })
   }
 
-  nodeGrabbed = (nodeId, relLoc) => {
+  nodeGrabbed = (nodeId, center, event) => {
     if (this.state.grabbed.type === 'EMPTY') {
+      const grabLoc = this.getLoc(event)
+      const relLoc = {
+        x: center.x - grabLoc.x,
+        y: center.y - grabLoc.y
+      }
       this.setState({
         grabbed: { type: 'NODE', data: { id: nodeId, relLoc } }
       })
@@ -279,7 +303,6 @@ class Graph extends Component {
   renderNode = (node) => {
     return (
       <Node key={node.id} {...node}
-        dims={this.state.dims}
         deleteNode={this.deleteNode}
         toggleSelectNode={this.toggleSelectNode}
         nodeGrabbed={this.nodeGrabbed}
