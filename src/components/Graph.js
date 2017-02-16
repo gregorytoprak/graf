@@ -260,7 +260,8 @@ class Graph extends Component {
       endLoc: startNode.loc,
       moving: false,
       selected: false,
-      control: startNode.loc
+      curved: false,
+      controlLoc: startNode.loc
     }
     this.setState({ edges: [...this.state.edges, edge] })
     return edge.id
@@ -294,7 +295,9 @@ class Graph extends Component {
         if (edge.id === edgeId) {
           return {
             ...edge,
-            control: loc
+            moving: true,
+            curved: true,
+            controlLoc: loc
           }
         } else {
           return edge

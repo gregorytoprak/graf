@@ -30,12 +30,12 @@ class Edge extends Component {
 
   // renders
 
-  position = (loc) => `${loc.x},${loc.y}`
-
   render () {
-    const p = this.position
-    const { startLoc, endLoc, control } = this.props
-    const d = `M ${p(startLoc)} Q ${p(control)} ${p(endLoc)}`
+    const p = (loc) => `${loc.x},${loc.y}`
+    const { startLoc, endLoc, controlLoc } = this.props
+    const d = this.props.curved
+      ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
+      : `M ${p(startLoc)} L ${p(endLoc)}`
     return (
       <path id={this.props.id}
         d={d}
