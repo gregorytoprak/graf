@@ -35,14 +35,14 @@ class Graph extends Component {
 
   handleWheel = (e) => {
     e.preventDefault()
-    if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
+    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
       const zoomLoc = this.getLoc(e)
       this.zoomGround(zoomLoc, e.deltaY)
     }
   }
 
   handleMouseDown = (e) => {
-    if (!e.metaKey && !e.shiftKey && this.state.grabbed.type === 'EMPTY') {
+    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
       const grabLoc = this.getLoc(e)
       this.groundPanGrabbed(grabLoc)
     }
@@ -51,21 +51,19 @@ class Graph extends Component {
   handleMouseMove = (e) => {
     const g = this.state.grabbed
     const loc = this.getLoc(e)
-    if (g.type === 'PAN_GROUND') {
+    if (!e.shiftKey && !e.metaKey && g.type === 'PAN_GROUND') {
       this.panGround(loc, g.data.grabLoc)
-    } else if (g.type === 'NODE') {
+    } else if (!e.shiftKey && !e.metaKey && g.type === 'NODE') {
       this.moveNode(loc, g.data.id, g.data.relLoc)
-    } else if (g.type === 'NEW_EDGE') {
+    } else if (!e.shiftKey && e.metaKey && g.type === 'NEW_EDGE') {
       this.moveNewEdge(g.data.id, loc)
     }
   }
 
   handleMouseUp = (e) => {
-    if (this.state.grabbed.type === 'PAN_GROUND') {
+    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'PAN_GROUND') {
       this.groundReleased()
-    } else if (this.state.grabbed.type === 'NODE') {
-      this.nodeReleased()
-    } else if (this.state.grabbed.type === 'NEW_EDGE') {
+    } else if (!e.shiftKey && e.metaKey && this.state.grabbed.type === 'NEW_EDGE') {
       this.edgeReleased()
     }
   }
@@ -111,9 +109,11 @@ class Graph extends Component {
   }
 
   nodeReleased = () => {
-    this.setState({
-      grabbed: { type: 'EMPTY', data: {} }
-    })
+    if (this.state.grabbed.type === 'NODE') {
+      this.setState({
+        grabbed: { type: 'EMPTY', data: {} }
+      })
+    }
   }
 
   edgeStarted = (startNodeId) => {
@@ -306,6 +306,7 @@ class Graph extends Component {
         deleteNode={this.deleteNode}
         toggleSelectNode={this.toggleSelectNode}
         nodeGrabbed={this.nodeGrabbed}
+        nodeReleased={this.nodeReleased}
         edgeStarted={this.edgeStarted}
         edgeEnded={this.edgeEnded}
       />

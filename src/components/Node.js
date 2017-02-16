@@ -6,23 +6,25 @@ class Node extends Component {
   // handlers
 
   handleMouseDown = (e) => {
-    e.stopPropagation() // don't grab the ground beneath this node
-    if (e.metaKey && !e.shiftKey) {
+    e.stopPropagation()
+    if (!e.shiftKey && e.metaKey) {
       this.props.edgeStarted(this.props.id)
-    } else if (!e.metaKey && !e.shiftKey) {
+    } else if (!e.shiftKey && !e.metaKey) {
       this.props.nodeGrabbed(this.props.id, this.props.loc, e)
     }
   }
 
   handleMouseUp = (e) => {
-    if (e.metaKey && !e.shiftKey) {
-      e.stopPropagation() // don't release an edge when it should be completed
+    e.stopPropagation()
+    if (!e.shiftKey && e.metaKey) {
       this.props.edgeEnded(this.props.id)
+    } else if (!e.shiftKey && !e.metaKey) {
+      this.props.nodeReleased()
     }
   }
 
   handleClick = (e) => {
-    e.stopPropagation() // don't select the ground beneath this node
+    e.stopPropagation()
     if (e.shiftKey && !e.metaKey) {
       this.props.deleteNode(this.props.id)
     } else if (!e.shiftKey && !e.metaKey) {
@@ -31,7 +33,7 @@ class Node extends Component {
   }
 
   handleDoubleClick = (e) => {
-    e.stopPropagation() // don't create a node on top of this node
+    e.stopPropagation()
   }
 
   // renders

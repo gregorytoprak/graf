@@ -6,11 +6,14 @@ class Edge extends Component {
   // handlers
 
   handleMouseDown = (e) => {
-    e.stopPropagation() // don't grab the ground beneath this edge
+    e.stopPropagation()
+    // if (!e.shiftKey && !e.metaKey) {
+    //   this.props.edgeGrabbed(this.props.id, this.props.loc, e)
+    // }
   }
 
   handleClick = (e) => {
-    e.stopPropagation() // don't select the ground beneath this edge
+    e.stopPropagation()
     if (e.shiftKey && !e.metaKey) {
       this.props.deleteEdge(this.props.id)
     } else if (!e.shiftKey && !e.metaKey) {
@@ -19,7 +22,7 @@ class Edge extends Component {
   }
 
   handleDoubleClick = (e) => {
-    e.stopPropagation() // don't create a node on top of this edge
+    e.stopPropagation()
   }
 
   // renders
