@@ -16,11 +16,8 @@ class Node extends Component {
 
   handleMouseUp = (e) => {
     e.stopPropagation()
-    if (!e.shiftKey && e.metaKey) {
-      this.props.edgeEnded(this.props.id)
-    } else if (!e.shiftKey && !e.metaKey) {
-      this.props.nodeReleased()
-    }
+    this.props.edgeEnded(this.props.id)
+    this.props.nodeReleased()
   }
 
   handleClick = (e) => {

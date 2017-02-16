@@ -7,9 +7,13 @@ class Edge extends Component {
 
   handleMouseDown = (e) => {
     e.stopPropagation()
-    // if (!e.shiftKey && !e.metaKey) {
-    //   this.props.edgeGrabbed(this.props.id, this.props.loc, e)
-    // }
+    if (!e.shiftKey && !e.metaKey) {
+      this.props.edgeGrabbed(this.props.id)
+    }
+  }
+
+  handleMouseUp = (e) => {
+    this.props.edgeReleased()
   }
 
   handleClick = (e) => {
@@ -29,12 +33,22 @@ class Edge extends Component {
 
   render () {
     return (
+      // <line id={this.props.id}
+      //   x1={this.props.startLoc.x} y1={this.props.startLoc.y}
+      //   x2={this.props.endLoc.x} y2={this.props.endLoc.y}
+      //   stroke={this.props.selected ? 'dodgerblue' : 'black'}
+      //   strokeWidth='0.1'
+      //   onMouseDown={this.handleMouseDown}
+      //   onClick={this.handleClick}
+      //   onDoubleClick={this.handleDoubleClick}
+      // />
       <line id={this.props.id}
         x1={this.props.startLoc.x} y1={this.props.startLoc.y}
         x2={this.props.endLoc.x} y2={this.props.endLoc.y}
         stroke={this.props.selected ? 'dodgerblue' : 'black'}
         strokeWidth='0.1'
         onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
         onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
       />

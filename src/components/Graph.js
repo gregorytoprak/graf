@@ -35,7 +35,7 @@ class Graph extends Component {
 
   handleWheel = (e) => {
     e.preventDefault()
-    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
+    if (this.state.grabbed.type === 'EMPTY') {
       const zoomLoc = this.getLoc(e)
       this.zoomGround(zoomLoc, e.deltaY)
     }
@@ -51,20 +51,22 @@ class Graph extends Component {
   handleMouseMove = (e) => {
     const g = this.state.grabbed
     const loc = this.getLoc(e)
-    if (!e.shiftKey && !e.metaKey && g.type === 'PAN_GROUND') {
+    if (g.type === 'PAN_GROUND') {
       this.panGround(loc, g.data.grabLoc)
-    } else if (!e.shiftKey && !e.metaKey && g.type === 'NODE') {
+    } else if (g.type === 'NODE') {
       this.moveNode(loc, g.data.id, g.data.relLoc)
-    } else if (!e.shiftKey && e.metaKey && g.type === 'NEW_EDGE') {
-      this.moveNewEdge(g.data.id, loc)
+    } else if (g.type === 'EDGE') {
+      this.moveEdge(loc, g.data.id)
+    } else if (g.type === 'NEW_EDGE') {
+      this.moveNewEdge(loc, g.data.id)
     }
   }
 
   handleMouseUp = (e) => {
-    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'PAN_GROUND') {
+    if (this.state.grabbed.type === 'PAN_GROUND') {
       this.groundReleased()
-    } else if (!e.shiftKey && e.metaKey && this.state.grabbed.type === 'NEW_EDGE') {
-      this.edgeReleased()
+    } else if (this.state.grabbed.type === 'NEW_EDGE') {
+      this.edgeDropped()
     }
   }
 
@@ -116,6 +118,22 @@ class Graph extends Component {
     }
   }
 
+  edgeGrabbed = (edgeId) => {
+    if (this.state.grabbed.type === 'EMPTY') {
+      this.setState({
+        grabbed: { type: 'EDGE', data: { id: edgeId } }
+      })
+    }
+  }
+
+  edgeReleased = () => {
+    if (this.state.grabbed.type === 'EDGE') {
+      this.setState({
+        grabbed: { type: 'EMPTY', data: {} }
+      })
+    }
+  }
+
   edgeStarted = (startNodeId) => {
     if (this.state.grabbed.type === 'EMPTY') {
       const newEdgeId = this.createEdge(startNodeId)
@@ -134,7 +152,7 @@ class Graph extends Component {
     }
   }
 
-  edgeReleased = () => {
+  edgeDropped = () => {
     this.deleteEdge(this.state.grabbed.data.id)
     this.setState({
       grabbed: { type: 'EMPTY', data: {} }
@@ -239,7 +257,8 @@ class Graph extends Component {
       endNodeId: null,
       endLoc: startNode.loc,
       moving: false,
-      selected: false
+      selected: false,
+      displacement: 0
     }
     this.setState({ edges: [...this.state.edges, edge] })
     return edge.id
@@ -267,7 +286,22 @@ class Graph extends Component {
     })
   }
 
-  moveNewEdge = (edgeId, loc) => {
+  moveEdge = (loc, edgeId) => {
+    this.setState({
+      edges: this.state.edges.map(edge => {
+        if (edge.id === edgeId) {
+          return {
+            ...edge,
+            control: loc
+          }
+        } else {
+          return edge
+        }
+      })
+    })
+  }
+
+  moveNewEdge = (loc, edgeId) => {
     this.setState({
       edges: this.state.edges.map(edge => {
         if (edge.id === edgeId) {
@@ -324,8 +358,9 @@ class Graph extends Component {
     }
     return (
       <Edge key={edge.id} {...edge}
-        startLoc={startNode.loc}
-        endLoc={endLoc}
+        startLoc={startNode.loc} endLoc={endLoc}
+        edgeGrabbed={this.edgeGrabbed}
+        edgeReleased={this.edgeReleased}
         deleteEdge={this.deleteEdge}
         toggleSelectEdge={this.toggleSelectEdge}
       />
