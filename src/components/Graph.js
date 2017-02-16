@@ -56,7 +56,7 @@ class Graph extends Component {
     } else if (g.type === 'NODE') {
       this.moveNode(loc, g.data.id, g.data.relLoc)
     } else if (g.type === 'EDGE') {
-      this.moveEdge(loc, g.data.id)
+      this.moveEdge(loc, g.data.id, g.data.relLoc)
     } else if (g.type === 'NEW_EDGE') {
       this.moveNewEdge(loc, g.data.id)
     }
@@ -65,8 +65,6 @@ class Graph extends Component {
   handleMouseUp = (e) => {
     if (this.state.grabbed.type === 'PAN_GROUND') {
       this.groundReleased()
-    } else if (this.state.grabbed.type === 'EDGE') {
-      this.edgeReleased()
     } else if (this.state.grabbed.type === 'NEW_EDGE') {
       this.edgeDropped()
     }
@@ -120,10 +118,15 @@ class Graph extends Component {
     }
   }
 
-  edgeGrabbed = (edgeId) => {
+  edgeGrabbed = (edgeId, controlCenter, event) => {
     if (this.state.grabbed.type === 'EMPTY') {
+      const grabLoc = this.getLoc(event)
+      const relLoc = {
+        x: controlCenter.x - grabLoc.x,
+        y: controlCenter.y - grabLoc.y
+      }
       this.setState({
-        grabbed: { type: 'EDGE', data: { id: edgeId } }
+        grabbed: { type: 'EDGE', data: { id: edgeId, relLoc } }
       })
     }
   }
@@ -289,7 +292,7 @@ class Graph extends Component {
     })
   }
 
-  moveEdge = (loc, edgeId) => {
+  moveEdge = (loc, edgeId, relLoc) => {
     this.setState({
       edges: this.state.edges.map(edge => {
         if (edge.id === edgeId) {
@@ -297,7 +300,10 @@ class Graph extends Component {
             ...edge,
             moving: true,
             curved: true,
-            controlLoc: loc
+            controlLoc: {
+              x: loc.x + relLoc.x,
+              y: loc.y + relLoc.y
+            }
           }
         } else {
           return edge
@@ -353,7 +359,11 @@ class Graph extends Component {
   }
 
   renderEdge = (edge) => {
-    const startNode = this.state.nodes.find(node => node.id === edge.startNodeId)
+    const midpoint = (a, b) => ({
+      x: (a.x + b.x) / 2,
+      y: (a.y + b.y) / 2
+    })
+    const startLoc = this.state.nodes.find(node => node.id === edge.startNodeId).loc
     let endLoc
     if (edge.endNodeId !== null) {
       const endNode = this.state.nodes.find(node => node.id === edge.endNodeId)
@@ -363,8 +373,10 @@ class Graph extends Component {
     }
     return (
       <Edge key={edge.id} {...edge}
-        startLoc={startNode.loc} endLoc={endLoc}
+        startLoc={startLoc} endLoc={endLoc}
+        controlLoc={edge.curved ? edge.controlLoc : midpoint(startLoc, endLoc)}
         edgeGrabbed={this.edgeGrabbed}
+        edgeReleased={this.edgeReleased}
         deleteEdge={this.deleteEdge}
         toggleSelectEdge={this.toggleSelectEdge}
       />
