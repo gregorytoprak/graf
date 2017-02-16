@@ -29,6 +29,15 @@ class Edge extends Component {
     }
   }
 
+  handleClickControl = (e) => {
+    e.stopPropagation()
+    if (e.shiftKey && !e.metaKey) {
+      this.props.straightenEdge(this.props.id)
+    } else if (!e.shiftKey && !e.metaKey) {
+      this.props.toggleSelectEdge(this.props.id)
+    }
+  }
+
   handleDoubleClick = (e) => {
     e.stopPropagation()
   }
@@ -59,7 +68,7 @@ class Edge extends Component {
               r='0.5' fill='white' stroke='dodgerblue' strokeWidth='0.05'
               onMouseDown={this.handleMouseDownControl}
               onMouseUp={this.handleMouseUp}
-              onClick={this.handleClick}
+              onClick={this.handleClickControl}
               onDoubleClick={this.handleDoubleClick}
             />
           )

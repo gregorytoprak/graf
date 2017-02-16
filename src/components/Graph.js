@@ -264,7 +264,7 @@ class Graph extends Component {
       moving: false,
       selected: false,
       curved: false,
-      controlLoc: startNode.loc
+      controlLoc: null
     }
     this.setState({ edges: [...this.state.edges, edge] })
     return edge.id
@@ -273,6 +273,23 @@ class Graph extends Component {
   deleteEdge = (edgeId) => {
     this.setState({
       edges: this.state.edges.filter(edge => edge.id !== edgeId)
+    })
+  }
+
+  straightenEdge = (edgeId) => {
+    this.setState({
+      edges: this.state.edges.map(edge => {
+        if (edge.id === edgeId) {
+          return {
+            ...edge,
+            selected: false,
+            curved: false,
+            controlLoc: null
+          }
+        } else {
+          return edge
+        }
+      })
     })
   }
 
@@ -378,6 +395,7 @@ class Graph extends Component {
         edgeGrabbed={this.edgeGrabbed}
         edgeReleased={this.edgeReleased}
         deleteEdge={this.deleteEdge}
+        straightenEdge={this.straightenEdge}
         toggleSelectEdge={this.toggleSelectEdge}
       />
     )
