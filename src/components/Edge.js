@@ -5,6 +5,10 @@ class Edge extends Component {
 
   // handlers
 
+  handleMouseDown = (e) => {
+    e.stopPropagation() // don't grab the ground beneath this edge
+  }
+
   handleClick = (e) => {
     e.stopPropagation() // don't select the ground beneath this edge
     if (e.shiftKey && !e.metaKey) {
@@ -27,6 +31,7 @@ class Edge extends Component {
         x2={this.props.endLoc.x} y2={this.props.endLoc.y}
         stroke={this.props.selected ? 'dodgerblue' : 'black'}
         strokeWidth='0.1'
+        onMouseDown={this.handleMouseDown}
         onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
       />
