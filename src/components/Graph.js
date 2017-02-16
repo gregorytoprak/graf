@@ -65,6 +65,8 @@ class Graph extends Component {
   handleMouseUp = (e) => {
     if (this.state.grabbed.type === 'PAN_GROUND') {
       this.groundReleased()
+    } else if (this.state.grabbed.type === 'EDGE') {
+      this.edgeReleased()
     } else if (this.state.grabbed.type === 'NEW_EDGE') {
       this.edgeDropped()
     }
@@ -258,7 +260,7 @@ class Graph extends Component {
       endLoc: startNode.loc,
       moving: false,
       selected: false,
-      displacement: 0
+      control: startNode.loc
     }
     this.setState({ edges: [...this.state.edges, edge] })
     return edge.id
@@ -360,7 +362,6 @@ class Graph extends Component {
       <Edge key={edge.id} {...edge}
         startLoc={startNode.loc} endLoc={endLoc}
         edgeGrabbed={this.edgeGrabbed}
-        edgeReleased={this.edgeReleased}
         deleteEdge={this.deleteEdge}
         toggleSelectEdge={this.toggleSelectEdge}
       />

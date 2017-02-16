@@ -13,7 +13,6 @@ class Edge extends Component {
   }
 
   handleMouseUp = (e) => {
-    this.props.edgeReleased()
   }
 
   handleClick = (e) => {
@@ -31,20 +30,16 @@ class Edge extends Component {
 
   // renders
 
+  position = (loc) => `${loc.x},${loc.y}`
+
   render () {
+    const p = this.position
+    const { startLoc, endLoc, control } = this.props
+    const d = `M ${p(startLoc)} Q ${p(control)} ${p(endLoc)}`
     return (
-      // <line id={this.props.id}
-      //   x1={this.props.startLoc.x} y1={this.props.startLoc.y}
-      //   x2={this.props.endLoc.x} y2={this.props.endLoc.y}
-      //   stroke={this.props.selected ? 'dodgerblue' : 'black'}
-      //   strokeWidth='0.1'
-      //   onMouseDown={this.handleMouseDown}
-      //   onClick={this.handleClick}
-      //   onDoubleClick={this.handleDoubleClick}
-      // />
-      <line id={this.props.id}
-        x1={this.props.startLoc.x} y1={this.props.startLoc.y}
-        x2={this.props.endLoc.x} y2={this.props.endLoc.y}
+      <path id={this.props.id}
+        d={d}
+        fill='none'
         stroke={this.props.selected ? 'dodgerblue' : 'black'}
         strokeWidth='0.1'
         onMouseDown={this.handleMouseDown}
