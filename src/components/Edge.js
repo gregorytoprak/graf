@@ -11,7 +11,7 @@ class Edge extends Component {
 
   handleMouseDownControl = (e) => {
     e.stopPropagation()
-    if (!e.shiftKey && !e.metaKey) {
+    if (!e.shiftKey) {
       this.props.edgeGrabbed(this.props.id, this.props.controlLoc, e)
     }
   }
@@ -22,18 +22,18 @@ class Edge extends Component {
 
   handleClick = (e) => {
     e.stopPropagation()
-    if (e.shiftKey && !e.metaKey) {
+    if (e.shiftKey) {
       this.props.deleteEdge(this.props.id)
-    } else if (!e.shiftKey && !e.metaKey) {
+    } else if (!e.shiftKey) {
       this.props.toggleSelectEdge(this.props.id)
     }
   }
 
   handleClickControl = (e) => {
     e.stopPropagation()
-    if (e.shiftKey && !e.metaKey) {
+    if (e.shiftKey) {
       this.props.straightenEdge(this.props.id)
-    } else if (!e.shiftKey && !e.metaKey) {
+    } else if (!e.shiftKey) {
       this.props.toggleSelectEdge(this.props.id)
     }
   }

@@ -42,7 +42,7 @@ class Graph extends Component {
   }
 
   handleMouseDown = (e) => {
-    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
+    if (!e.shiftKey && this.state.grabbed.type === 'EMPTY') {
       const grabLoc = this.getLoc(e)
       this.groundPanGrabbed(grabLoc)
     }
@@ -71,13 +71,13 @@ class Graph extends Component {
   }
 
   handleClick = (e) => {
-    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
+    if (!e.shiftKey && this.state.grabbed.type === 'EMPTY') {
       // this.selectGround()
     }
   }
 
   handleDoubleClick = (e) => {
-    if (!e.shiftKey && !e.metaKey && this.state.grabbed.type === 'EMPTY') {
+    if (!e.shiftKey && this.state.grabbed.type === 'EMPTY') {
       this.createNode(this.getLoc(e))
     }
   }

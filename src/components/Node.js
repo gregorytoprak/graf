@@ -7,9 +7,9 @@ class Node extends Component {
 
   handleMouseDown = (e) => {
     e.stopPropagation()
-    if (!e.shiftKey && e.metaKey) {
+    if (!e.shiftKey && !this.props.selected) {
       this.props.edgeStarted(this.props.id)
-    } else if (!e.shiftKey && !e.metaKey) {
+    } else if (!e.shiftKey && this.props.selected) {
       this.props.nodeGrabbed(this.props.id, this.props.loc, e)
     }
   }
@@ -22,9 +22,9 @@ class Node extends Component {
 
   handleClick = (e) => {
     e.stopPropagation()
-    if (e.shiftKey && !e.metaKey) {
+    if (e.shiftKey) {
       this.props.deleteNode(this.props.id)
-    } else if (!e.shiftKey && !e.metaKey) {
+    } else if (!e.shiftKey) {
       this.props.toggleSelectNode(this.props.id)
     }
   }

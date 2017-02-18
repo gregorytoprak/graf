@@ -5,14 +5,13 @@
 ## Todo
 
 - [x] Create a node: double-click
-- [x] Create an edge: command-drag from one node to another
-- [x] Select: click
-- [x] Delete: shift-click
-- [x] Move a node: drag the node
-- [x] Curve an edge: drag the handle (visible when edge is selected)
+- [x] Create an edge: drag from one node to another
+- [x] Select a node or edge: click
+- [x] Delete a node or edge: shift-click
+- [x] Move a node: select then drag
+- [x] Curve an edge: select then drag handle
 - [x] Pan on the graph: drag the ground
 - [x] Zoom on the graph: scroll
-
 - [ ] Edit menu can modify style attributes of selected object
 - [ ] Proper selection: one thing at a time until another is cmd-clicked to add to selection
   - hitting escape clears selection
