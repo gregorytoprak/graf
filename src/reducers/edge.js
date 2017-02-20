@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { START_EDGE, COMPLETE_EDGE, SELECT_EDGE } from '../actions'
+import { START_EDGE, COMPLETE_EDGE, SELECT_EDGE } from '../actions/edge'
 
 const initialState = Immutable.fromJS({
   id: undefined,

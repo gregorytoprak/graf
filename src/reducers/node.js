@@ -1,5 +1,5 @@
 import Immutable from 'immutable'
-import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from '../actions'
+import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from '../actions/node'
 
 const initialState = Immutable.fromJS({
   id: undefined,

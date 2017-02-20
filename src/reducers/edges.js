@@ -1,6 +1,7 @@
 import Immutable from 'immutable'
 import edge from './edge'
-import { DELETE_NODE, START_EDGE, COMPLETE_EDGE, DELETE_EDGE, SELECT_EDGE } from '../actions'
+import { DELETE_NODE } from '../actions/node'
+import { START_EDGE, COMPLETE_EDGE, DELETE_EDGE, SELECT_EDGE } from '../actions/edge'
 
 const initialState = Immutable.fromJS([])
 
