@@ -4,8 +4,7 @@ import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from '../actions'
 const initialState = Immutable.fromJS({
   id: undefined,
   loc: undefined,
-  selected: false,
-  moving: false
+  selected: false
 })
 
 const node = (state = initialState, action) => {

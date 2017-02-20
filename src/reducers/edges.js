@@ -1,14 +1,21 @@
 import Immutable from 'immutable'
-// import edge from './edge'
-import { DELETE_NODE, CREATE_EDGE, DELETE_EDGE } from '../actions'
+import edge from './edge'
+import { DELETE_NODE, START_EDGE, COMPLETE_EDGE, DELETE_EDGE, SELECT_EDGE } from '../actions'
 
 const initialState = Immutable.fromJS([])
 
 const edges = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_NODE:
-    case CREATE_EDGE:
+      return state.filterNot(e => e.get('startNodeId') === action.payload.id ||
+                                  e.get('endNodeId') === action.payload.id)
+    case START_EDGE:
+      return state.push(edge(undefined, action))
     case DELETE_EDGE:
+      return state.filterNot(e => e.get('id') === action.payload.id)
+    case COMPLETE_EDGE:
+    case SELECT_EDGE:
+      return state.map(e => e.get('id') === action.payload.id ? edge(e, action) : e)
     default:
       return state
   }
