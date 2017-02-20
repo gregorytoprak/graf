@@ -4,12 +4,14 @@ import Edge from './Edge'
 
 class Graph extends Component {
   state = {
-    dims: { cx: 0, cy: 0, w: 25, h: 25 },
+    dims: { x: 0, y: 0, w: 25, h: 25 },
     cursor: 'crosshair',
     grabbed: { type: 'EMPTY', data: {} },
     nodes: [],
     edges: []
   }
+
+  // helpers
 
   getRawDims = () => {
     const r = document.getElementsByTagName('svg')[0].getBoundingClientRect()
@@ -26,8 +28,8 @@ class Graph extends Component {
       y: (rawLoc.y - rawDims.y) / rawDims.h
     }
     return {
-      x: (unitLoc.x * this.state.dims.w) + (this.state.dims.cx - this.state.dims.w / 2),
-      y: (unitLoc.y * this.state.dims.h) + (this.state.dims.cy - this.state.dims.h / 2)
+      x: (unitLoc.x * this.state.dims.w) + this.state.dims.x,
+      y: (unitLoc.y * this.state.dims.h) + this.state.dims.y
     }
   }
 
@@ -171,30 +173,36 @@ class Graph extends Component {
       cursor: 'all-scroll',
       dims: {
         ...this.state.dims,
-        cx: this.state.dims.cx + grabLoc.x - loc.x,
-        cy: this.state.dims.cy + grabLoc.y - loc.y
+        x: this.state.dims.x + grabLoc.x - loc.x,
+        y: this.state.dims.y + grabLoc.y - loc.y
       }
     })
   }
 
   zoomGround = (zoomLoc, deltaY) => {
-    const zoomFactor = 1.02 ** deltaY
     const olds = this.state.dims
+    let zoomFactor = 1.02 ** deltaY
+    if (olds.w * zoomFactor > 250) {
+      zoomFactor = 250 / olds.w
+    } else if (olds.w * zoomFactor < 2.5) {
+      zoomFactor = 2.5 / olds.w
+    }
+    const news = {
+      x: olds.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+      y: olds.y * zoomFactor + zoomLoc.y * (1 - zoomFactor),
+        // Consider the lines from the corners of the original view box to the location
+        // we're zooming in on. In order to maintain both the proportionality of
+        // the sides and the coordinates of the cursor, the new, zoomed, view box
+        // will be inset at the same proportion along all four of those lines. This
+        // gives us the parametric equation for the point t/1 between A and B as
+        // C(t) = (1-t)A + (t)B. From here, see that our 'zoom factor' of the width
+        // and height is actually proportional to the remaining distance (1-t) because
+        // of similar triangles... I don't have time to find a better explanation.
+      w: olds.w * zoomFactor,
+      h: olds.h * zoomFactor
+    }
     this.setState({
-      dims: {
-        cx: olds.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-        cy: olds.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor),
-          // Consider the lines from the corners of the original view box to the location
-          // we're zooming in on. In order to maintain both the proportionality of
-          // the sides and the coordinates of the cursor, the new, zoomed, view box
-          // will be inset at the same proportion along all four of those lines. This
-          // gives us the parametric equation for the point t/1 between A and B as
-          // C(t) = (1-t)A + (t)B. From here, see that our 'zoom factor' of the width
-          // and height is actually proportional to the remaining distance (1-t) because
-          // of similar triangles... I don't have time to find a better explanation.
-        w: olds.w * zoomFactor,
-        h: olds.h * zoomFactor
-      }
+      dims: news
     })
   }
 
@@ -403,7 +411,7 @@ class Graph extends Component {
 
   render () {
     const d = this.state.dims
-    const viewBox = [d.cx - d.w / 2, d.cy - d.h / 2, d.w, d.h].join(' ')
+    const viewBox = [d.x, d.y, d.w, d.h].join(' ')
     return (
       <svg className='Graph' viewBox={viewBox}
         style={{ cursor: this.state.cursor }}
