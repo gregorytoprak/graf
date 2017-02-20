@@ -1,19 +1,20 @@
 import Immutable from 'immutable'
-import nodes from './nodes'
 import { CREATE_NODE } from '../actions'
 
 const initialState = Immutable.fromJS({
-  nodes: [],
-  edges: []
+  id: undefined,
+  loc: undefined,
+  selected: false,
+  moving: false
 })
 
-const reducer = (state = initialState, action) => {
+const node = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NODE:
-      return state.update('nodes', nodesState => nodes(nodesState, action))
+      return state.merge(Immutable.fromJS(action.data))
     default:
       return state
   }
 }
 
-export default reducer
+export default node
