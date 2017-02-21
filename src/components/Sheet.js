@@ -4,9 +4,15 @@ import React, { Component } from 'react'
 // import ControlsContainer from '../containers/ControlsContainer'
 
 class Sheet extends Component {
+  state = { hand: 'EMPTY', grabLoc: null }
+
+  resetState = () => {
+    this.setState({ hand: 'EMPTY', grabLoc: null })
+  }
+
   getLoc = (event) => {
     const raw = { x: event.clientX, y: event.clientY }
-    const vmax = Math.max(this.props.dims.width, this.props.dims.height)
+    const vmax = Math.max(this.props.viewport.width, this.props.viewport.height)
     return {
       x: raw.x * (this.props.s / vmax) + this.props.loc.x,
       y: raw.y * (this.props.s / vmax) + this.props.loc.y
@@ -29,11 +35,34 @@ class Sheet extends Component {
     }, this.props.s * zoomFactor)
   }
 
+  handleMouseDown = (e) => {
+    this.setState({ hand: 'PAN_GROUND', grabLoc: this.getLoc(e) })
+  }
+
+  handleMouseMove = (e) => {
+    const moveLoc = this.getLoc(e)
+    if (this.state.hand === 'PAN_GROUND') {
+      this.props.pan({
+        x: this.props.loc.x + this.state.grabLoc.x - moveLoc.x,
+        y: this.props.loc.y + this.state.grabLoc.y - moveLoc.y
+      })
+    }
+  }
+
+  handleMouseUp = (e) => {
+    if (this.state.hand === 'PAN_GROUND') {
+      this.resetState()
+    }
+  }
+
   render () {
     const viewBox = [this.props.loc.x, this.props.loc.y, this.props.s, this.props.s].join(' ')
     return (
       <svg className='Sheet' viewBox={viewBox}
         onWheel={this.handleWheel}
+        onMouseDown={this.handleMouseDown}
+        onMouseMove={this.handleMouseMove}
+        onMouseUp={this.handleMouseUp}
       >
         <circle cx='5' cy='5' r='1' />
       </svg>

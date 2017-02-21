@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux-immutable'
-import browser from './browser'
 import sheet from './sheet'
 import nodes from './nodes'
 import edges from './edges'
 import controls from './controls'
+import viewport from './viewport'
 
 const reducer = combineReducers({
-  browser,
   sheet,
   nodes,
   edges,
-  controls
+  controls,
+  viewport
 })
 
 export default reducer
