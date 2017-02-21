@@ -8,8 +8,9 @@ const initialState = Immutable.fromJS([])
 const edges = (state = initialState, action) => {
   switch (action.type) {
     case DELETE_NODE:
-      return state.filterNot(e => e.get('startNodeId') === action.payload.id ||
-                                  e.get('endNodeId') === action.payload.id)
+      return state.filterNot(e =>
+        e.get('startNodeId') === action.payload.id ||
+        e.get('endNodeId') === action.payload.id)
     case START_EDGE:
       return state.push(edge(undefined, action))
     case DELETE_EDGE:
