@@ -4,10 +4,8 @@ import { panSheet, zoomSheet } from '../actions/sheet'
 
 const mapStateToProps = state => ({
   dims: {
-    x: state.getIn(['browser', 'x']),
-    y: state.getIn(['browser', 'y']),
-    w: state.getIn(['browser', 'w']),
-    h: state.getIn(['browser', 'h'])
+    width: state.getIn(['browser', 'width']),
+    height: state.getIn(['browser', 'height'])
   },
   loc: {
     x: state.getIn(['sheet', 'loc', 'x']),
