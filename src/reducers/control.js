@@ -15,7 +15,7 @@ const control = (state = initialState, action) => {
     case SELECT_EDGE:
       return state.update('selected', s => !s)
     case MOVE_CONTROL:
-      return state.set('loc', action.payload.loc)
+      return state.set('loc', Immutable.Map(action.payload.loc))
     case RESET_CONTROL:
       return state.set('loc', undefined)
     default:

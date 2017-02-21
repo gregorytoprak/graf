@@ -10,11 +10,11 @@ const initialState = Immutable.fromJS({
 const node = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NODE:
-      return state.set('id', action.payload.id).set('loc', action.payload.loc)
+      return state.set('id', action.payload.id).set('loc', Immutable.Map(action.payload.loc))
     case SELECT_NODE:
       return state.update('selected', s => !s)
     case MOVE_NODE:
-      return state.set('loc', action.payload.loc)
+      return state.set('loc', Immutable.Map(action.payload.loc))
     default:
       return state
   }

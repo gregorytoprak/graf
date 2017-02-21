@@ -9,9 +9,9 @@ const initialState = Immutable.fromJS({
 const sheet = (state = initialState, action) => {
   switch (action.type) {
     case PAN_SHEET:
-      return state.set('loc', action.payload.loc)
+      return state.set('loc', Immutable.Map(action.payload.loc))
     case ZOOM_SHEET:
-      return state.set('loc', action.payload.loc).set('s', action.payload.s)
+      return state.set('loc', Immutable.Map(action.payload.loc)).set('s', action.payload.s)
     default:
       return state
   }
