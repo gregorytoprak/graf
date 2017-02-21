@@ -4,36 +4,29 @@ import React, { Component } from 'react'
 // import ControlsContainer from '../containers/ControlsContainer'
 
 class Sheet extends Component {
-  // handleWheel = (e) => {
-  //   e.preventDefault()
-  //   if (this.state.grabbed.type === 'EMPTY') {
-  //     const zoomLoc = this.getLoc(e)
-  //     this.zoomGround(zoomLoc, e.deltaY)
-  //   }
-  // }
-  //
-  // zoomGround = (zoomLoc, deltaY) => {
-  //   const olds = this.state.dims
-  //   let zoomFactor = 1.02 ** deltaY
-  //   if (olds.w * zoomFactor > 250) {
-  //     zoomFactor = 250 / olds.w
-  //   } else if (olds.w * zoomFactor < 2.5) {
-  //     zoomFactor = 2.5 / olds.w
-  //   }
-  //   const news = {
-  //     x: olds.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-  //     y: olds.y * zoomFactor + zoomLoc.y * (1 - zoomFactor),
-  //     w: olds.w * zoomFactor,
-  //     h: olds.h * zoomFactor
-  //   }
-  //   this.setState({
-  //     dims: news
-  //   })
-  // }
+  getLoc = (event) => {
+    const raw = { x: event.clientX, y: event.clientY }
+    const vmax = Math.max(this.props.dims.width, this.props.dims.height)
+    return {
+      x: raw.x * (this.props.s / vmax) + this.props.loc.x,
+      y: raw.y * (this.props.s / vmax) + this.props.loc.y
+    }
+  }
 
   handleWheel = (e) => {
     e.preventDefault()
-    // const zoomLoc =
+    const zoomLoc = this.getLoc(e)
+    let zoomFactor = 1.02 ** e.deltaY
+    if (this.props.s * zoomFactor > 100) {
+      zoomFactor = 100 / this.props.s
+    } else if (this.props.s * zoomFactor < 1) {
+      zoomFactor = 1 / this.props.s
+    }
+
+    this.props.zoom({
+      x: this.props.loc.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+      y: this.props.loc.y * zoomFactor + zoomLoc.y * (1 - zoomFactor)
+    }, this.props.s * zoomFactor)
   }
 
   render () {
