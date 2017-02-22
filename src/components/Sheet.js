@@ -27,13 +27,7 @@ class Sheet extends Component {
     } else if (this.props.h * zoomFactor < 1) {
       zoomFactor = 1 / this.props.h
     }
-
-    this.props.zoom(
-      this.props.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-      this.props.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor),
-      this.props.w * zoomFactor,
-      this.props.h * zoomFactor
-    )
+    this.props.zoom(zoomLoc, zoomFactor)
   }
 
   handleMouseDown = (e) => {

@@ -17,8 +17,12 @@ const sheet = (state = initialState, action) => {
         .update('cx', cx => cx + action.payload.dx)
         .update('cy', cy => cy + action.payload.dy)
     case ZOOM_SHEET:
-      return state.set('cx', action.payload.cx).set('cy', action.payload.cy)
-        .set('w', action.payload.w).set('h', action.payload.h)
+      const zf = action.payload.zoomFactor
+      return state
+        .update('cx', cx => cx * zf + action.payload.zoomLoc.x * (1 - zf))
+        .update('cy', cy => cy * zf + action.payload.zoomLoc.y * (1 - zf))
+        .update('w', w => w * zf)
+        .update('h', h => h * zf)
     case RESIZE_VIEWPORT:
       const { width, height } = action.payload.viewport
       return state.set('vw', width).set('vh', height)

@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   pan: (dx, dy) => { dispatch(panSheet(dx, dy)) },
-  zoom: (cx, cy, w, h) => { dispatch(zoomSheet(cx, cy, w, h)) }
+  zoom: (zoomLoc, zoomFactor) => { dispatch(zoomSheet(zoomLoc, zoomFactor)) }
 })
 
 const SheetContainer = connect(mapStateToProps, mapDispatchToProps)(Sheet)

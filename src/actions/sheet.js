@@ -6,8 +6,8 @@ export const panSheet = (dx, dy) => ({
   type: PAN_SHEET, payload: { dx, dy }
 })
 
-export const zoomSheet = (cx, cy, w, h) => ({
-  type: ZOOM_SHEET, payload: { cx, cy, w, h }
+export const zoomSheet = (zoomLoc, zoomFactor) => ({
+  type: ZOOM_SHEET, payload: { zoomLoc, zoomFactor }
 })
 
 export const resizeViewport = (viewport) => ({
