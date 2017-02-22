@@ -13,10 +13,10 @@ const initialState = Immutable.fromJS({
 const sheet = (state = initialState, action) => {
   switch (action.type) {
     case PAN_SHEET:
-      return state.set('cx', action.payload.loc.cx).set('cy', action.payload.loc.cy)
+      return state.set('cx', action.payload.cx).set('cy', action.payload.cy)
     case ZOOM_SHEET:
-      return state.set('cx', action.payload.loc.cx).set('cy', action.payload.loc.cy)
-        .set('w', action.payload.dims.w).set('h', action.payload.dims.h)
+      return state.set('cx', action.payload.cx).set('cy', action.payload.cy)
+        .set('w', action.payload.w).set('h', action.payload.h)
     case RESIZE_VIEWPORT:
       return state.set('vw', action.payload.viewport.width).set('vh', action.payload.viewport.height)
     default:
