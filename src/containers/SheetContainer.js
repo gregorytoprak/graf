@@ -1,19 +1,25 @@
 import { connect } from 'react-redux'
 import Sheet from '../components/Sheet'
 import { panSheet, zoomSheet } from '../actions/sheet'
+import { createNode } from '../actions/node'
 
-const mapStateToProps = state => ({
-  cx: state.getIn(['sheet', 'cx']),
-  cy: state.getIn(['sheet', 'cy']),
-  w: state.getIn(['sheet', 'w']),
-  h: state.getIn(['sheet', 'h']),
-  vw: state.getIn(['sheet', 'vw']),
-  vh: state.getIn(['sheet', 'vh'])
-})
+const mapStateToProps = (state) => {
+  const sheet = state.get('sheet')
+  return {
+    cx: sheet.get('cx'),
+    cy: sheet.get('cy'),
+    w: sheet.get('w'),
+    h: sheet.get('h'),
+    vw: sheet.get('vw'),
+    vh: sheet.get('vh'),
+    nodeIds: state.get('nodes').map(node => node.get('id'))
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   pan: (dx, dy) => { dispatch(panSheet(dx, dy)) },
-  zoom: (zoomLoc, zoomFactor) => { dispatch(zoomSheet(zoomLoc, zoomFactor)) }
+  zoom: (zoomLoc, zoomFactor) => { dispatch(zoomSheet(zoomLoc, zoomFactor)) },
+  createNode: (id, loc) => { dispatch(createNode(id, loc)) }
 })
 
 const SheetContainer = connect(mapStateToProps, mapDispatchToProps)(Sheet)

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-// import NodesContainer from '../containers/NodesContainer'
-// import EdgesContainer from '../containers/EdgesContainer'
-// import ControlsContainer from '../containers/ControlsContainer'
+import NodeContainer from '../containers/NodeContainer'
 
 class Sheet extends Component {
   state = { hand: 'EMPTY', grabLoc: null }
@@ -65,13 +63,10 @@ class Sheet extends Component {
         onMouseUp={this.handleMouseUp}
       >
         <circle cx='0' cy='0' r='1' />
+        {this.props.nodeIds.map(id => <NodeContainer key={id} id={id} />)}
       </svg>
     )
   }
 }
-
-// <NodesContainer />
-// <EdgesContainer />
-// <ControlsContainer />
 
 export default Sheet
