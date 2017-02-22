@@ -6,8 +6,8 @@ const initialState = Immutable.fromJS({
   cy: 0,
   w: 10,
   h: 10,
-  vw: undefined,
-  vh: undefined
+  vw: 1000,
+  vh: 1000
 })
 
 const sheet = (state = initialState, action) => {
@@ -18,7 +18,10 @@ const sheet = (state = initialState, action) => {
       return state.set('cx', action.payload.cx).set('cy', action.payload.cy)
         .set('w', action.payload.w).set('h', action.payload.h)
     case RESIZE_VIEWPORT:
-      return state.set('vw', action.payload.viewport.width).set('vh', action.payload.viewport.height)
+      const { width, height } = action.payload.viewport
+      return state.set('vw', width).set('vh', height)
+        .update('w', w => w * width / state.get('vw'))
+        .update('h', h => h * height / state.get('vh'))
     default:
       return state
   }

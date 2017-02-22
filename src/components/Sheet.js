@@ -12,10 +12,9 @@ class Sheet extends Component {
 
   getLoc = (event) => {
     const raw = { x: event.clientX, y: event.clientY }
-    const vmax = Math.max(this.props.vw, this.props.vh)
     return {
-      x: raw.x * (this.props.w / vmax) + this.props.cx - this.props.w / 2,
-      y: raw.y * (this.props.h / vmax) + this.props.cy - this.props.h / 2
+      x: raw.x * (this.props.w / this.props.vw) + this.props.cx - this.props.w / 2,
+      y: raw.y * (this.props.h / this.props.vh) + this.props.cy - this.props.h / 2
     }
   }
 
@@ -23,10 +22,10 @@ class Sheet extends Component {
     e.preventDefault()
     const zoomLoc = this.getLoc(e)
     let zoomFactor = 1.02 ** e.deltaY
-    if (this.props.w * zoomFactor > 100) {
-      zoomFactor = 100 / this.props.w
-    } else if (this.props.w * zoomFactor < 1) {
-      zoomFactor = 1 / this.props.w
+    if (this.props.h * zoomFactor > 100) {
+      zoomFactor = 100 / this.props.h
+    } else if (this.props.h * zoomFactor < 1) {
+      zoomFactor = 1 / this.props.h
     }
 
     this.props.zoom(
