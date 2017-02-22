@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  pan: (cx, cy) => { dispatch(panSheet(cx, cy)) },
+  pan: (dx, dy) => { dispatch(panSheet(dx, dy)) },
   zoom: (cx, cy, w, h) => { dispatch(zoomSheet(cx, cy, w, h)) }
 })
 

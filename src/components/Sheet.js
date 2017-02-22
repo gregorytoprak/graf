@@ -44,8 +44,8 @@ class Sheet extends Component {
     const moveLoc = this.getLoc(e)
     if (this.state.hand === 'PAN_GROUND') {
       this.props.pan(
-        this.props.cx + this.state.grabLoc.x - moveLoc.x,
-        this.props.cy + this.state.grabLoc.y - moveLoc.y
+        this.state.grabLoc.x - moveLoc.x,
+        this.state.grabLoc.y - moveLoc.y
       )
     }
   }

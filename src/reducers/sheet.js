@@ -13,7 +13,9 @@ const initialState = Immutable.fromJS({
 const sheet = (state = initialState, action) => {
   switch (action.type) {
     case PAN_SHEET:
-      return state.set('cx', action.payload.cx).set('cy', action.payload.cy)
+      return state
+        .update('cx', cx => cx + action.payload.dx)
+        .update('cy', cy => cy + action.payload.dy)
     case ZOOM_SHEET:
       return state.set('cx', action.payload.cx).set('cy', action.payload.cy)
         .set('w', action.payload.w).set('h', action.payload.h)
