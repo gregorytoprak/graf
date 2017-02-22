@@ -14,8 +14,8 @@ class Sheet extends Component {
     const raw = { x: event.clientX, y: event.clientY }
     const vmax = Math.max(this.props.viewport.width, this.props.viewport.height)
     return {
-      x: raw.x * (this.props.dims.w / vmax) + this.props.loc.cx - this.props.dims.w / 2,
-      y: raw.y * (this.props.dims.h / vmax) + this.props.loc.cy - this.props.dims.h / 2
+      x: raw.x * (this.props.w / vmax) + this.props.cx - this.props.w / 2,
+      y: raw.y * (this.props.h / vmax) + this.props.cy - this.props.h / 2
     }
   }
 
@@ -23,21 +23,17 @@ class Sheet extends Component {
     e.preventDefault()
     const zoomLoc = this.getLoc(e)
     let zoomFactor = 1.02 ** e.deltaY
-    if (this.props.dims.w * zoomFactor > 100) {
-      zoomFactor = 100 / this.props.dims.w
-    } else if (this.props.dims.w * zoomFactor < 1) {
-      zoomFactor = 1 / this.props.dims.w
+    if (this.props.w * zoomFactor > 100) {
+      zoomFactor = 100 / this.props.w
+    } else if (this.props.w * zoomFactor < 1) {
+      zoomFactor = 1 / this.props.w
     }
 
     this.props.zoom(
-      {
-        cx: this.props.loc.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-        cy: this.props.loc.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor)
-      },
-      {
-        w: this.props.dims.w * zoomFactor,
-        h: this.props.dims.h * zoomFactor
-      }
+      this.props.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+      this.props.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor),
+      this.props.w * zoomFactor,
+      this.props.h * zoomFactor
     )
   }
 
@@ -48,10 +44,10 @@ class Sheet extends Component {
   handleMouseMove = (e) => {
     const moveLoc = this.getLoc(e)
     if (this.state.hand === 'PAN_GROUND') {
-      this.props.pan({
-        cx: this.props.loc.cx + this.state.grabLoc.x - moveLoc.x,
-        cy: this.props.loc.cy + this.state.grabLoc.y - moveLoc.y
-      })
+      this.props.pan(
+        this.props.cx + this.state.grabLoc.x - moveLoc.x,
+        this.props.cy + this.state.grabLoc.y - moveLoc.y
+      )
     }
   }
 
@@ -63,10 +59,10 @@ class Sheet extends Component {
 
   render () {
     const viewBox = [
-      this.props.loc.cx - this.props.dims.w / 2,
-      this.props.loc.cy - this.props.dims.h / 2,
-      this.props.dims.w,
-      this.props.dims.h
+      this.props.cx - this.props.w / 2,
+      this.props.cy - this.props.h / 2,
+      this.props.w,
+      this.props.h
     ].join(' ')
     return (
       <svg className='Sheet' viewBox={viewBox}

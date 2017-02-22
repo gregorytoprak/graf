@@ -1,10 +1,10 @@
 export const PAN_SHEET = 'PAN_SHEET'
 export const ZOOM_SHEET = 'ZOOM_SHEET'
 
-export const panSheet = (loc) => ({
-  type: PAN_SHEET, payload: { loc }
+export const panSheet = (cx, cy) => ({
+  type: PAN_SHEET, payload: { cx, cy }
 })
 
-export const zoomSheet = (loc, dims) => ({
-  type: ZOOM_SHEET, payload: { loc, dims }
+export const zoomSheet = (cx, cy, w, h) => ({
+  type: ZOOM_SHEET, payload: { cx, cy, w, h }
 })

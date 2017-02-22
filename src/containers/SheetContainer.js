@@ -7,19 +7,15 @@ const mapStateToProps = state => ({
     width: state.getIn(['viewport', 'width']),
     height: state.getIn(['viewport', 'height'])
   },
-  loc: {
-    cx: state.getIn(['sheet', 'loc', 'cx']),
-    cy: state.getIn(['sheet', 'loc', 'cy'])
-  },
-  dims: {
-    w: state.getIn(['sheet', 'dims', 'w']),
-    h: state.getIn(['sheet', 'dims', 'h'])
-  }
+  cx: state.getIn(['sheet', 'cx']),
+  cy: state.getIn(['sheet', 'cy']),
+  w: state.getIn(['sheet', 'w']),
+  h: state.getIn(['sheet', 'h'])
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  pan: (loc) => { dispatch(panSheet(loc)) },
-  zoom: (loc, dims) => { dispatch(zoomSheet(loc, dims)) }
+  pan: (cx, cy) => { dispatch(panSheet(cx, cy)) },
+  zoom: (cx, cy, w, h) => { dispatch(zoomSheet(cx, cy, w, h)) }
 })
 
 const SheetContainer = connect(mapStateToProps, mapDispatchToProps)(Sheet)
