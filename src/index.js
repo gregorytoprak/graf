@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { viewport } from 'verge'
 import reducer from './reducers'
-import { resizeViewport } from './actions/viewport'
+import { resizeViewport } from './actions/sheet'
 import App from './components/App'
 import './styles.css'
 

@@ -12,7 +12,7 @@ class Sheet extends Component {
 
   getLoc = (event) => {
     const raw = { x: event.clientX, y: event.clientY }
-    const vmax = Math.max(this.props.viewport.width, this.props.viewport.height)
+    const vmax = Math.max(this.props.vw, this.props.vh)
     return {
       x: raw.x * (this.props.w / vmax) + this.props.cx - this.props.w / 2,
       y: raw.y * (this.props.h / vmax) + this.props.cy - this.props.h / 2
