@@ -2,7 +2,7 @@ import Immutable from 'immutable'
 import { PAN_SHEET, ZOOM_SHEET } from '../actions/sheet'
 
 const initialState = Immutable.fromJS({
-  loc: { x: 0, y: 0 },
+  loc: { cx: 0, cy: 0 },
   s: 10
 })
 

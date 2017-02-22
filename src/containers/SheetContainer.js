@@ -8,8 +8,8 @@ const mapStateToProps = state => ({
     height: state.getIn(['viewport', 'height'])
   },
   loc: {
-    x: state.getIn(['sheet', 'loc', 'x']),
-    y: state.getIn(['sheet', 'loc', 'y'])
+    cx: state.getIn(['sheet', 'loc', 'cx']),
+    cy: state.getIn(['sheet', 'loc', 'cy'])
   },
   s: state.getIn(['sheet', 's'])
 })

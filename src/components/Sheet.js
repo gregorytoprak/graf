@@ -14,8 +14,8 @@ class Sheet extends Component {
     const raw = { x: event.clientX, y: event.clientY }
     const vmax = Math.max(this.props.viewport.width, this.props.viewport.height)
     return {
-      x: raw.x * (this.props.s / vmax) + this.props.loc.x,
-      y: raw.y * (this.props.s / vmax) + this.props.loc.y
+      x: raw.x * (this.props.s / vmax) + this.props.loc.cx - this.props.s / 2,
+      y: raw.y * (this.props.s / vmax) + this.props.loc.cy - this.props.s / 2
     }
   }
 
@@ -30,8 +30,8 @@ class Sheet extends Component {
     }
 
     this.props.zoom({
-      x: this.props.loc.x * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-      y: this.props.loc.y * zoomFactor + zoomLoc.y * (1 - zoomFactor)
+      cx: this.props.loc.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+      cy: this.props.loc.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor)
     }, this.props.s * zoomFactor)
   }
 
@@ -43,8 +43,8 @@ class Sheet extends Component {
     const moveLoc = this.getLoc(e)
     if (this.state.hand === 'PAN_GROUND') {
       this.props.pan({
-        x: this.props.loc.x + this.state.grabLoc.x - moveLoc.x,
-        y: this.props.loc.y + this.state.grabLoc.y - moveLoc.y
+        cx: this.props.loc.cx + this.state.grabLoc.x - moveLoc.x,
+        cy: this.props.loc.cy + this.state.grabLoc.y - moveLoc.y
       })
     }
   }
@@ -56,7 +56,12 @@ class Sheet extends Component {
   }
 
   render () {
-    const viewBox = [this.props.loc.x, this.props.loc.y, this.props.s, this.props.s].join(' ')
+    const viewBox = [
+      this.props.loc.cx - this.props.s / 2,
+      this.props.loc.cy - this.props.s / 2,
+      this.props.s,
+      this.props.s
+    ].join(' ')
     return (
       <svg className='Sheet' viewBox={viewBox}
         onWheel={this.handleWheel}
@@ -64,7 +69,7 @@ class Sheet extends Component {
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
       >
-        <circle cx='5' cy='5' r='1' />
+        <circle cx='0' cy='0' r='1' />
       </svg>
     )
   }
