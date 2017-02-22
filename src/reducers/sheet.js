@@ -3,7 +3,7 @@ import { PAN_SHEET, ZOOM_SHEET } from '../actions/sheet'
 
 const initialState = Immutable.fromJS({
   loc: { cx: 0, cy: 0 },
-  s: 10
+  dims: { w: 10, h: 10 }
 })
 
 const sheet = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const sheet = (state = initialState, action) => {
     case PAN_SHEET:
       return state.set('loc', Immutable.Map(action.payload.loc))
     case ZOOM_SHEET:
-      return state.set('loc', Immutable.Map(action.payload.loc)).set('s', action.payload.s)
+      return state.set('loc', Immutable.Map(action.payload.loc)).set('dims', Immutable.Map(action.payload.dims))
     default:
       return state
   }

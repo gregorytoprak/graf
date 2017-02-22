@@ -5,6 +5,6 @@ export const panSheet = (loc) => ({
   type: PAN_SHEET, payload: { loc }
 })
 
-export const zoomSheet = (loc, s) => ({
-  type: ZOOM_SHEET, payload: { loc, s }
+export const zoomSheet = (loc, dims) => ({
+  type: ZOOM_SHEET, payload: { loc, dims }
 })

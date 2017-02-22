@@ -14,8 +14,8 @@ class Sheet extends Component {
     const raw = { x: event.clientX, y: event.clientY }
     const vmax = Math.max(this.props.viewport.width, this.props.viewport.height)
     return {
-      x: raw.x * (this.props.s / vmax) + this.props.loc.cx - this.props.s / 2,
-      y: raw.y * (this.props.s / vmax) + this.props.loc.cy - this.props.s / 2
+      x: raw.x * (this.props.dims.w / vmax) + this.props.loc.cx - this.props.dims.w / 2,
+      y: raw.y * (this.props.dims.h / vmax) + this.props.loc.cy - this.props.dims.h / 2
     }
   }
 
@@ -23,16 +23,22 @@ class Sheet extends Component {
     e.preventDefault()
     const zoomLoc = this.getLoc(e)
     let zoomFactor = 1.02 ** e.deltaY
-    if (this.props.s * zoomFactor > 100) {
-      zoomFactor = 100 / this.props.s
-    } else if (this.props.s * zoomFactor < 1) {
-      zoomFactor = 1 / this.props.s
+    if (this.props.dims.w * zoomFactor > 100) {
+      zoomFactor = 100 / this.props.dims.w
+    } else if (this.props.dims.w * zoomFactor < 1) {
+      zoomFactor = 1 / this.props.dims.w
     }
 
-    this.props.zoom({
-      cx: this.props.loc.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
-      cy: this.props.loc.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor)
-    }, this.props.s * zoomFactor)
+    this.props.zoom(
+      {
+        cx: this.props.loc.cx * zoomFactor + zoomLoc.x * (1 - zoomFactor),
+        cy: this.props.loc.cy * zoomFactor + zoomLoc.y * (1 - zoomFactor)
+      },
+      {
+        w: this.props.dims.w * zoomFactor,
+        h: this.props.dims.h * zoomFactor
+      }
+    )
   }
 
   handleMouseDown = (e) => {
@@ -57,10 +63,10 @@ class Sheet extends Component {
 
   render () {
     const viewBox = [
-      this.props.loc.cx - this.props.s / 2,
-      this.props.loc.cy - this.props.s / 2,
-      this.props.s,
-      this.props.s
+      this.props.loc.cx - this.props.dims.w / 2,
+      this.props.loc.cy - this.props.dims.h / 2,
+      this.props.dims.w,
+      this.props.dims.h
     ].join(' ')
     return (
       <svg className='Sheet' viewBox={viewBox}
