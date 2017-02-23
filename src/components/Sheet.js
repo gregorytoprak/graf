@@ -48,6 +48,10 @@ class Sheet extends Component {
     }
   }
 
+  handleDoubleClick = (e) => {
+    this.props.node(this.getLoc(e))
+  }
+
   render () {
     const viewBox = [
       this.props.cx - this.props.w / 2,
@@ -61,6 +65,7 @@ class Sheet extends Component {
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
+        onDoubleClick={this.handleDoubleClick}
       >
         <circle cx='0' cy='0' r='1' />
         {this.props.nodeIds.map(id => <NodeContainer key={id} id={id} />)}

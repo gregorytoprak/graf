@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import Sheet from '../components/Sheet'
 import { panSheet, zoomSheet } from '../actions/sheet'
 import { createNode } from '../actions/node'
+import { makeId } from '../utils'
 
 const mapStateToProps = (state) => {
   const sheet = state.get('sheet')
@@ -19,7 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   pan: (dx, dy) => { dispatch(panSheet(dx, dy)) },
   zoom: (zoomLoc, zoomFactor) => { dispatch(zoomSheet(zoomLoc, zoomFactor)) },
-  createNode: (id, loc) => { dispatch(createNode(id, loc)) }
+  node: (loc) => { dispatch(createNode(makeId(), loc)) }
 })
 
 const SheetContainer = connect(mapStateToProps, mapDispatchToProps)(Sheet)
