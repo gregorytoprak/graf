@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import NodeContainer from '../containers/NodeContainer'
 
 class Sheet extends Component {
-  state = { hand: 'EMPTY', grabLoc: null }
-
-  resetState = () => {
-    this.setState({ hand: 'EMPTY', grabLoc: null })
-  }
+  state = { hand: 'EMPTY' }
 
   getLoc = (event) => {
     const raw = { x: event.clientX, y: event.clientY }
@@ -29,12 +25,13 @@ class Sheet extends Component {
   }
 
   handleMouseDown = (e) => {
-    this.setState({ hand: 'PAN_GROUND', grabLoc: this.getLoc(e) })
+    const grabLoc = this.getLoc(e)
+    this.setState({ hand: 'PAN', grabLoc })
   }
 
   handleMouseMove = (e) => {
-    const moveLoc = this.getLoc(e)
-    if (this.state.hand === 'PAN_GROUND') {
+    if (this.state.hand === 'PAN') {
+      const moveLoc = this.getLoc(e)
       this.props.pan(
         this.state.grabLoc.x - moveLoc.x,
         this.state.grabLoc.y - moveLoc.y
@@ -43,13 +40,12 @@ class Sheet extends Component {
   }
 
   handleMouseUp = (e) => {
-    if (this.state.hand === 'PAN_GROUND') {
-      this.resetState()
-    }
+    this.setState({ hand: 'EMPTY' })
   }
 
   handleDoubleClick = (e) => {
-    this.props.node(this.getLoc(e))
+    const loc = this.getLoc(e)
+    this.props.node(loc.x, loc.y)
   }
 
   render () {
@@ -68,7 +64,7 @@ class Sheet extends Component {
         onDoubleClick={this.handleDoubleClick}
       >
         <circle cx='0' cy='0' r='1' />
-        {this.props.nodeIds.map(id => <NodeContainer key={id} id={id} />)}
+        {this.props.nodeIds.map(id => <NodeContainer key={id} id={id} getLoc={this.getLoc} />)}
       </svg>
     )
   }

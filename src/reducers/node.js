@@ -3,18 +3,25 @@ import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from '../actions/node'
 
 const initialState = Immutable.fromJS({
   id: undefined,
-  loc: undefined,
+  cx: undefined,
+  cy: undefined,
   selected: false
 })
 
 const node = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NODE:
-      return state.set('id', action.payload.id).set('loc', Immutable.Map(action.payload.loc))
+      return state
+        .set('id', action.payload.id)
+        .set('cx', action.payload.cx)
+        .set('cy', action.payload.cy)
     case SELECT_NODE:
-      return state.update('selected', s => !s)
+      return state
+        .update('selected', s => !s)
     case MOVE_NODE:
-      return state.set('loc', Immutable.Map(action.payload.loc))
+      return state
+        .set('cx', action.payload.cx)
+        .set('cy', action.payload.cy)
     default:
       return state
   }

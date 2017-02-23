@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   pan: (dx, dy) => { dispatch(panSheet(dx, dy)) },
   zoom: (zoomLoc, zoomFactor) => { dispatch(zoomSheet(zoomLoc, zoomFactor)) },
-  node: (loc) => { dispatch(createNode(makeId(), loc)) }
+  node: (cx, cy) => { dispatch(createNode(makeId(), cx, cy)) }
 })
 
 const SheetContainer = connect(mapStateToProps, mapDispatchToProps)(Sheet)

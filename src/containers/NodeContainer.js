@@ -5,10 +5,8 @@ import { deleteNode, selectNode, moveNode } from '../actions/node'
 const mapStateToProps = (state, { id }) => {
   const node = state.get('nodes').find(node => node.get('id') === id)
   return {
-    loc: {
-      x: node.getIn(['loc', 'x']),
-      y: node.getIn(['loc', 'y'])
-    },
+    cx: node.get('cx'),
+    cy: node.get('cy'),
     selected: node.get('selected')
   }
 }
@@ -16,7 +14,7 @@ const mapStateToProps = (state, { id }) => {
 const mapDispatchToProps = (dispatch, { id }) => ({
   delete: () => { dispatch(deleteNode(id)) },
   select: () => { dispatch(selectNode(id)) },
-  move: (loc) => { dispatch(moveNode(id, loc)) }
+  move: (cx, cy) => { dispatch(moveNode(id, cx, cy)) }
 })
 
 const NodeContainer = connect(mapStateToProps, mapDispatchToProps)(Node)
