@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 class Node extends Component {
-  state = { hand: 'EMPTY' }
+  state = { hand: 'EMPTY', data: {}, moving: false }
 
   handleMouseDown = (e) => {
     e.stopPropagation()
@@ -10,30 +10,32 @@ class Node extends Component {
       x: this.props.cx - grabLoc.x,
       y: this.props.cy - grabLoc.y
     }
-    this.setState({ hand: 'MOVE', relLoc })
+    this.setState({ hand: 'MOVE', data: { relLoc } })
   }
 
   handleMouseMove = (e) => {
     if (this.state.hand === 'MOVE') {
       const moveLoc = this.props.getLoc(e)
       this.props.move(
-        moveLoc.x + this.state.relLoc.x,
-        moveLoc.y + this.state.relLoc.y
+        moveLoc.x + this.state.data.relLoc.x,
+        moveLoc.y + this.state.data.relLoc.y
       )
+      this.setState({ moving: true })
     }
   }
 
   handleMouseUp = (e) => {
-    this.setState({ hand: 'EMPTY' })
+    this.setState({ hand: 'EMPTY', data: {} })
   }
 
   handleClick = (e) => {
     e.stopPropagation()
     if (e.shiftKey) {
       this.props.delete()
-    } else if (!e.shiftKey) {
+    } else if (!e.shiftKey && !this.state.moving) {
       this.props.select()
     }
+    this.setState({ moving: false })
   }
 
   handleDoubleClick = (e) => {
