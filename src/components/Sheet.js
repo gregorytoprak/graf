@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import NodeContainer from '../containers/NodeContainer'
 
 class Sheet extends Component {
-  state = { hand: 'EMPTY', data: {} }
-
   getLoc = (event) => {
     const raw = { x: event.clientX, y: event.clientY }
     return {
@@ -25,22 +23,21 @@ class Sheet extends Component {
   }
 
   handleMouseDown = (e) => {
-    const grabLoc = this.getLoc(e)
-    this.setState({ hand: 'PAN', data: { grabLoc } })
+    this.props.panHand(this.getLoc(e))
   }
 
   handleMouseMove = (e) => {
-    if (this.state.hand === 'PAN') {
+    if (this.props.hand.type === 'pan') {
       const moveLoc = this.getLoc(e)
       this.props.pan(
-        this.state.data.grabLoc.x - moveLoc.x,
-        this.state.data.grabLoc.y - moveLoc.y
+        this.props.hand.loc.x - moveLoc.x,
+        this.props.hand.loc.y - moveLoc.y
       )
     }
   }
 
   handleMouseUp = (e) => {
-    this.setState({ hand: 'EMPTY', data: {} })
+    this.props.emptyHand()
   }
 
   handleDoubleClick = (e) => {
