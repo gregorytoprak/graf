@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import NodeContainer from '../containers/NodeContainer'
-import { PAN_HAND, MOVE_NODE_HAND } from '../actions/hand'
 
 class Sheet extends Component {
   getLoc = (event) => {
@@ -20,26 +19,27 @@ class Sheet extends Component {
     } else if (this.props.h * zoomFactor < 1) {
       zoomFactor = 1 / this.props.h
     }
-    this.props.zoom(zoomLoc, zoomFactor)
+    this.props.zoomSheet(zoomLoc, zoomFactor)
   }
 
   handleMouseDown = (e) => {
-    this.props.panHand(this.getLoc(e))
+    const grabLoc = this.getLoc(e)
+    this.props.panHand(grabLoc.x, grabLoc.y)
   }
 
   handleMouseMove = (e) => {
-    if (this.props.hand.type === PAN_HAND) {
+    if (this.props.hand.palm === 'pan') {
       const moveLoc = this.getLoc(e)
-      this.props.pan(
-        this.props.hand.loc.x - moveLoc.x,
-        this.props.hand.loc.y - moveLoc.y
+      this.props.panSheet(
+        this.props.hand.x - moveLoc.x,
+        this.props.hand.y - moveLoc.y
       )
-    } else if (this.props.hand.type === MOVE_NODE_HAND) {
+    } else if (this.props.hand.palm === 'moveNode') {
       const moveLoc = this.getLoc(e)
       this.props.moveNode(
         this.props.hand.id,
-        moveLoc.x + this.props.hand.loc.x,
-        moveLoc.y + this.props.hand.loc.y
+        moveLoc.x + this.props.hand.x,
+        moveLoc.y + this.props.hand.y
       )
     }
   }
@@ -50,7 +50,7 @@ class Sheet extends Component {
 
   handleDoubleClick = (e) => {
     const loc = this.getLoc(e)
-    this.props.node(loc.x, loc.y)
+    this.props.createNode(loc.x, loc.y)
   }
 
   render () {

@@ -3,20 +3,14 @@ import Node from '../components/Node'
 import { deleteNode, selectNode } from '../actions/node'
 import { emptyHand, moveNodeHand } from '../actions/hand'
 
-const mapStateToProps = (state, { id }) => {
-  const node = state.get('nodes').find(node => node.get('id') === id)
-  return {
-    cx: node.get('cx'),
-    cy: node.get('cy'),
-    selected: node.get('selected')
-  }
-}
+const mapStateToProps = (state, { id }) =>
+  state.nodes.find(nd => nd.id === id)
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-  delete: () => { dispatch(deleteNode(id)) },
-  select: () => { dispatch(selectNode(id)) },
+  deleteNode: () => { dispatch(deleteNode(id)) },
+  selectNode: () => { dispatch(selectNode(id)) },
   emptyHand: () => { dispatch(emptyHand()) },
-  moveNodeHand: (id, loc) => { dispatch(moveNodeHand(id, loc)) }
+  moveNodeHand: (x, y) => { dispatch(moveNodeHand(id, x, y)) }
 })
 
 const NodeContainer = connect(mapStateToProps, mapDispatchToProps)(Node)

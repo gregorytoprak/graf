@@ -8,13 +8,11 @@
     "standard": "^8.6.0"
   },
   "dependencies": {
-    "immutable": "^3.8.1",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-immutable": "^3.1.0",
     "verge": "^1.9.1"
   },
   "scripts": {

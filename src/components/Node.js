@@ -4,11 +4,10 @@ class Node extends Component {
   handleMouseDown = (e) => {
     e.stopPropagation()
     const grabLoc = this.props.getLoc(e)
-    const relLoc = {
-      x: this.props.cx - grabLoc.x,
-      y: this.props.cy - grabLoc.y
-    }
-    this.props.moveNodeHand(this.props.id, relLoc)
+    this.props.moveNodeHand(
+      this.props.cx - grabLoc.x,
+      this.props.cy - grabLoc.y
+    )
   }
 
   handleMouseUp = (e) => {
@@ -18,9 +17,9 @@ class Node extends Component {
   handleClick = (e) => {
     e.stopPropagation()
     if (e.shiftKey) {
-      this.props.delete()
+      this.props.deleteNode()
     } else if (!e.shiftKey) {
-      this.props.select()
+      this.props.selectNode()
     }
   }
 

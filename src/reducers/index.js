@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux-immutable'
+import { combineReducers } from 'redux'
 import sheet from './sheet'
 import hand from './hand'
 import nodes from './nodes'
