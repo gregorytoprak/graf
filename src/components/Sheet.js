@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NodeContainer from '../containers/NodeContainer'
+import { PAN_HAND, MOVE_NODE_HAND } from '../actions/hand'
 
 class Sheet extends Component {
   getLoc = (event) => {
@@ -27,11 +28,18 @@ class Sheet extends Component {
   }
 
   handleMouseMove = (e) => {
-    if (this.props.hand.type === 'pan') {
+    if (this.props.hand.type === PAN_HAND) {
       const moveLoc = this.getLoc(e)
       this.props.pan(
         this.props.hand.loc.x - moveLoc.x,
         this.props.hand.loc.y - moveLoc.y
+      )
+    } else if (this.props.hand.type === MOVE_NODE_HAND) {
+      const moveLoc = this.getLoc(e)
+      this.props.moveNode(
+        this.props.hand.id,
+        moveLoc.x + this.props.hand.loc.x,
+        moveLoc.y + this.props.hand.loc.y
       )
     }
   }

@@ -1,8 +1,9 @@
 import Immutable from 'immutable'
-import { EMPTY_HAND, PAN_HAND } from '../actions/hand'
+import { EMPTY_HAND, PAN_HAND, MOVE_NODE_HAND } from '../actions/hand'
 
 const initialState = Immutable.fromJS({
-  type: 'empty',
+  type: 'EMPTY_HAND',
+  id: undefined,
   loc: {
     x: undefined,
     y: undefined
@@ -15,7 +16,13 @@ const sheet = (state = initialState, action) => {
       return initialState
     case PAN_HAND:
       return state
-        .set('type', 'pan')
+        .set('type', action.type)
+        .setIn(['loc', 'x'], action.payload.loc.x)
+        .setIn(['loc', 'y'], action.payload.loc.y)
+    case MOVE_NODE_HAND:
+      return state
+        .set('type', action.type)
+        .set('id', action.payload.id)
         .setIn(['loc', 'x'], action.payload.loc.x)
         .setIn(['loc', 'y'], action.payload.loc.y)
     default:
