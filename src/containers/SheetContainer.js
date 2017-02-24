@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   panSheet: (dx, dy) => { dispatch(panSheet(dx, dy)) },
   zoomSheet: (zoomLoc, zoomFactor) => { dispatch(zoomSheet(zoomLoc, zoomFactor)) },
-  createNode: (cx, cy) => { dispatch(createNode(makeId(), cx, cy)) },
+  createNode: (cx, cy) => { dispatch(createNode(makeId('node'), cx, cy)) },
   moveNode: (id, cx, cy) => { dispatch(moveNode(id, cx, cy)) },
   emptyHand: () => { dispatch(emptyHand()) },
   panHand: (x, y) => { dispatch(panHand(x, y)) }

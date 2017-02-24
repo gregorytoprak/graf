@@ -1,1 +1,1 @@
-export const makeId = () => Date.now()
+export const makeId = (type) => type + '-' + Date.now()
