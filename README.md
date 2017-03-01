@@ -5,22 +5,16 @@
 ## Features
 
 - Create a node: double-click
-- Create an edge: drag from one node to another
+- Move a node: drag
+- Create an edge: command-drag from one node to another
+- Curve an edge: select then drag handle
 - Select a node or edge: click
 - Delete a node or edge: shift-click
-- Move a node: select then drag
-- Curve an edge: select then drag handle
-- Pan on the graph: drag the ground
-- Zoom on the graph: scroll
+- Pan the sheet: drag
+- Zoom the sheet: scroll
 
 ## Todo
 
-- [ ] Reduxify
-  - Create an edge
-  - Select a node or edge
-  - Delete a node or edge
-  - Move a node
-  - Curve an edge
 - [ ] Welcome screen
   - [ ] Instructions
   - [ ] Load from cookie or file or start new drawing
