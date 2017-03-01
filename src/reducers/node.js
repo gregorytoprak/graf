@@ -4,7 +4,8 @@ const initialState = {
   id: undefined,
   cx: undefined,
   cy: undefined,
-  selected: false
+  selected: false,
+  moving: false
 }
 
 const node = (state = initialState, action) => {
@@ -17,12 +18,14 @@ const node = (state = initialState, action) => {
     case SELECT_NODE:
       return {
         ...state,
-        selected: !state.selected
+        selected: state.moving ? state.selected : !state.selected,
+        moving: false
       }
     case MOVE_NODE:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        moving: true
       }
     default:
       return state
