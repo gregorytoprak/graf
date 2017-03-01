@@ -8,6 +8,7 @@ import { makeId } from '../utils'
 const mapStateToProps = (state) => ({
   ...state.sheet,
   nodeIds: state.nodes.map(nd => nd.id),
+  edgeIds: state.edges.map(ed => ed.id),
   hand: { ...state.hand }
 })
 

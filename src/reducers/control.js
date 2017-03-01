@@ -5,6 +5,7 @@ const initialState = {
   id: undefined,
   cx: undefined,
   cy: undefined,
+  curved: false,
   selected: false
 }
 
