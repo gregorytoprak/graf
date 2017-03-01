@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Sheet from '../components/Sheet'
 import { panSheet, zoomSheet } from '../actions/sheet'
 import { createNode, moveNode } from '../actions/node'
-import { deleteEdge } from '../actions/edge'
+import { deleteEdge, moveControl } from '../actions/edge'
 import { emptyHand, panHand, startEdgeHand } from '../actions/hand'
 import { makeId } from '../utils'
 
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   createNode: (cx, cy) => { dispatch(createNode(makeId('node'), cx, cy)) },
   moveNode: (id, cx, cy) => { dispatch(moveNode(id, cx, cy)) },
   deleteEdge: (id) => { dispatch(deleteEdge(id)) },
+  moveControl: (id, controlx, controly) => { dispatch(moveControl(id, controlx, controly)) },
   emptyHand: () => { dispatch(emptyHand()) },
   panHand: (x, y) => { dispatch(panHand(x, y)) },
   startEdgeHand: (id, loc) => { dispatch(startEdgeHand(id, loc)) }

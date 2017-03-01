@@ -49,6 +49,13 @@ class Sheet extends Component {
         this.props.hand.id,
         moveLoc
       )
+    } else if (this.props.hand.palm === 'moveControl') {
+      const moveLoc = this.getLoc(e)
+      this.props.moveControl(
+        this.props.hand.id,
+        moveLoc.x + this.props.hand.loc.x,
+        moveLoc.y + this.props.hand.loc.y
+      )
     }
   }
 

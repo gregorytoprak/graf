@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
 import Control from '../components/Control'
+import { selectEdge, resetControl } from '../actions/edge'
+import { emptyHand, moveControlHand } from '../actions/hand'
 
 const mapStateToProps = (state, { id }) => {
   const edge = state.edges.find(ed => ed.id === id)
@@ -13,6 +15,10 @@ const mapStateToProps = (state, { id }) => {
 }
 
 const mapDispatchToProps = (dispatch, { id }) => ({
+  selectEdge: () => { dispatch(selectEdge(id)) },
+  resetControl: () => { dispatch(resetControl(id)) },
+  emptyHand: () => { dispatch(emptyHand()) },
+  moveControlHand: (loc) => { dispatch(moveControlHand(id, loc)) }
 })
 
 const ControlContainer = connect(mapStateToProps, mapDispatchToProps)(Control)
