@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import Edge from '../components/Edge'
+import { deleteEdge, selectEdge } from '../actions/edge'
 
 const mapStateToProps = (state, { id }) => {
   const edge = state.edges.find(ed => ed.id === id)
@@ -14,6 +15,8 @@ const mapStateToProps = (state, { id }) => {
 }
 
 const mapDispatchToProps = (dispatch, { id }) => ({
+  deleteEdge: () => { dispatch(deleteEdge(id)) },
+  selectEdge: () => { dispatch(selectEdge(id)) }
 })
 
 const EdgeContainer = connect(mapStateToProps, mapDispatchToProps)(Edge)

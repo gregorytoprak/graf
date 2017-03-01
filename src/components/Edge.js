@@ -1,6 +1,27 @@
 import React, { Component } from 'react'
 
 class Edge extends Component {
+  handleMouseDown = (e) => {
+    e.stopPropagation()
+  }
+
+  handleMouseUp = (e) => {
+    e.stopPropagation()
+  }
+
+  handleClick = (e) => {
+    e.stopPropagation()
+    if (e.shiftKey) {
+      this.props.deleteEdge()
+    } else {
+      this.props.selectEdge()
+    }
+  }
+
+  handleDoubleClick = (e) => {
+    e.stopPropagation()
+  }
+
   render () {
     const startLoc = this.props.startLoc
     const endLoc = this.props.complete ? this.props.endLoc : this.props.hand.loc
@@ -13,6 +34,10 @@ class Edge extends Component {
         d={this.props.curved
           ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
           : `M ${p(startLoc)} L ${p(endLoc)}`}
+        onMouseDown={this.handleMouseDown}
+        onMouseUp={this.handleMouseUp}
+        onClick={this.handleClick}
+        onDoubleClick={this.handleDoubleClick}
       />
     )
   }
