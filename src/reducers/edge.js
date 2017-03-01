@@ -5,6 +5,7 @@ const initialState = {
   id: undefined,
   startNodeId: undefined,
   endNodeId: undefined,
+  complete: false,
   curved: false,
   selected: false
 }
@@ -19,6 +20,7 @@ const edge = (state = initialState, action) => {
     case COMPLETE_EDGE:
       return {
         ...state,
+        complete: true,
         ...action.payload
       }
     case SELECT_EDGE:

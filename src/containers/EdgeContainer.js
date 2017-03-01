@@ -9,7 +9,7 @@ const mapStateToProps = (state, { id }) => {
   return {
     ...edge,
     startLoc: { cx: startNode.cx, cy: startNode.cy },
-    endLoc: { cx: endNode.cx, cy: endNode.cy },
+    endLoc: edge.complete ? { cx: endNode.cx, cy: endNode.cy } : null,
     controlLoc: { cx: control.cx, cy: control.cy }
   }
 }

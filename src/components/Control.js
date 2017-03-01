@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class Control extends Component {
   render () {
+    if (!this.props.complete || !this.props.selected) { return null }
     const { startLoc, endLoc } = this.props
     const loc = {
       cx: this.props.curved ? this.props.cx : (startLoc.cx + endLoc.cx) / 2,

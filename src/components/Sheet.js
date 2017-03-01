@@ -71,9 +71,9 @@ class Sheet extends Component {
         onDoubleClick={this.handleDoubleClick}
       >
         <circle cx='0' cy='0' r='1' />
-        {this.props.edgeIds.map(id => <ControlContainer key={id} id={id} getLoc={this.getLoc} />)}
-        {this.props.nodeIds.map(id => <NodeContainer key={id} id={id} getLoc={this.getLoc} />)}
         {this.props.edgeIds.map(id => <EdgeContainer key={id} id={id} getLoc={this.getLoc} />)}
+        {this.props.nodeIds.map(id => <NodeContainer key={id} id={id} getLoc={this.getLoc} />)}
+        {this.props.edgeIds.map(id => <ControlContainer key={id} id={id} getLoc={this.getLoc} />)}
       </svg>
     )
   }

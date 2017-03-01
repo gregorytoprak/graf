@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class Edge extends Component {
   render () {
+    if (!this.props.complete) { return null }
     const { startLoc, endLoc, controlLoc } = this.props
     const p = a => `${a.cx},${a.cy}`
     return (

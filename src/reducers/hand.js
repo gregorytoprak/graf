@@ -1,4 +1,4 @@
-import { EMPTY_HAND, PAN_HAND, MOVE_NODE_HAND } from '../actions/hand'
+import { EMPTY_HAND, PAN_HAND, MOVE_NODE_HAND, START_EDGE_HAND } from '../actions/hand'
 
 const initialState = {
   palm: 'empty'
@@ -9,6 +9,7 @@ const sheet = (state = initialState, action) => {
     case EMPTY_HAND:
     case PAN_HAND:
     case MOVE_NODE_HAND:
+    case START_EDGE_HAND:
       return action.payload
     default:
       return state

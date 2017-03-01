@@ -1,5 +1,5 @@
 import control from './control'
-import { START_EDGE, DELETE_EDGE, SELECT_EDGE } from '../actions/edge'
+import { START_EDGE, COMPLETE_EDGE, DELETE_EDGE, SELECT_EDGE } from '../actions/edge'
 import { RESET_CONTROL, MOVE_CONTROL } from '../actions/control'
 
 const initialState = []
@@ -13,6 +13,7 @@ const controls = (state = initialState, action) => {
       ]
     case DELETE_EDGE:
       return state.filter(ct => ct.id !== action.payload.id)
+    case COMPLETE_EDGE:
     case SELECT_EDGE:
     case RESET_CONTROL:
     case MOVE_CONTROL:
