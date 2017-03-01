@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Edge extends Component {
   render () {
     const startLoc = this.props.startLoc
-    const endLoc = this.props.complete ? this.props.endLoc : this.props.startLoc // this.props.hand.loc
+    const endLoc = this.props.complete ? this.props.endLoc : this.props.hand.loc
     const controlLoc = { x: this.props.controlx, y: this.props.controly }
     const p = a => `${a.x},${a.y}`
     return (

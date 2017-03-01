@@ -43,10 +43,19 @@ class Sheet extends Component {
         moveLoc.x + this.props.hand.x,
         moveLoc.y + this.props.hand.y
       )
+    } else if (this.props.hand.palm === 'startEdge') {
+      const moveLoc = this.getLoc(e)
+      this.props.startEdgeHand(
+        this.props.hand.id,
+        moveLoc
+      )
     }
   }
 
   handleMouseUp = (e) => {
+    if (this.props.hand.palm === 'startEdge') {
+      this.props.deleteEdge(this.props.hand.id)
+    }
     this.props.emptyHand()
   }
 

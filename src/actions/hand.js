@@ -15,6 +15,6 @@ export const moveNodeHand = (id, x, y) => ({
   type: MOVE_NODE_HAND, payload: { palm: 'moveNode', id, x, y }
 })
 
-export const startEdgeHand = (id) => ({
-  type: START_EDGE_HAND, payload: { palm: 'startEdge', id }
+export const startEdgeHand = (id, loc) => ({
+  type: START_EDGE_HAND, payload: { palm: 'startEdge', id, loc }
 })

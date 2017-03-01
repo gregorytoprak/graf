@@ -5,7 +5,7 @@ class Node extends Component {
     e.stopPropagation()
     const grabLoc = this.props.getLoc(e)
     if (e.metaKey) {
-      this.props.startEdge()
+      this.props.startEdge(grabLoc)
     } else {
       this.props.moveNodeHand(
         this.props.cx - grabLoc.x,
@@ -15,6 +15,7 @@ class Node extends Component {
   }
 
   handleMouseUp = (e) => {
+    e.stopPropagation()
     if (this.props.hand.palm === 'startEdge') {
       this.props.completeEdge(this.props.hand.id)
     }

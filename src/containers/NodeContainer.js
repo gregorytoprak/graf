@@ -17,10 +17,10 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   deleteNode: () => { dispatch(deleteNode(id)) },
   selectNode: () => { dispatch(selectNode(id)) },
   emptyHand: () => { dispatch(emptyHand()) },
-  startEdge: () => {
+  startEdge: (loc) => {
     const edgeId = makeId('edge')
     dispatch(startEdge(edgeId, id))
-    dispatch(startEdgeHand(edgeId))
+    dispatch(startEdgeHand(edgeId, loc))
   },
   completeEdge: (edgeId) => { dispatch(completeEdge(edgeId, id)) },
   moveNodeHand: (x, y) => { dispatch(moveNodeHand(id, x, y)) }

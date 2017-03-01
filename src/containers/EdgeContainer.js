@@ -8,7 +8,8 @@ const mapStateToProps = (state, { id }) => {
   return {
     ...edge,
     startLoc: { x: startNode.cx, y: startNode.cy },
-    endLoc: edge.complete ? { x: endNode.cx, y: endNode.cy } : null
+    endLoc: edge.complete ? { x: endNode.cx, y: endNode.cy } : null,
+    hand: state.hand
   }
 }
 
