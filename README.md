@@ -16,6 +16,11 @@
 ## Todo
 
 - [ ] Reduxify
+  - Create an edge
+  - Select a node or edge
+  - Delete a node or edge
+  - Move a node
+  - Curve an edge
 - [ ] Welcome screen
   - [ ] Instructions
   - [ ] Load from cookie or file or start new drawing
@@ -25,4 +30,3 @@
 - [ ] Style nodes/edges in edit menu
   - [ ] Need better handling of selection to mass-edit
 - [ ] n-Directional axes
-
