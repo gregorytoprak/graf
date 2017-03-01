@@ -1,33 +1,31 @@
 import React, { Component } from 'react'
 
 class Node extends Component {
+  state = {}
+
+  // handlers
+
   handleMouseDown = (e) => {
     e.stopPropagation()
-    const grabLoc = this.props.getLoc(e)
-    if (e.metaKey) {
-      this.props.startEdge(grabLoc)
-    } else {
-      this.props.moveNodeHand(
-        this.props.cx - grabLoc.x,
-        this.props.cy - grabLoc.y
-      )
+    if (!e.shiftKey && !this.props.selected) {
+      this.props.edgeStarted(this.props.id)
+    } else if (!e.shiftKey && this.props.selected) {
+      this.props.nodeGrabbed(this.props.id, this.props.loc, e)
     }
   }
 
   handleMouseUp = (e) => {
     e.stopPropagation()
-    if (this.props.hand.palm === 'startEdge') {
-      this.props.completeEdge(this.props.hand.id)
-    }
-    this.props.emptyHand()
+    this.props.edgeEnded(this.props.id)
+    this.props.nodeReleased()
   }
 
   handleClick = (e) => {
     e.stopPropagation()
     if (e.shiftKey) {
-      this.props.deleteNode()
-    } else {
-      this.props.selectNode()
+      this.props.deleteNode(this.props.id)
+    } else if (!e.shiftKey) {
+      this.props.toggleSelectNode(this.props.id)
     }
   }
 
@@ -35,12 +33,16 @@ class Node extends Component {
     e.stopPropagation()
   }
 
+  // renders
+
   render () {
     return (
-      <circle className='Node'
-        cx={this.props.cx} cy={this.props.cy}
-        r='1' fill='white' strokeWidth='0.05'
+      <circle id={this.props.id}
+        cx={this.props.loc.x} cy={this.props.loc.y}
+        r='1'
+        fill='white'
         stroke={this.props.selected ? 'dodgerblue' : 'black'}
+        strokeWidth='0.05'
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onClick={this.handleClick}

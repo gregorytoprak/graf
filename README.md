@@ -2,23 +2,25 @@
 
 [graph.gdt.io](http://graph.gdt.io/)
 
+## Features
+
+- Create a node: double-click
+- Move a node: drag
+- Create an edge: command-drag from one node to another
+- Curve an edge: select then drag handle
+- Select a node or edge: click
+- Delete a node or edge: shift-click
+- Pan the sheet: drag
+- Zoom the sheet: scroll
+
 ## Todo
 
-- [x] Create a node: double-click
-- [x] Create an edge: drag from one node to another
-- [x] Select a node or edge: click
-- [x] Delete a node or edge: shift-click
-- [x] Move a node: select then drag
-- [x] Curve an edge: select then drag handle
-- [x] Pan on the graph: drag the ground
-- [x] Zoom on the graph: scroll
-- [ ] Edit menu can modify style attributes of selected object
-- [ ] Proper selection: one thing at a time until another is cmd-clicked to add to selection
-  - hitting escape clears selection
-- [ ] n-directional axes --- killer app
-- [ ] Save everything to cookies all the time
-- [ ] Download, Upload to/from svg
-- [ ] Undo, Redo functionality?
-- [ ] Multiple tabs of graphs?
-- [ ] Save, Load from tweetable string representation?
-- [ ] Data sheet of graph facts?
+- [ ] Welcome screen
+  - [ ] Instructions
+  - [ ] Load from cookie or file or start new drawing
+- [ ] Automatically save to cookies (every ~5 seconds?)
+- [ ] Save/load with svg files
+  - [ ] Need some way to read the relevant state from it
+- [ ] Style nodes/edges in edit menu
+  - [ ] Need better handling of selection to mass-edit
+- [ ] n-Directional axes

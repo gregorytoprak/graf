@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Graph from './Graph'
+import SheetContainer from '../containers/SheetContainer'
 
 class App extends Component {
   render () {
     return (
       <div className='App'>
-        <Graph />
+        <SheetContainer />
       </div>
     )
   }

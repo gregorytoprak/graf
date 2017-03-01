@@ -10,7 +10,10 @@
   "dependencies": {
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "verge": "^1.9.1"
   },
   "scripts": {
     "deploy": "react-scripts build && surge ./build graph.gdt.io && open http://graph.gdt.io/",
