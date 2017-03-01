@@ -5,8 +5,8 @@ const initialState = {
   cy: 0,
   w: 10,
   h: 10,
-  vw: 1000,
-  vh: 1000
+  vw: 500,
+  vh: 500
 }
 
 const sheet = (state = initialState, action) => {
