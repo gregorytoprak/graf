@@ -22,9 +22,9 @@ export const selectEdge = (id) => ({
 })
 
 export const moveControl = (id, controlx, controly) => ({
-  type: MOVE_CONTROL, payload: { id, controlx, controly, curved: true }
+  type: MOVE_CONTROL, payload: { id, controlx, controly, curved: true, moving: true }
 })
 
 export const resetControl = (id) => ({
-  type: RESET_CONTROL, payload: { id, controlx: undefined, controly: undefined, curved: false }
+  type: RESET_CONTROL, payload: { id, controlx: undefined, controly: undefined, curved: false, selected: false }
 })

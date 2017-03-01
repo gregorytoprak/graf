@@ -8,7 +8,8 @@ const initialState = {
   controly: undefined,
   complete: false,
   curved: false,
-  selected: false
+  selected: false,
+  moving: false
 }
 
 const edge = (state = initialState, action) => {
@@ -16,7 +17,8 @@ const edge = (state = initialState, action) => {
     case SELECT_EDGE:
       return {
         ...state,
-        selected: !state.selected
+        selected: state.moving ? state.selected : !state.selected,
+        moving: false
       }
     case START_EDGE:
     case COMPLETE_EDGE:
