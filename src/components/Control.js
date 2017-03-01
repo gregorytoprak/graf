@@ -5,14 +5,13 @@ class Control extends Component {
     if (!this.props.complete || !this.props.selected) { return null }
     const { startLoc, endLoc } = this.props
     const loc = {
-      cx: this.props.curved ? this.props.cx : (startLoc.cx + endLoc.cx) / 2,
-      cy: this.props.curved ? this.props.cy : (startLoc.cy + endLoc.cy) / 2
+      cx: this.props.curved ? this.props.controlx : (startLoc.cx + endLoc.cx) / 2,
+      cy: this.props.curved ? this.props.controly : (startLoc.cy + endLoc.cy) / 2
     }
     return (
       <circle className='Control'
         cx={loc.cx} cy={loc.cy}
-        r='0.5' fill='white' strokeWidth='0.05'
-        stroke={this.props.selected ? 'dodgerblue' : 'black'}
+        r='0.5' fill='white' strokeWidth='0.05' stroke='dodgerblue'
       />
     )
   }
