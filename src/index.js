@@ -8,7 +8,16 @@ import { resizeViewport } from './actions/sheet'
 import App from './components/App'
 import './styles.css'
 
-const store = createStore(reducer)
+const it = window.localStorage.getItem('graph')
+const persistedState = it ? JSON.parse(it) : {}
+const store = createStore(reducer, persistedState)
+
+store.subscribe(() => {
+  const currentState = store.getState()
+  if (currentState.hand.palm === 'empty') {
+    window.localStorage.setItem('graph', JSON.stringify(currentState))
+  }
+})
 
 const resize = () => { store.dispatch(resizeViewport(viewport())) }
 
