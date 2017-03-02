@@ -24,4 +24,3 @@
 - [ ] Style nodes/edges in edit menu
   - [ ] Need better handling of selection to mass-edit
 - [ ] n-Directional axes
-- [ ] Swap surge deployment out for zeit.co/now
