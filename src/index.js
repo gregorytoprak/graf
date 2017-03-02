@@ -14,9 +14,7 @@ const store = createStore(reducer, persistedState)
 
 store.subscribe(() => {
   const currentState = store.getState()
-  if (currentState.hand.palm === 'empty') {
-    window.localStorage.setItem('graph', JSON.stringify(currentState))
-  }
+  window.localStorage.setItem('graph', JSON.stringify(currentState))
 })
 
 const resize = () => { store.dispatch(resizeViewport(viewport())) }

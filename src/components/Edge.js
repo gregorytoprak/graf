@@ -6,7 +6,7 @@ class Edge extends Component {
   }
 
   handleMouseUp = (e) => {
-    e.stopPropagation()
+    this.props.emptyHand()
   }
 
   handleClick = (e) => {
