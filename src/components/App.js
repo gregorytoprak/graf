@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SheetContainer from '../containers/SheetContainer'
-import Welcome from './Welcome'
+import Welcome from '../containers/Welcome'
 
 class App extends Component {
   state = { showWelcome: true }

@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Modal, PageHeader, Button } from 'react-bootstrap'
+import { viewport } from 'verge'
+import { resizeViewport } from '../actions/sheet'
+import { clear } from '../actions/meta'
+import { persistence } from '../utils'
 
 class Welcome extends Component {
+  newGraph = () => {
+    persistence.clear()
+    this.props.dispatch(clear())
+    this.props.dispatch(resizeViewport(viewport()))
+    this.props.close()
+  }
+
   render () {
     if (!this.props.show) { return null }
     return (
-      <Modal.Dialog>
+      <Modal.Dialog className='Welcome'>
         <Modal.Header>
           <PageHeader>Graph Maker <small>graph.gdt.io</small></PageHeader>
         </Modal.Header>
@@ -23,11 +35,12 @@ class Welcome extends Component {
           </ul>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.close}>Close</Button>
+          <Button bsStyle='danger' onClick={this.newGraph}>Clear</Button>
+          <Button bsStyle='primary' onClick={this.props.close}>Continue</Button>
         </Modal.Footer>
       </Modal.Dialog>
     )
   }
 }
 
-export default Welcome
+export default connect()(Welcome)

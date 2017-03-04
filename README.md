@@ -12,13 +12,13 @@
 - Delete a node or edge: shift-click
 - Pan the sheet: drag
 - Zoom the sheet: scroll
-- Automatic saving to local storage
+- Automatic saving to cookies
 
 ## Todo
 
 - [ ] Welcome screen
-  - [ ] Instructions
-  - [ ] Load from cookie or file or start new drawing
+  - [x] Instructions
+  - [x] Load from cookie or file or start new drawing
 - [ ] Save/load with svg files
   - [ ] Need some way to read the relevant state from it
 - [ ] Style nodes/edges in edit menu

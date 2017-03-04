@@ -3,19 +3,18 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { viewport } from 'verge'
-import Cookies from 'js-cookie'
 import reducer from './reducers'
 import { resizeViewport } from './actions/sheet'
 import App from './components/App'
+import { persistence } from './utils'
 import './styles.css'
 
-const it = Cookies.get('graph')
-const persistedState = it ? JSON.parse(it) : {}
+const persistedState = persistence.load()
 const store = createStore(reducer, persistedState)
 
 store.subscribe(() => {
   const currentState = store.getState()
-  Cookies.set('graph', JSON.stringify(currentState))
+  persistence.save(currentState)
 })
 
 const resize = () => { store.dispatch(resizeViewport(viewport())) }
