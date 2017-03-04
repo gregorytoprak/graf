@@ -6,6 +6,7 @@ import reducer from './reducers'
 import { resizeViewport } from './actions/sheet'
 import App from './components/App'
 import { persistence } from './utils'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles.css'
 
 const persistedState = persistence.load()
