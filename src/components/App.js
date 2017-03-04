@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 import SheetContainer from '../containers/SheetContainer'
-import Welcome from '../containers/Welcome'
+import WelcomeContainer from '../containers/WelcomeContainer'
+import { Button, Glyphicon } from 'react-bootstrap'
 
 class App extends Component {
-  state = { showWelcome: true }
+  state = { welcomeVisible: true }
 
-  close = () => {
-    this.setState({ showWelcome: false })
+  hideWelcome = () => {
+    this.setState({ welcomeVisible: false })
+  }
+
+  showWelcome = () => {
+    this.setState({ welcomeVisible: true })
   }
 
   render () {
     return (
       <div className='App'>
+        <Button className='opener' onClick={this.showWelcome}>
+          <Glyphicon glyph='menu-hamburger' />
+        </Button>
+        <WelcomeContainer show={this.state.welcomeVisible} hide={this.hideWelcome} />
         <SheetContainer />
-        <Welcome show={this.state.showWelcome} close={this.close} />
       </div>
     )
   }
