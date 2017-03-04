@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Modal, PageHeader, Button } from 'react-bootstrap'
-import { viewport } from 'verge'
 import { resizeViewport } from '../actions/sheet'
 import { clear } from '../actions/meta'
 import { persistence } from '../utils'
@@ -10,7 +9,7 @@ class Welcome extends Component {
   newGraph = () => {
     persistence.clear()
     this.props.dispatch(clear())
-    this.props.dispatch(resizeViewport(viewport()))
+    this.props.dispatch(resizeViewport())
     this.props.close()
   }
 

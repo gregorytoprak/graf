@@ -27,15 +27,14 @@ const sheet = (state = initialState, action) => {
         h: state.h * zf
       }
     case RESIZE_VIEWPORT:
-      const { width, height } = action.payload.viewport
       // Keeping the 'scale' of the screen means maintaining
       //   w_new / w_old === vw_new / vw_old
       return {
         ...state,
-        w: state.w * width / state.vw,
-        h: state.h * height / state.vh,
-        vw: width,
-        vh: height
+        w: state.w * action.payload.vw / state.vw,
+        h: state.h * action.payload.vh / state.vh,
+        vw: action.payload.vw,
+        vh: action.payload.vh
       }
     default:
       return state

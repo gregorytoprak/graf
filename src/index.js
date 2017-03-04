@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { viewport } from 'verge'
 import reducer from './reducers'
 import { resizeViewport } from './actions/sheet'
 import App from './components/App'
@@ -17,7 +16,7 @@ store.subscribe(() => {
   persistence.save(currentState)
 })
 
-const resize = () => { store.dispatch(resizeViewport(viewport())) }
+const resize = () => { store.dispatch(resizeViewport()) }
 
 resize()
 window.addEventListener('resize', resize)
