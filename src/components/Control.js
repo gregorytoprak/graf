@@ -18,7 +18,6 @@ class Control extends Component {
   }
 
   handleMouseUp = (e) => {
-    e.stopPropagation()
     this.props.emptyHand()
   }
 
