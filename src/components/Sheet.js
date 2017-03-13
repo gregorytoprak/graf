@@ -80,6 +80,7 @@ class Sheet extends Component {
     ].join(' ')
     return (
       <svg className='Sheet' viewBox={viewBox}
+        xmlns='http://www.w3.org/2000/svg'
         onWheel={this.handleWheel}
         onMouseDown={this.handleMouseDown}
         onMouseMove={this.handleMouseMove}

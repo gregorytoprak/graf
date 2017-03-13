@@ -13,14 +13,13 @@
 - Pan the sheet: drag
 - Zoom the sheet: scroll
 - Automatic saving to cookies
+- Manual saving to svg
 
 ## Todo
 
-- [ ] Welcome screen
-  - [x] Instructions
-  - [x] Load from cookie or file or start new drawing
-- [ ] Save/load with svg files
-  - [ ] Need some way to read the relevant state from it
 - [ ] Style nodes/edges in edit menu
   - [ ] Need better handling of selection to mass-edit
+- [ ] Upgrade control scheme
+  - [ ] Hold letter key + click for clear, new node, new edge
+  - [ ] Have UI buttons for these as well
 - [ ] n-Directional axes

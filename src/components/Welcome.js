@@ -24,9 +24,11 @@ class Welcome extends Component {
         <Modal.Footer>
           <ButtonToolbar>
             <Button bsStyle='primary' onClick={this.props.hide}>Continue</Button>
+            <Button bsStyle='success' onClick={this.props.download}>Download</Button>
             <DropdownButton id='new-graph' bsStyle='danger' title='New Graph'>
               <MenuItem onClick={this.props.newGraph}>Empty Graph</MenuItem>
             </DropdownButton>
+            <Button bsStyle='info' href='http://github.com/gdtoprak/graph-maker/'>GitHub</Button>
             <Button bsStyle='link' href='http://gdt.io/'>by GDT</Button>
           </ButtonToolbar>
         </Modal.Footer>
