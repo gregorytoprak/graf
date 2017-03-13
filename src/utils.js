@@ -14,3 +14,13 @@ export const persistence = {
     Cookies.remove('graph')
   }
 }
+
+export const download = () => {
+  const svg = document.getElementsByClassName('Sheet')[0].outerHTML
+  const a = document.createElement('a')
+  a.href = encodeURI('data:image/svg,' + svg)
+  a.download = 'graph.svg'
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+}
