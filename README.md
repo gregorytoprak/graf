@@ -19,7 +19,4 @@
 
 - [ ] Style nodes/edges in edit menu
   - [ ] Need better handling of selection to mass-edit
-- [ ] Upgrade control scheme
-  - [ ] Hold letter key + click for clear, new node, new edge
-  - [ ] Have UI buttons for these as well
 - [ ] n-Directional axes

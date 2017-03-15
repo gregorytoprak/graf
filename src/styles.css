@@ -10,12 +10,10 @@ html, body, #root, .App, .Sheet {
   cursor: crosshair;
 }
 
-.Sidebar {
+.opener {
   position: absolute;
   left: 40px;
   top: 40px;
   width: 40px;
-}
-.Sidebar > :not(:last-child) {
-  margin-bottom: 4px;
+  height: 40px;
 }

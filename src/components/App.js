@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import SheetContainer from '../containers/SheetContainer'
+import { Button, Glyphicon } from 'react-bootstrap'
 import WelcomeContainer from '../containers/WelcomeContainer'
-import SidebarContainer from '../containers/SidebarContainer'
+import SheetContainer from '../containers/SheetContainer'
 import { download } from '../utils'
 
 class App extends Component {
@@ -18,14 +18,14 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <SidebarContainer
-          showWelcome={this.showWelcome}
-        />
         <WelcomeContainer
           show={this.state.welcomeVisible}
           hide={this.hideWelcome}
           download={download}
         />
+        <Button className='opener' onClick={this.showWelcome}>
+          <Glyphicon glyph='menu-hamburger' />
+        </Button>
         <SheetContainer />
       </div>
     )
