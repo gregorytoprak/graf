@@ -3,7 +3,7 @@ import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from "../actions/node";
 
 const initialState = {
   id: undefined,
-  color: "#ffffff",
+  color: null,
   cx: undefined,
   cy: undefined,
   selected: false,
@@ -27,7 +27,7 @@ const node = (state = initialState, action) => {
     case RESET_COLORS:
       return {
         ...state,
-        color: state.selected ? initialState.color : state.color
+        color: state.selected ? null : state.color
       };
     case SET_COLOR:
       return {

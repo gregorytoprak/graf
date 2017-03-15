@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   id: undefined,
-  color: "#000000",
+  color: null,
   startNodeId: undefined,
   endNodeId: undefined,
   controlx: undefined,
@@ -31,7 +31,7 @@ const edge = (state = initialState, action) => {
     case RESET_COLORS:
       return {
         ...state,
-        color: state.selected ? initialState.color : state.color
+        color: state.selected ? null : state.color
       };
     case SET_COLOR:
       return {

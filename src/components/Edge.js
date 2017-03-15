@@ -32,14 +32,18 @@ class Edge extends Component {
     return (
       <path
         className="Edge"
-        fill="none"
-        strokeWidth="0.1"
-        stroke={this.props.selected ? "dodgerblue" : this.props.color}
         d={
           this.props.curved
             ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
             : `M ${p(startLoc)} L ${p(endLoc)}`
         }
+        stroke={
+          this.props.selected
+            ? "dodgerblue"
+            : this.props.color ? this.props.color : "black"
+        }
+        strokeWidth="0.1"
+        fill="none"
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onClick={this.handleClick}

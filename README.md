@@ -21,5 +21,5 @@
 - [ ] Loops
 - [ ] Arrows
 ...
-- [ ] axes
-- [ ] cleaning
+- [ ] Axes
+- [ ] Cleaning
