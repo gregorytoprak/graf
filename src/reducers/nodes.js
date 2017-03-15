@@ -1,4 +1,5 @@
 import node from './node'
+import { FULL_SELECT } from '../actions/meta'
 import { CREATE_NODE, DELETE_NODE, SELECT_NODE, MOVE_NODE } from '../actions/node'
 
 const initialState = []
@@ -12,6 +13,8 @@ const nodes = (state = initialState, action) => {
       ]
     case DELETE_NODE:
       return state.filter(nd => nd.id !== action.payload.id)
+    case FULL_SELECT:
+      return state.map(nd => node(nd, action))
     case SELECT_NODE:
     case MOVE_NODE:
       return state.map(nd => nd.id === action.payload.id ? node(nd, action) : nd)

@@ -1,3 +1,4 @@
+import { FULL_SELECT } from '../actions/meta'
 import { START_EDGE, COMPLETE_EDGE, SELECT_EDGE, MOVE_CONTROL, RESET_CONTROL } from '../actions/edge'
 
 const initialState = {
@@ -24,6 +25,7 @@ const edge = (state = initialState, action) => {
     case COMPLETE_EDGE:
     case MOVE_CONTROL:
     case RESET_CONTROL:
+    case FULL_SELECT:
       return {
         ...state,
         ...action.payload

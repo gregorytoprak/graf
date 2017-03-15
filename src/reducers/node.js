@@ -1,3 +1,4 @@
+import { FULL_SELECT } from '../actions/meta'
 import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from '../actions/node'
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
 const node = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NODE:
+    case FULL_SELECT:
       return {
         ...state,
         ...action.payload

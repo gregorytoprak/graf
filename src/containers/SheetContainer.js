@@ -4,6 +4,7 @@ import { panSheet, zoomSheet } from '../actions/sheet'
 import { createNode, moveNode } from '../actions/node'
 import { deleteEdge, moveControl } from '../actions/edge'
 import { emptyHand, panHand, startEdgeHand } from '../actions/hand'
+import { noSelect } from '../actions/meta'
 import { makeId } from '../utils'
 
 const mapStateToProps = (state) => ({
@@ -22,7 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
   moveControl: (id, controlx, controly) => { dispatch(moveControl(id, controlx, controly)) },
   emptyHand: () => { dispatch(emptyHand()) },
   panHand: (x, y) => { dispatch(panHand(x, y)) },
-  startEdgeHand: (id, loc) => { dispatch(startEdgeHand(id, loc)) }
+  startEdgeHand: (id, loc) => { dispatch(startEdgeHand(id, loc)) },
+  noSelect: () => { dispatch(noSelect()) }
 })
 
 const SheetContainer = connect(mapStateToProps, mapDispatchToProps)(Sheet)
