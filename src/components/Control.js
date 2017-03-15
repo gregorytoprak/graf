@@ -40,8 +40,12 @@ class Control extends Component {
     }
     const { startLoc, endLoc } = this.props;
     const loc = {
-      cx: this.props.curved ? this.props.controlx : (startLoc.x + endLoc.x) / 2,
-      cy: this.props.curved ? this.props.controly : (startLoc.y + endLoc.y) / 2
+      cx: this.props.loop
+        ? startLoc.x + this.props.controlx
+        : this.props.curved ? this.props.controlx : (startLoc.x + endLoc.x) / 2,
+      cy: this.props.loop
+        ? startLoc.y + this.props.controly
+        : this.props.curved ? this.props.controly : (startLoc.y + endLoc.y) / 2
     };
     return (
       <circle

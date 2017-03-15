@@ -52,10 +52,16 @@ class Sheet extends Component {
       this.props.startEdgeHand(this.props.hand.id, moveLoc);
     } else if (this.props.hand.palm === "moveControl") {
       const moveLoc = this.getLoc(e);
+      const edge = this.props.edges.find(ed => ed.id === this.props.hand.id);
+      const startNode = this.props.nodes.find(nd => nd.id === edge.startNodeId);
       this.props.moveControl(
         this.props.hand.id,
-        moveLoc.x + this.props.hand.loc.x,
-        moveLoc.y + this.props.hand.loc.y
+        edge.loop
+          ? moveLoc.x + this.props.hand.loc.x - startNode.cx
+          : moveLoc.x + this.props.hand.loc.x,
+        edge.loop
+          ? moveLoc.y + this.props.hand.loc.y - startNode.cy
+          : moveLoc.y + this.props.hand.loc.y
       );
     }
   };

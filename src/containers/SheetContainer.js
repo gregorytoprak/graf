@@ -11,6 +11,8 @@ const mapStateToProps = state => ({
   ...state.sheet,
   nodeIds: state.nodes.map(nd => nd.id),
   edgeIds: state.edges.map(ed => ed.id),
+  nodes: state.nodes,
+  edges: state.edges,
   hand: state.hand
 });
 

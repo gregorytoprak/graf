@@ -26,7 +26,7 @@ class Node extends Component {
     e.stopPropagation();
     if (e.shiftKey) {
       this.props.deleteNode();
-    } else {
+    } else if (!e.metaKey) {
       this.props.selectNode();
     }
   };
