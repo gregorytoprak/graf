@@ -4,8 +4,8 @@
   "homepage": "http://graph.gdt.io/",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.8.5",
-    "standard": "^8.6.0"
+    "prettier": "^0.22.0",
+    "react-scripts": "0.8.5"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

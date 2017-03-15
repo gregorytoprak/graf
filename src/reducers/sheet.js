@@ -1,4 +1,4 @@
-import { PAN_SHEET, ZOOM_SHEET, RESIZE_VIEWPORT } from '../actions/sheet'
+import { PAN_SHEET, ZOOM_SHEET, RESIZE_VIEWPORT } from "../actions/sheet";
 
 const initialState = {
   cx: 0,
@@ -7,7 +7,7 @@ const initialState = {
   h: 10,
   vw: 500,
   vh: 500
-}
+};
 
 const sheet = (state = initialState, action) => {
   switch (action.type) {
@@ -16,16 +16,16 @@ const sheet = (state = initialState, action) => {
         ...state,
         cx: state.cx + action.payload.dx,
         cy: state.cy + action.payload.dy
-      }
+      };
     case ZOOM_SHEET:
-      const zf = action.payload.zoomFactor
+      const zf = action.payload.zoomFactor;
       return {
         ...state,
         cx: state.cx * zf + action.payload.zoomLoc.x * (1 - zf),
         cy: state.cy * zf + action.payload.zoomLoc.y * (1 - zf),
         w: state.w * zf,
         h: state.h * zf
-      }
+      };
     case RESIZE_VIEWPORT:
       // Keeping the 'scale' of the screen means maintaining
       //   w_new / w_old === vw_new / vw_old
@@ -35,10 +35,10 @@ const sheet = (state = initialState, action) => {
         h: state.h * action.payload.vh / state.vh,
         vw: action.payload.vw,
         vh: action.payload.vh
-      }
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default sheet
+export default sheet;

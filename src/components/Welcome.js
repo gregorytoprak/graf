@@ -1,12 +1,26 @@
-import React, { Component } from 'react'
-import { Modal, ButtonToolbar, Button, OverlayTrigger, Tooltip, DropdownButton, MenuItem } from 'react-bootstrap'
+import React, { Component } from "react";
+import {
+  Modal,
+  ButtonToolbar,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+  DropdownButton,
+  MenuItem
+} from "react-bootstrap";
 
 class Welcome extends Component {
-  render () {
+  render() {
     return (
-      <Modal className='Welcome' show={this.props.show} onHide={this.props.hide}>
+      <Modal
+        className="Welcome"
+        show={this.props.show}
+        onHide={this.props.hide}
+      >
         <Modal.Header>
-          <Modal.Title componentClass='h1'>Graph Maker <small>graph.gdt.io</small></Modal.Title>
+          <Modal.Title componentClass="h1">
+            Graph Maker <small>graph.gdt.io</small>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ul>
@@ -25,20 +39,36 @@ class Welcome extends Component {
         </Modal.Body>
         <Modal.Footer>
           <ButtonToolbar>
-            <Button bsStyle='primary' onClick={this.props.hide}>Continue</Button>
-            <OverlayTrigger placement='bottom' overlay={<Tooltip id='open-menu'>Depending on browser, saves as 'graph.svg' or 'Unknown'</Tooltip>}>
-              <Button bsStyle='success' onClick={this.props.download}>Download SVG</Button>
+            <Button bsStyle="primary" onClick={this.props.hide}>
+              Continue
+            </Button>
+            <OverlayTrigger
+              placement="bottom"
+              overlay={
+                <Tooltip id="open-menu">
+                  Depending on browser, saves as 'graph.svg' or 'Unknown'
+                </Tooltip>
+              }
+            >
+              <Button bsStyle="success" onClick={this.props.download}>
+                Download SVG
+              </Button>
             </OverlayTrigger>
-            <DropdownButton id='new-graph' bsStyle='danger' title='New Graph'>
+            <DropdownButton id="new-graph" bsStyle="danger" title="New Graph">
               <MenuItem onClick={this.props.newGraph}>Empty Graph</MenuItem>
             </DropdownButton>
-            <Button bsStyle='info' href='http://github.com/gdtoprak/graph-maker/'>GitHub</Button>
-            <Button bsStyle='link' href='http://gdt.io/'>by GDT</Button>
+            <Button
+              bsStyle="info"
+              href="http://github.com/gdtoprak/graph-maker/"
+            >
+              GitHub
+            </Button>
+            <Button bsStyle="link" href="http://gdt.io/">by GDT</Button>
           </ButtonToolbar>
         </Modal.Footer>
       </Modal>
-    )
+    );
   }
 }
 
-export default Welcome
+export default Welcome;

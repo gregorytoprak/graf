@@ -1,23 +1,23 @@
-import React, { Component } from 'react'
-import WelcomeContainer from '../containers/WelcomeContainer'
-import SidebarContainer from '../containers/SidebarContainer'
-import SheetContainer from '../containers/SheetContainer'
-import { download } from '../utils'
+import React, { Component } from "react";
+import WelcomeContainer from "../containers/WelcomeContainer";
+import SidebarContainer from "../containers/SidebarContainer";
+import SheetContainer from "../containers/SheetContainer";
+import { download } from "../utils";
 
 class App extends Component {
-  state = { welcomeVisible: true }
+  state = { welcomeVisible: true };
 
   hideWelcome = () => {
-    this.setState({ welcomeVisible: false })
-  }
+    this.setState({ welcomeVisible: false });
+  };
 
   showWelcome = () => {
-    this.setState({ welcomeVisible: true })
-  }
+    this.setState({ welcomeVisible: true });
+  };
 
-  render () {
+  render() {
     return (
-      <div className='App'>
+      <div className="App">
         <WelcomeContainer
           show={this.state.welcomeVisible}
           hide={this.hideWelcome}
@@ -26,8 +26,8 @@ class App extends Component {
         <SidebarContainer showWelcome={this.showWelcome} />
         <SheetContainer />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
