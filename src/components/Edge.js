@@ -23,6 +23,28 @@ class Edge extends Component {
   };
 
   render() {
+    const baseProps = {
+      className: "Edge",
+      stroke: this.props.selected
+        ? "dodgerblue"
+        : this.props.color ? this.props.color : "black",
+      strokeWidth: "0.1",
+      onMouseDown: this.handleMouseDown,
+      onMouseUp: this.handleMouseUp,
+      onClick: this.handleClick,
+      onDoubleClick: this.handleDoubleClick
+    };
+    if (this.props.loop) {
+      return (
+        <circle
+          {...baseProps}
+          fill="transparent"
+          cx={this.props.startLoc.x}
+          cy={this.props.startLoc.y - 1}
+          r="1"
+        />
+      );
+    }
     const startLoc = this.props.startLoc;
     const endLoc = this.props.complete
       ? this.props.endLoc
@@ -31,23 +53,13 @@ class Edge extends Component {
     const p = a => `${a.x},${a.y}`;
     return (
       <path
-        className="Edge"
+        {...baseProps}
+        fill="none"
         d={
           this.props.curved
             ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
             : `M ${p(startLoc)} L ${p(endLoc)}`
         }
-        stroke={
-          this.props.selected
-            ? "dodgerblue"
-            : this.props.color ? this.props.color : "black"
-        }
-        strokeWidth="0.1"
-        fill="none"
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-        onClick={this.handleClick}
-        onDoubleClick={this.handleDoubleClick}
       />
     );
   }
