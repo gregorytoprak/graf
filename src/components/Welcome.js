@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, ButtonToolbar, Button, DropdownButton, MenuItem } from 'react-bootstrap'
+import { Modal, ButtonToolbar, Button, OverlayTrigger, Tooltip, DropdownButton, MenuItem } from 'react-bootstrap'
 
 class Welcome extends Component {
   render () {
@@ -24,7 +24,9 @@ class Welcome extends Component {
         <Modal.Footer>
           <ButtonToolbar>
             <Button bsStyle='primary' onClick={this.props.hide}>Continue</Button>
-            <Button bsStyle='success' onClick={this.props.download}>Download</Button>
+            <OverlayTrigger placement='bottom' overlay={<Tooltip id='open-menu'>Depending on browser, saves as 'graph.svg' or 'Unknown'</Tooltip>}>
+              <Button bsStyle='success' onClick={this.props.download}>Download SVG</Button>
+            </OverlayTrigger>
             <DropdownButton id='new-graph' bsStyle='danger' title='New Graph'>
               <MenuItem onClick={this.props.newGraph}>Empty Graph</MenuItem>
             </DropdownButton>
