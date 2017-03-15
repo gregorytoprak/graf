@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { CirclePicker } from 'react-color'
 import { ButtonGroup, OverlayTrigger, Popover, Button, Glyphicon } from 'react-bootstrap'
 
 class Sidebar extends Component {
@@ -9,9 +10,11 @@ class Sidebar extends Component {
           <Button onClick={() => this.props.fullSelect(true)}>Select All</Button>
           <Button onClick={() => this.props.fullSelect(false)}>Select None</Button>
         </ButtonGroup>
-        <p>Some stuff for nodes</p>
-        <hr />
-        <p>Some stuff for edges</p>
+        <h4>Set color of selected</h4>
+        <Button onClick={() => this.props.resetColors()}>Reset</Button>
+        <div className='ColorPickerWrapper'>
+          <CirclePicker onChange={this.props.setColor} />
+        </div>
       </Popover>
     )
 

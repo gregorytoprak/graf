@@ -43,8 +43,8 @@ class Control extends Component {
     }
     return (
       <circle className='Control'
+        r='0.5' strokeWidth='0.05' stroke='dodgerblue' fill='white'
         cx={loc.cx} cy={loc.cy}
-        r='0.5' fill='white' strokeWidth='0.05' stroke='dodgerblue'
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onClick={this.handleClick}

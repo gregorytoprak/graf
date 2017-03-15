@@ -30,7 +30,7 @@ class Edge extends Component {
     return (
       <path className='Edge'
         fill='none' strokeWidth='0.1'
-        stroke={this.props.selected ? 'dodgerblue' : 'black'}
+        stroke={this.props.selected ? 'dodgerblue' : this.props.color}
         d={this.props.curved
           ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
           : `M ${p(startLoc)} L ${p(endLoc)}`}

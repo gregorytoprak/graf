@@ -1,5 +1,5 @@
 import edge from './edge'
-import { FULL_SELECT } from '../actions/meta'
+import { FULL_SELECT, RESET_COLORS, SET_COLOR } from '../actions/meta'
 import { DELETE_NODE } from '../actions/node'
 import { START_EDGE, COMPLETE_EDGE, DELETE_EDGE, SELECT_EDGE, MOVE_CONTROL, RESET_CONTROL } from '../actions/edge'
 
@@ -19,6 +19,8 @@ const edges = (state = initialState, action) => {
     case DELETE_EDGE:
       return state.filter(ed => ed.id !== action.payload.id)
     case FULL_SELECT:
+    case RESET_COLORS:
+    case SET_COLOR:
       return state.map(ed => edge(ed, action))
     case COMPLETE_EDGE:
     case SELECT_EDGE:

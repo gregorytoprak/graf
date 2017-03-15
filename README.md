@@ -14,9 +14,8 @@
 - Zoom the sheet: scroll
 - Automatic saving to cookies
 - Manual saving to svg
+- Edit colors of selected
 
 ## Todo
 
-- [ ] Style nodes/edges in edit menu
-  - [ ] Need better handling of selection to mass-edit
 - [ ] n-Directional axes

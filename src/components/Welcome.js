@@ -19,6 +19,8 @@ class Welcome extends Component {
             <li>Pan the sheet: drag</li>
             <li>Zoom the sheet: scroll</li>
             <li>Automatic saving to cookies</li>
+            <li>Manual saving to svg</li>
+            <li>Edit colors of selected</li>
           </ul>
         </Modal.Body>
         <Modal.Footer>

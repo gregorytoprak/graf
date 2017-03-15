@@ -1,8 +1,9 @@
-import { FULL_SELECT } from '../actions/meta'
+import { FULL_SELECT, RESET_COLORS, SET_COLOR } from '../actions/meta'
 import { START_EDGE, COMPLETE_EDGE, SELECT_EDGE, MOVE_CONTROL, RESET_CONTROL } from '../actions/edge'
 
 const initialState = {
   id: undefined,
+  color: '#000000',
   startNodeId: undefined,
   endNodeId: undefined,
   controlx: undefined,
@@ -20,6 +21,16 @@ const edge = (state = initialState, action) => {
         ...state,
         selected: state.moving ? state.selected : !state.selected,
         moving: false
+      }
+    case RESET_COLORS:
+      return {
+        ...state,
+        color: state.selected ? initialState.color : state.color
+      }
+    case SET_COLOR:
+      return {
+        ...state,
+        color: state.selected ? action.payload.color : state.color
       }
     case START_EDGE:
     case COMPLETE_EDGE:

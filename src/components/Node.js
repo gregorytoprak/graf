@@ -38,9 +38,9 @@ class Node extends Component {
   render () {
     return (
       <circle className='Node'
-        cx={this.props.cx} cy={this.props.cy}
-        r='1' fill='white' strokeWidth='0.05'
+        strokeWidth='0.05' r='1' fill={this.props.color}
         stroke={this.props.selected ? 'dodgerblue' : 'black'}
+        cx={this.props.cx} cy={this.props.cy}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onClick={this.handleClick}

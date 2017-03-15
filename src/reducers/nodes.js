@@ -1,5 +1,5 @@
 import node from './node'
-import { FULL_SELECT } from '../actions/meta'
+import { FULL_SELECT, RESET_COLORS, SET_COLOR } from '../actions/meta'
 import { CREATE_NODE, DELETE_NODE, SELECT_NODE, MOVE_NODE } from '../actions/node'
 
 const initialState = []
@@ -14,6 +14,8 @@ const nodes = (state = initialState, action) => {
     case DELETE_NODE:
       return state.filter(nd => nd.id !== action.payload.id)
     case FULL_SELECT:
+    case RESET_COLORS:
+    case SET_COLOR:
       return state.map(nd => node(nd, action))
     case SELECT_NODE:
     case MOVE_NODE:
