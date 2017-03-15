@@ -18,4 +18,8 @@
 
 ## Todo
 
-- [ ] n-Directional axes
+- [ ] Loops
+- [ ] Arrows
+...
+- [ ] axes
+- [ ] cleaning
