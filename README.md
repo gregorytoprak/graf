@@ -20,6 +20,6 @@
 
 - [ ] Loops
 - [ ] Arrows
-...
+- [ ] Initial graphs
 - [ ] Axes
 - [ ] Cleaning
