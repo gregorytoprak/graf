@@ -40,14 +40,20 @@ const edge = (state = initialState, action) => {
         color: state.selected ? action.payload.color : state.color
       };
     case COMPLETE_EDGE:
-    case RESET_CONTROL:
       const loop = action.payload.endNodeId === state.startNodeId;
       return {
         ...state,
         ...action.payload,
         loop,
         controlx: loop ? 0 : undefined,
-        controly: loop ? -1 : undefined
+        controly: loop ? -2 : undefined
+      };
+    case RESET_CONTROL:
+      return {
+        ...state,
+        ...action.payload,
+        controlx: state.loop ? 0 : undefined,
+        controly: state.loop ? -2 : undefined
       };
     case START_EDGE:
     case MOVE_CONTROL:

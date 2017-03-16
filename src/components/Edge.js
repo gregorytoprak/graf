@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { dist } from "../utils";
 
 class Edge extends Component {
   handleMouseDown = e => {
@@ -29,6 +30,7 @@ class Edge extends Component {
         ? "dodgerblue"
         : this.props.color ? this.props.color : "black",
       strokeWidth: "0.1",
+      fill: "none",
       onMouseDown: this.handleMouseDown,
       onMouseUp: this.handleMouseUp,
       onClick: this.handleClick,
@@ -38,10 +40,9 @@ class Edge extends Component {
       return (
         <circle
           {...baseProps}
-          fill="transparent"
-          cx={this.props.startLoc.x}
-          cy={this.props.startLoc.y - 1}
-          r="1"
+          cx={this.props.startLoc.x + this.props.controlx / 2}
+          cy={this.props.startLoc.y + this.props.controly / 2}
+          r={dist([this.props.controlx, this.props.controly], [0, 0]) / 2}
         />
       );
     }
@@ -51,17 +52,10 @@ class Edge extends Component {
       : this.props.hand.loc;
     const controlLoc = { x: this.props.controlx, y: this.props.controly };
     const p = a => `${a.x},${a.y}`;
-    return (
-      <path
-        {...baseProps}
-        fill="none"
-        d={
-          this.props.curved
-            ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
-            : `M ${p(startLoc)} L ${p(endLoc)}`
-        }
-      />
-    );
+    const d = this.props.curved
+      ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
+      : `M ${p(startLoc)} L ${p(endLoc)}`;
+    return <path {...baseProps} d={d} />;
   }
 }
 
