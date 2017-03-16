@@ -5,15 +5,20 @@ class Control extends Component {
     e.stopPropagation();
     const grabLoc = this.props.getLoc(e);
     const { startLoc, endLoc } = this.props;
-    const loc = this.props.moved
+    const loc = this.props.loop
       ? {
-          x: this.props.controlx - grabLoc.x,
-          y: this.props.controly - grabLoc.y
+          x: this.props.controlx - grabLoc.x + startLoc.x,
+          y: this.props.controly - grabLoc.y + startLoc.y
         }
-      : {
-          x: (startLoc.x + endLoc.x) / 2 - grabLoc.x,
-          y: (startLoc.y + endLoc.y) / 2 - grabLoc.y
-        };
+      : this.props.moved
+          ? {
+              x: this.props.controlx - grabLoc.x,
+              y: this.props.controly - grabLoc.y
+            }
+          : {
+              x: (startLoc.x + endLoc.x) / 2 - grabLoc.x,
+              y: (startLoc.y + endLoc.y) / 2 - grabLoc.y
+            };
     this.props.moveControlHand(loc);
   };
 
