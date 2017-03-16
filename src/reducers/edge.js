@@ -16,18 +16,50 @@ const initialState = {
   controly: undefined,
   complete: false,
   loop: null,
-  curved: false,
+  moved: false,
   selected: false,
   moving: false
 };
 
 const edge = (state = initialState, action) => {
   switch (action.type) {
+    case START_EDGE:
+      return {
+        ...state,
+        id: action.payload.id,
+        startNodeId: action.payload.startNodeId
+      };
+    case COMPLETE_EDGE:
+      const loop = action.payload.endNodeId === state.startNodeId;
+      return {
+        ...state,
+        endNodeId: action.payload.endNodeId,
+        complete: true,
+        loop,
+        controlx: loop ? 0 : undefined,
+        controly: loop ? -2 : undefined
+      };
     case SELECT_EDGE:
       return {
         ...state,
         selected: state.moving ? state.selected : !state.selected,
         moving: false
+      };
+    case MOVE_CONTROL:
+      return {
+        ...state,
+        controlx: action.payload.controlx,
+        controly: action.payload.controly,
+        moved: true,
+        moving: true
+      };
+    case RESET_CONTROL:
+      return {
+        ...state,
+        controlx: state.loop ? 0 : undefined,
+        controly: state.loop ? -2 : undefined,
+        moved: false,
+        selected: false
       };
     case RESET_COLORS:
       return {
@@ -39,24 +71,6 @@ const edge = (state = initialState, action) => {
         ...state,
         color: state.selected ? action.payload.color : state.color
       };
-    case COMPLETE_EDGE:
-      const loop = action.payload.endNodeId === state.startNodeId;
-      return {
-        ...state,
-        ...action.payload,
-        loop,
-        controlx: loop ? 0 : undefined,
-        controly: loop ? -2 : undefined
-      };
-    case RESET_CONTROL:
-      return {
-        ...state,
-        ...action.payload,
-        controlx: state.loop ? 0 : undefined,
-        controly: state.loop ? -2 : undefined
-      };
-    case START_EDGE:
-    case MOVE_CONTROL:
     case FULL_SELECT:
       return {
         ...state,

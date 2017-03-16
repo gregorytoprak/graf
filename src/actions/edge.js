@@ -12,7 +12,7 @@ export const startEdge = (id, startNodeId) => ({
 
 export const completeEdge = (id, endNodeId) => ({
   type: COMPLETE_EDGE,
-  payload: { id, endNodeId, complete: true }
+  payload: { id, endNodeId }
 });
 
 export const deleteEdge = id => ({
@@ -27,16 +27,10 @@ export const selectEdge = id => ({
 
 export const moveControl = (id, controlx, controly) => ({
   type: MOVE_CONTROL,
-  payload: { id, controlx, controly, curved: true, moving: true }
+  payload: { id, controlx, controly }
 });
 
 export const resetControl = id => ({
   type: RESET_CONTROL,
-  payload: {
-    id,
-    controlx: undefined,
-    controly: undefined,
-    curved: false,
-    selected: false
-  }
+  payload: { id }
 });

@@ -52,7 +52,7 @@ class Edge extends Component {
       : this.props.hand.loc;
     const controlLoc = { x: this.props.controlx, y: this.props.controly };
     const p = a => `${a.x},${a.y}`;
-    const d = this.props.curved
+    const d = this.props.moved
       ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
       : `M ${p(startLoc)} L ${p(endLoc)}`;
     return <path {...baseProps} d={d} />;
