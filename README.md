@@ -18,8 +18,9 @@
 
 ## Todo
 
-- [ ] Loops
+- [ ] Edge handle goes relative to the midpoint of the edge's nodes
+- [ ] (Consider) Edge handle goes on the edge rather than as distant control point
 - [ ] Arrows
+- [ ] Cleaning
 - [ ] Initial graphs
 - [ ] Axes
-- [ ] Cleaning
