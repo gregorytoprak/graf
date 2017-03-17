@@ -18,9 +18,12 @@
 
 ## Todo
 
-- [ ] (Consider) Edge maintains shape and scale when attached edges move
-- [ ] (Consider) Edge handle goes on the edge rather than as distant control point
 - [ ] Arrows
 - [ ] Cleaning
-- [ ] Initial graphs
 - [ ] Axes
+
+### Consider
+
+- [ ] Initial graphs
+- [ ] Edge maintains shape and scale when attached edges move
+- [ ] Edge handle goes on the edge rather than as distant control point
