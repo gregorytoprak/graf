@@ -18,12 +18,12 @@
 
 ## Todo
 
-- [ ] Arrows
 - [ ] Cleaning
 - [ ] Axes
 
 ### Consider
 
+- [ ] Arrows
 - [ ] Initial graphs
 - [ ] Edge maintains shape and scale when attached edges move
 - [ ] Edge handle goes on the edge rather than as distant control point
