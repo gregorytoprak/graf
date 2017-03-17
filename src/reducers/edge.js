@@ -37,7 +37,7 @@ const edge = (state = initialState, action) => {
         complete: true,
         loop,
         controlx: 0,
-        controly: state.loop ? -2 : 0
+        controly: loop ? -2 : 0
       };
     case SELECT_EDGE:
       return {
