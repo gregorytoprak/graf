@@ -12,8 +12,7 @@ const initialState = {
   color: null,
   startNodeId: undefined,
   endNodeId: undefined,
-  controlx: undefined,
-  controly: undefined,
+  controlPt: [0, 0],
   complete: false,
   loop: null,
   moved: false,
@@ -36,8 +35,7 @@ const edge = (state = initialState, action) => {
         endNodeId: action.payload.endNodeId,
         complete: true,
         loop,
-        controlx: 0,
-        controly: loop ? -2 : 0
+        controlPt: [0, loop ? -2 : 0]
       };
     case SELECT_EDGE:
       return {
@@ -48,16 +46,14 @@ const edge = (state = initialState, action) => {
     case MOVE_CONTROL:
       return {
         ...state,
-        controlx: action.payload.controlx,
-        controly: action.payload.controly,
+        controlPt: action.payload.newControlPt,
         moved: true,
         moving: true
       };
     case RESET_CONTROL:
       return {
         ...state,
-        controlx: 0,
-        controly: state.loop ? -2 : 0,
+        controlPt: [0, state.loop ? -2 : 0],
         moved: false,
         selected: false
       };

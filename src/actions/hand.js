@@ -6,25 +6,25 @@ export const MOVE_CONTROL_HAND = "MOVE_CONTROL_HAND";
 
 export const emptyHand = () => ({
   type: EMPTY_HAND,
-  payload: { palm: "empty" }
+  payload: { palm: EMPTY_HAND }
 });
 
-export const panHand = (x, y) => ({
+export const panHand = grabLoc => ({
   type: PAN_HAND,
-  payload: { palm: "pan", x, y }
+  payload: { palm: PAN_HAND, grabLoc }
 });
 
 export const moveNodeHand = (id, x, y) => ({
   type: MOVE_NODE_HAND,
-  payload: { palm: "moveNode", id, x, y }
+  payload: { palm: MOVE_NODE_HAND, id, x, y }
 });
 
 export const startEdgeHand = (id, loc) => ({
   type: START_EDGE_HAND,
-  payload: { palm: "startEdge", id, loc }
+  payload: { palm: START_EDGE_HAND, id, loc }
 });
 
-export const moveControlHand = (id, loc) => ({
+export const moveControlHand = (id, relGrabLoc) => ({
   type: MOVE_CONTROL_HAND,
-  payload: { palm: "moveControl", id, loc }
+  payload: { palm: MOVE_CONTROL_HAND, id, relGrabLoc }
 });

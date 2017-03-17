@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { START_EDGE_HAND } from "../actions/hand";
 
 class Node extends Component {
   handleMouseDown = e => {
@@ -16,7 +17,7 @@ class Node extends Component {
 
   handleMouseUp = e => {
     e.stopPropagation();
-    if (this.props.hand.palm === "startEdge") {
+    if (this.props.hand.palm === START_EDGE_HAND) {
       this.props.completeEdge(this.props.hand.id);
     }
     this.props.emptyHand();

@@ -4,9 +4,9 @@ export const PAN_SHEET = "PAN_SHEET";
 export const ZOOM_SHEET = "ZOOM_SHEET";
 export const RESIZE_VIEWPORT = "RESIZE_VIEWPORT";
 
-export const panSheet = (dx, dy) => ({
+export const panSheet = shift => ({
   type: PAN_SHEET,
-  payload: { dx, dy }
+  payload: { shift }
 });
 
 export const zoomSheet = (zoomLoc, zoomFactor) => ({
@@ -16,5 +16,5 @@ export const zoomSheet = (zoomLoc, zoomFactor) => ({
 
 export const resizeViewport = () => ({
   type: RESIZE_VIEWPORT,
-  payload: { vw: viewportW(), vh: viewportH() }
+  payload: { vdimsNew: [viewportW(), viewportH()] }
 });

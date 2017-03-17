@@ -25,9 +25,9 @@ export const selectEdge = id => ({
   payload: { id }
 });
 
-export const moveControl = (id, controlx, controly) => ({
+export const moveControl = (id, newControlPt) => ({
   type: MOVE_CONTROL,
-  payload: { id, controlx, controly }
+  payload: { id, newControlPt }
 });
 
 export const resetControl = id => ({

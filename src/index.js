@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-
 import reducer from "./reducers";
 import { resizeViewport } from "./actions/sheet";
 import App from "./components/App";
@@ -21,7 +20,6 @@ store.subscribe(() => {
 const resize = () => {
   store.dispatch(resizeViewport());
 };
-
 resize();
 window.addEventListener("resize", resize);
 

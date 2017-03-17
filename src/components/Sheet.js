@@ -2,18 +2,21 @@ import React, { Component } from "react";
 import NodeContainer from "../containers/NodeContainer";
 import EdgeContainer from "../containers/EdgeContainer";
 import ControlContainer from "../containers/ControlContainer";
+import {
+  PAN_HAND,
+  MOVE_NODE_HAND,
+  START_EDGE_HAND,
+  MOVE_CONTROL_HAND
+} from "../actions/hand";
+import { vec } from "../utils";
 
 class Sheet extends Component {
   getLoc = event => {
-    const raw = { x: event.clientX, y: event.clientY };
-    return {
-      x: raw.x * (this.props.w / this.props.vw) +
-        this.props.cx -
-        this.props.w / 2,
-      y: raw.y * (this.props.h / this.props.vh) +
-        this.props.cy -
-        this.props.h / 2
-    };
+    const { center, dims, vdims } = this.props;
+    const zeroPt = vec.sub(center, vec.scl(1 / 2, dims));
+    const scale = vec.div(dims, vdims);
+    const raw = [event.clientX, event.clientY];
+    return vec.add(vec.prd(raw, scale), zeroPt);
   };
 
   handleWheel = e => {
@@ -30,41 +33,33 @@ class Sheet extends Component {
 
   handleMouseDown = e => {
     const grabLoc = this.getLoc(e);
-    this.props.panHand(grabLoc.x, grabLoc.y);
+    this.props.panHand(grabLoc);
   };
 
   handleMouseMove = e => {
-    if (this.props.hand.palm === "pan") {
+    if (this.props.hand.palm === PAN_HAND) {
       const moveLoc = this.getLoc(e);
-      this.props.panSheet(
-        this.props.hand.x - moveLoc.x,
-        this.props.hand.y - moveLoc.y
-      );
-    } else if (this.props.hand.palm === "moveNode") {
+      const shift = vec.sub(this.props.hand.grabLoc, moveLoc);
+      this.props.panSheet(shift);
+    } else if (this.props.hand.palm === MOVE_NODE_HAND) {
       const moveLoc = this.getLoc(e);
       this.props.moveNode(
         this.props.hand.id,
         moveLoc.x + this.props.hand.x,
         moveLoc.y + this.props.hand.y
       );
-    } else if (this.props.hand.palm === "startEdge") {
+    } else if (this.props.hand.palm === START_EDGE_HAND) {
       const moveLoc = this.getLoc(e);
       this.props.startEdgeHand(this.props.hand.id, moveLoc);
-    } else if (this.props.hand.palm === "moveControl") {
+    } else if (this.props.hand.palm === MOVE_CONTROL_HAND) {
       const moveLoc = this.getLoc(e);
-      const edge = this.props.edges.find(ed => ed.id === this.props.hand.id);
-      const startNode = this.props.nodes.find(nd => nd.id === edge.startNodeId);
-      const endNode = this.props.nodes.find(nd => nd.id === edge.endNodeId);
-      this.props.moveControl(
-        this.props.hand.id,
-        moveLoc.x + this.props.hand.loc.x - (startNode.cx + endNode.cx) / 2,
-        moveLoc.y + this.props.hand.loc.y - (startNode.cy + endNode.cy) / 2
-      );
+      const newControlPt = vec.add(this.props.hand.relGrabLoc, moveLoc);
+      this.props.moveControl(this.props.hand.id, newControlPt);
     }
   };
 
   handleMouseUp = e => {
-    if (this.props.hand.palm === "startEdge") {
+    if (this.props.hand.palm === START_EDGE_HAND) {
       this.props.deleteEdge(this.props.hand.id);
     }
     this.props.emptyHand();
@@ -76,16 +71,13 @@ class Sheet extends Component {
   };
 
   render() {
-    const viewBox = [
-      this.props.cx - this.props.w / 2,
-      this.props.cy - this.props.h / 2,
-      this.props.w,
-      this.props.h
-    ].join(" ");
+    const { center, dims } = this.props;
+    const zeroPt = vec.sub(center, vec.scl(1 / 2, dims));
+    const vb = [zeroPt, dims];
     return (
       <svg
         className="Sheet"
-        viewBox={viewBox}
+        viewBox={`${vb[0][0]} ${vb[0][1]} ${vb[1][0]} ${vb[1][1]}`}
         xmlns="http://www.w3.org/2000/svg"
         onWheel={this.handleWheel}
         onMouseDown={this.handleMouseDown}
@@ -93,9 +85,7 @@ class Sheet extends Component {
         onMouseUp={this.handleMouseUp}
         onDoubleClick={this.handleDoubleClick}
       >
-        {this.props.edgeIds.map(id => (
-          <EdgeContainer key={id} id={id} getLoc={this.getLoc} />
-        ))}
+        {this.props.edgeIds.map(id => <EdgeContainer key={id} id={id} />)}
         {this.props.nodeIds.map(id => (
           <NodeContainer key={id} id={id} getLoc={this.getLoc} />
         ))}

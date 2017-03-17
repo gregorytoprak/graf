@@ -2,16 +2,16 @@ import { connect } from "react-redux";
 import Control from "../components/Control";
 import { selectEdge, resetControl } from "../actions/edge";
 import { emptyHand, moveControlHand } from "../actions/hand";
+import { vec } from "../utils";
 
 const mapStateToProps = (state, { id }) => {
   const edge = state.edges.find(ed => ed.id === id);
   const startNode = state.nodes.find(nd => nd.id === edge.startNodeId);
   const endNode = state.nodes.find(nd => nd.id === edge.endNodeId);
-  return {
-    ...edge,
-    startLoc: { x: startNode.cx, y: startNode.cy },
-    endLoc: edge.complete ? { x: endNode.cx, y: endNode.cy } : null
-  };
+  const midPt = edge.complete
+    ? vec.scl(1 / 2, vec.add(startNode.loc, endNode.loc))
+    : startNode.loc;
+  return { ...edge, midPt };
 };
 
 const mapDispatchToProps = (dispatch, { id }) => ({
@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  moveControlHand: loc => {
-    dispatch(moveControlHand(id, loc));
+  moveControlHand: relGrabLoc => {
+    dispatch(moveControlHand(id, relGrabLoc));
   }
 });
 

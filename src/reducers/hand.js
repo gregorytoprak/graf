@@ -7,7 +7,7 @@ import {
 } from "../actions/hand";
 
 const initialState = {
-  palm: "empty"
+  palm: EMPTY_HAND
 };
 
 const sheet = (state = initialState, action) => {

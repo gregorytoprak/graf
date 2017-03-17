@@ -17,8 +17,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  panSheet: (dx, dy) => {
-    dispatch(panSheet(dx, dy));
+  panSheet: shift => {
+    dispatch(panSheet(shift));
   },
   zoomSheet: (zoomLoc, zoomFactor) => {
     dispatch(zoomSheet(zoomLoc, zoomFactor));
@@ -38,8 +38,8 @@ const mapDispatchToProps = dispatch => ({
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  panHand: (x, y) => {
-    dispatch(panHand(x, y));
+  panHand: grabLoc => {
+    dispatch(panHand(grabLoc));
   },
   startEdgeHand: (id, loc) => {
     dispatch(startEdgeHand(id, loc));
