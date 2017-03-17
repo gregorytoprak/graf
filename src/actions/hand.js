@@ -14,9 +14,9 @@ export const panHand = grabLoc => ({
   payload: { palm: PAN_HAND, grabLoc }
 });
 
-export const moveNodeHand = (id, x, y) => ({
+export const moveNodeHand = (id, relGrabLoc) => ({
   type: MOVE_NODE_HAND,
-  payload: { palm: MOVE_NODE_HAND, id, x, y }
+  payload: { palm: MOVE_NODE_HAND, id, relGrabLoc }
 });
 
 export const startEdgeHand = (id, loc) => ({

@@ -9,8 +9,8 @@ const mapStateToProps = (state, { id }) => {
   const startNode = state.nodes.find(nd => nd.id === edge.startNodeId);
   const endNode = state.nodes.find(nd => nd.id === edge.endNodeId);
   const midPt = edge.complete
-    ? vec.scl(1 / 2, vec.add(startNode.loc, endNode.loc))
-    : startNode.loc;
+    ? vec.scl(1 / 2, vec.add(startNode.nodePt, endNode.nodePt))
+    : startNode.nodePt;
   return { ...edge, midPt };
 };
 

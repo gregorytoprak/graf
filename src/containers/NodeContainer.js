@@ -31,8 +31,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   completeEdge: edgeId => {
     dispatch(completeEdge(edgeId, id));
   },
-  moveNodeHand: (x, y) => {
-    dispatch(moveNodeHand(id, x, y));
+  moveNodeHand: relGrabLoc => {
+    dispatch(moveNodeHand(id, relGrabLoc));
   }
 });
 

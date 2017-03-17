@@ -19,6 +19,7 @@
 ## Todo
 
 - [ ] Cleaning
+  - move more modifications to the reducers themselves
 - [ ] Axes
 
 ### Consider

@@ -37,37 +37,36 @@ class Sheet extends Component {
   };
 
   handleMouseMove = e => {
-    if (this.props.hand.palm === PAN_HAND) {
+    const h = this.props.hand;
+    if (h.palm === PAN_HAND) {
       const moveLoc = this.getLoc(e);
-      const shift = vec.sub(this.props.hand.grabLoc, moveLoc);
-      this.props.panSheet(shift);
-    } else if (this.props.hand.palm === MOVE_NODE_HAND) {
+      const newCenter = vec.add(this.props.center, vec.sub(h.grabLoc, moveLoc));
+      this.props.panSheet(newCenter);
+    } else if (h.palm === MOVE_NODE_HAND) {
       const moveLoc = this.getLoc(e);
-      this.props.moveNode(
-        this.props.hand.id,
-        moveLoc.x + this.props.hand.x,
-        moveLoc.y + this.props.hand.y
-      );
-    } else if (this.props.hand.palm === START_EDGE_HAND) {
+      const newNodePt = vec.add(h.relGrabLoc, moveLoc);
+      this.props.moveNode(h.id, newNodePt);
+    } else if (h.palm === START_EDGE_HAND) {
       const moveLoc = this.getLoc(e);
-      this.props.startEdgeHand(this.props.hand.id, moveLoc);
-    } else if (this.props.hand.palm === MOVE_CONTROL_HAND) {
+      this.props.startEdgeHand(h.id, moveLoc);
+    } else if (h.palm === MOVE_CONTROL_HAND) {
       const moveLoc = this.getLoc(e);
-      const newControlPt = vec.add(this.props.hand.relGrabLoc, moveLoc);
-      this.props.moveControl(this.props.hand.id, newControlPt);
+      const newControlPt = vec.add(h.relGrabLoc, moveLoc);
+      this.props.moveControl(h.id, newControlPt);
     }
   };
 
   handleMouseUp = e => {
-    if (this.props.hand.palm === START_EDGE_HAND) {
-      this.props.deleteEdge(this.props.hand.id);
+    const h = this.props.hand;
+    if (h.palm === START_EDGE_HAND) {
+      this.props.deleteEdge(h.id);
     }
     this.props.emptyHand();
   };
 
   handleDoubleClick = e => {
-    const loc = this.getLoc(e);
-    this.props.createNode(loc.x, loc.y);
+    const nodePt = this.getLoc(e);
+    this.props.createNode(nodePt);
   };
 
   render() {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { START_EDGE_HAND } from "../actions/hand";
+import { vec } from "../utils";
 
 class Node extends Component {
   handleMouseDown = e => {
@@ -8,17 +9,16 @@ class Node extends Component {
     if (e.metaKey) {
       this.props.startEdge(grabLoc);
     } else {
-      this.props.moveNodeHand(
-        this.props.cx - grabLoc.x,
-        this.props.cy - grabLoc.y
-      );
+      const relGrabLoc = vec.sub(this.props.nodePt, grabLoc);
+      this.props.moveNodeHand(relGrabLoc);
     }
   };
 
   handleMouseUp = e => {
     e.stopPropagation();
-    if (this.props.hand.palm === START_EDGE_HAND) {
-      this.props.completeEdge(this.props.hand.id);
+    const h = this.props.hand;
+    if (h.palm === START_EDGE_HAND) {
+      this.props.completeEdge(h.id);
     }
     this.props.emptyHand();
   };
@@ -37,11 +37,12 @@ class Node extends Component {
   };
 
   render() {
+    const loc = this.props.nodePt;
     return (
       <circle
         className="Node"
-        cx={this.props.cx}
-        cy={this.props.cy}
+        cx={loc[0]}
+        cy={loc[1]}
         r="1"
         stroke={
           this.props.selected

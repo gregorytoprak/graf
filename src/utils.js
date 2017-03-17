@@ -7,11 +7,9 @@ export const vec = {
   sub: (x, y) => [x[0] - y[0], x[1] - y[1]],
   prd: (x, y) => [x[0] * y[0], x[1] * y[1]],
   div: (x, y) => [x[0] / y[0], x[1] / y[1]],
-  scl: (a, x) => [a * x[0], a * x[1]]
+  scl: (a, x) => [a * x[0], a * x[1]],
+  len: x => (x[0] ** 2 + x[1] ** 2) ** (1 / 2)
 };
-
-export const dist = (a, b = [0, 0]) =>
-  ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** (1 / 2);
 
 export const persistence = {
   save: state => {

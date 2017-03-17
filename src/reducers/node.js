@@ -4,8 +4,7 @@ import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from "../actions/node";
 const initialState = {
   id: undefined,
   color: null,
-  cx: undefined,
-  cy: undefined,
+  nodePt: [0, 0],
   selected: false,
   moving: false
 };
@@ -13,6 +12,11 @@ const initialState = {
 const node = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NODE:
+      return {
+        ...state,
+        id: action.payload.id,
+        nodePt: action.payload.nodePt
+      };
     case FULL_SELECT:
       return {
         ...state,
@@ -37,7 +41,7 @@ const node = (state = initialState, action) => {
     case MOVE_NODE:
       return {
         ...state,
-        ...action.payload,
+        nodePt: action.payload.newNodePt,
         moving: true
       };
     default:

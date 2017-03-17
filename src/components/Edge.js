@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { dist } from "../utils";
+import { vec } from "../utils";
 
 class Edge extends Component {
   handleMouseDown = e => {
@@ -37,24 +37,20 @@ class Edge extends Component {
       onDoubleClick: this.handleDoubleClick
     };
     if (this.props.loop) {
-      return (
-        <circle
-          {...baseProps}
-          cx={this.props.startLoc.x + this.props.controlx / 2}
-          cy={this.props.startLoc.y + this.props.controly / 2}
-          r={dist([this.props.controlx, this.props.controly]) / 2}
-        />
+      const loc = vec.add(
+        this.props.startLoc,
+        vec.scl(1 / 2, this.props.controlPt)
       );
+      const r = vec.len(this.props.controlPt) / 2;
+      return <circle {...baseProps} cx={loc[0]} cy={loc[1]} r={r} />;
     }
     const startLoc = this.props.startLoc;
     const endLoc = this.props.complete
       ? this.props.endLoc
       : this.props.hand.loc;
-    const controlLoc = {
-      x: (startLoc.x + endLoc.x) / 2 + this.props.controlx,
-      y: (startLoc.y + endLoc.y) / 2 + this.props.controly
-    };
-    const p = a => `${a.x},${a.y}`;
+    const midPt = vec.scl(1 / 2, vec.add(startLoc, endLoc));
+    const controlLoc = vec.add(midPt, this.props.controlPt);
+    const p = x => `${x[0]},${x[1]}`;
     const d = this.props.moved
       ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
       : `M ${p(startLoc)} L ${p(endLoc)}`;

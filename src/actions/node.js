@@ -1,11 +1,13 @@
+import { makeId } from "../utils";
+
 export const CREATE_NODE = "CREATE_NODE";
 export const DELETE_NODE = "DELETE_NODE";
 export const SELECT_NODE = "SELECT_NODE";
 export const MOVE_NODE = "MOVE_NODE";
 
-export const createNode = (id, cx, cy) => ({
+export const createNode = nodePt => ({
   type: CREATE_NODE,
-  payload: { id, cx, cy }
+  payload: { id: makeId("node"), nodePt }
 });
 
 export const deleteNode = id => ({
@@ -18,7 +20,7 @@ export const selectNode = id => ({
   payload: { id }
 });
 
-export const moveNode = (id, cx, cy) => ({
+export const moveNode = (id, newNodePt) => ({
   type: MOVE_NODE,
-  payload: { id, cx, cy }
+  payload: { id, newNodePt }
 });
