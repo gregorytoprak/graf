@@ -5,20 +5,10 @@ class Control extends Component {
     e.stopPropagation();
     const grabLoc = this.props.getLoc(e);
     const { startLoc, endLoc } = this.props;
-    const loc = this.props.loop
-      ? {
-          x: this.props.controlx - grabLoc.x + startLoc.x,
-          y: this.props.controly - grabLoc.y + startLoc.y
-        }
-      : this.props.moved
-          ? {
-              x: this.props.controlx - grabLoc.x,
-              y: this.props.controly - grabLoc.y
-            }
-          : {
-              x: (startLoc.x + endLoc.x) / 2 - grabLoc.x,
-              y: (startLoc.y + endLoc.y) / 2 - grabLoc.y
-            };
+    const loc = {
+      x: (startLoc.x + endLoc.x) / 2 + this.props.controlx - grabLoc.x,
+      y: (startLoc.y + endLoc.y) / 2 + this.props.controly - grabLoc.y
+    };
     this.props.moveControlHand(loc);
   };
 
@@ -45,12 +35,8 @@ class Control extends Component {
     }
     const { startLoc, endLoc } = this.props;
     const loc = {
-      cx: this.props.loop
-        ? startLoc.x + this.props.controlx
-        : this.props.moved ? this.props.controlx : (startLoc.x + endLoc.x) / 2,
-      cy: this.props.loop
-        ? startLoc.y + this.props.controly
-        : this.props.moved ? this.props.controly : (startLoc.y + endLoc.y) / 2
+      cx: (startLoc.x + endLoc.x) / 2 + this.props.controlx,
+      cy: (startLoc.y + endLoc.y) / 2 + this.props.controly
     };
     return (
       <circle

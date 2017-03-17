@@ -18,7 +18,7 @@
 
 ## Todo
 
-- [ ] Edge handle goes relative to the midpoint of the edge's nodes
+- [ ] (Consider) Edge maintains shape and scale when attached edges move
 - [ ] (Consider) Edge handle goes on the edge rather than as distant control point
 - [ ] Arrows
 - [ ] Cleaning

@@ -54,14 +54,11 @@ class Sheet extends Component {
       const moveLoc = this.getLoc(e);
       const edge = this.props.edges.find(ed => ed.id === this.props.hand.id);
       const startNode = this.props.nodes.find(nd => nd.id === edge.startNodeId);
+      const endNode = this.props.nodes.find(nd => nd.id === edge.endNodeId);
       this.props.moveControl(
         this.props.hand.id,
-        edge.loop
-          ? moveLoc.x + this.props.hand.loc.x - startNode.cx
-          : moveLoc.x + this.props.hand.loc.x,
-        edge.loop
-          ? moveLoc.y + this.props.hand.loc.y - startNode.cy
-          : moveLoc.y + this.props.hand.loc.y
+        moveLoc.x + this.props.hand.loc.x - (startNode.cx + endNode.cx) / 2,
+        moveLoc.y + this.props.hand.loc.y - (startNode.cy + endNode.cy) / 2
       );
     }
   };

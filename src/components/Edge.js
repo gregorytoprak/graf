@@ -42,7 +42,7 @@ class Edge extends Component {
           {...baseProps}
           cx={this.props.startLoc.x + this.props.controlx / 2}
           cy={this.props.startLoc.y + this.props.controly / 2}
-          r={dist([this.props.controlx, this.props.controly], [0, 0]) / 2}
+          r={dist([this.props.controlx, this.props.controly]) / 2}
         />
       );
     }
@@ -50,7 +50,10 @@ class Edge extends Component {
     const endLoc = this.props.complete
       ? this.props.endLoc
       : this.props.hand.loc;
-    const controlLoc = { x: this.props.controlx, y: this.props.controly };
+    const controlLoc = {
+      x: (startLoc.x + endLoc.x) / 2 + this.props.controlx,
+      y: (startLoc.y + endLoc.y) / 2 + this.props.controly
+    };
     const p = a => `${a.x},${a.y}`;
     const d = this.props.moved
       ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`

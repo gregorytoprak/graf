@@ -36,8 +36,8 @@ const edge = (state = initialState, action) => {
         endNodeId: action.payload.endNodeId,
         complete: true,
         loop,
-        controlx: loop ? 0 : undefined,
-        controly: loop ? -2 : undefined
+        controlx: 0,
+        controly: state.loop ? -2 : 0
       };
     case SELECT_EDGE:
       return {
@@ -56,8 +56,8 @@ const edge = (state = initialState, action) => {
     case RESET_CONTROL:
       return {
         ...state,
-        controlx: state.loop ? 0 : undefined,
-        controly: state.loop ? -2 : undefined,
+        controlx: 0,
+        controly: state.loop ? -2 : 0,
         moved: false,
         selected: false
       };

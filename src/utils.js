@@ -2,7 +2,8 @@ import Cookies from "js-cookie";
 
 export const makeId = type => type + "-" + Date.now();
 
-export const dist = (a, b) => ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5;
+export const dist = (a, b = [0, 0]) =>
+  ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5;
 
 export const persistence = {
   save: state => {
