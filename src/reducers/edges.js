@@ -1,4 +1,5 @@
 import edge from "./edge";
+import { CLEAR } from "../actions/meta";
 import { FULL_SELECT, RESET_COLORS, SET_COLOR } from "../actions/meta";
 import { DELETE_NODE } from "../actions/node";
 import {
@@ -35,6 +36,8 @@ const edges = (state = initialState, action) => {
       return state.map(
         ed => ed.id === action.payload.id ? edge(ed, action) : ed
       );
+    case CLEAR:
+      return initialState;
     default:
       return state;
   }

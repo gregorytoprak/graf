@@ -1,3 +1,4 @@
+import { CLEAR } from "../actions/meta";
 import { PAN_SHEET, ZOOM_SHEET, RESIZE_VIEWPORT } from "../actions/sheet";
 import { vec } from "../utils";
 
@@ -34,6 +35,8 @@ const sheet = (state = initialState, action) => {
         dims: vec.prd(vdimsNew, vec.div(dims, vdims)),
         vdims: vdimsNew
       };
+    case CLEAR:
+      return initialState;
     default:
       return state;
   }

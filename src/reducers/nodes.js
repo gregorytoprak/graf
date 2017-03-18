@@ -1,4 +1,5 @@
 import node from "./node";
+import { CLEAR } from "../actions/meta";
 import { FULL_SELECT, RESET_COLORS, SET_COLOR } from "../actions/meta";
 import {
   CREATE_NODE,
@@ -24,6 +25,8 @@ const nodes = (state = initialState, action) => {
       return state.map(
         nd => nd.id === action.payload.id ? node(nd, action) : nd
       );
+    case CLEAR:
+      return initialState;
     default:
       return state;
   }

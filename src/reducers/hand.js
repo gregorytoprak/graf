@@ -1,3 +1,4 @@
+import { CLEAR } from "../actions/meta";
 import {
   EMPTY_HAND,
   PAN_HAND,
@@ -18,6 +19,8 @@ const sheet = (state = initialState, action) => {
     case START_EDGE_HAND:
     case MOVE_CONTROL_HAND:
       return action.payload;
+    case CLEAR:
+      return initialState;
     default:
       return state;
   }
