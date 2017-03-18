@@ -1,31 +1,31 @@
 import { connect } from "react-redux";
 import EdgeHandle from "../components/EdgeHandle";
-import { selectEdge, resetEdgeHandle } from "../actions/edge";
+import { resetEdgeHandle, selectEdge } from "../actions/edge";
 import { emptyHand, moveEdgeHandleHand } from "../actions/hand";
-import { vec } from "../utils";
 
 const mapStateToProps = (state, { id }) => {
   const edge = state.edges.find(ed => ed.id === id);
   const startNode = state.nodes.find(nd => nd.id === edge.startNodeId);
   const endNode = state.nodes.find(nd => nd.id === edge.endNodeId);
-  const midPt = edge.endNodeId
-    ? vec.scl(1 / 2, vec.add(startNode.nodePt, endNode.nodePt))
-    : startNode.nodePt;
-  return { ...edge, midPt };
+  return {
+    ...edge,
+    startPt: startNode.pt,
+    endPt: edge.endNodeId ? endNode.pt : state.hand.handPt
+  };
 };
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-  selectEdge: () => {
-    dispatch(selectEdge(id));
-  },
   resetEdgeHandle: () => {
     dispatch(resetEdgeHandle(id));
+  },
+  selectEdge: () => {
+    dispatch(selectEdge(id));
   },
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  moveEdgeHandleHand: relGrabLoc => {
-    dispatch(moveEdgeHandleHand(id, relGrabLoc));
+  moveEdgeHandleHand: relGrabPt => {
+    dispatch(moveEdgeHandleHand(id, relGrabPt));
   }
 });
 

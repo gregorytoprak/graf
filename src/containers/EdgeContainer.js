@@ -9,8 +9,8 @@ const mapStateToProps = (state, { id }) => {
   const endNode = state.nodes.find(nd => nd.id === edge.endNodeId);
   return {
     ...edge,
-    startPt: startNode.nodePt,
-    endPt: edge.endNodeId ? endNode.nodePt : state.hand.moveLoc
+    startPt: startNode.pt,
+    endPt: edge.endNodeId ? endNode.pt : state.hand.handPt
   };
 };
 

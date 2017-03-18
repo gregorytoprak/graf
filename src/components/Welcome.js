@@ -14,8 +14,8 @@ class Welcome extends Component {
     return (
       <Modal
         className="Welcome"
-        show={this.props.show}
-        onHide={this.props.hide}
+        show={this.props.welcomeVisible}
+        onHide={this.props.toggleWelcome}
       >
         <Modal.Header>
           <Modal.Title componentClass="h1">
@@ -39,7 +39,7 @@ class Welcome extends Component {
         </Modal.Body>
         <Modal.Footer>
           <ButtonToolbar>
-            <Button bsStyle="primary" onClick={this.props.hide}>
+            <Button bsStyle="primary" onClick={this.props.toggleWelcome}>
               Continue
             </Button>
             <OverlayTrigger

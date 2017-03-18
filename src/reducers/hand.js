@@ -1,4 +1,3 @@
-import { CLEAR } from "../actions/meta";
 import {
   EMPTY_HAND,
   PAN_HAND,
@@ -6,6 +5,7 @@ import {
   START_EDGE_HAND,
   MOVE_EDGE_HANDLE_HAND
 } from "../actions/hand";
+import { CLEAR } from "../actions/other";
 
 const initialState = {
   palm: EMPTY_HAND

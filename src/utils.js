@@ -8,7 +8,7 @@ export const vec = {
   prd: (x, y) => [x[0] * y[0], x[1] * y[1]],
   div: (x, y) => [x[0] / y[0], x[1] / y[1]],
   scl: (a, x) => [a * x[0], a * x[1]],
-  len: x => (x[0] ** 2 + x[1] ** 2) ** (1 / 2)
+  len: x => (x[0] ** 2 + x[1] ** 2) ** 0.5
 };
 
 export const persistence = {

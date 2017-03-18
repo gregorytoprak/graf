@@ -19,20 +19,20 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   selectNode: () => {
     dispatch(selectNode(id));
   },
-  emptyHand: () => {
-    dispatch(emptyHand());
-  },
   startEdge: () => {
     dispatch(startEdge(id));
-  },
-  startEdgeHand: grabLoc => {
-    dispatch(startEdgeHand(grabLoc));
   },
   completeEdge: () => {
     dispatch(completeEdge(id));
   },
-  moveNodeHand: relGrabLoc => {
-    dispatch(moveNodeHand(id, relGrabLoc));
+  emptyHand: () => {
+    dispatch(emptyHand());
+  },
+  moveNodeHand: relGrabPt => {
+    dispatch(moveNodeHand(id, relGrabPt));
+  },
+  startEdgeHand: grabPt => {
+    dispatch(startEdgeHand(grabPt));
   }
 });
 

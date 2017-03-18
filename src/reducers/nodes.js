@@ -5,7 +5,7 @@ import {
   MOVE_NODE,
   SELECT_NODE
 } from "../actions/node";
-import { FULL_SELECT, SET_COLOR, CLEAR } from "../actions/meta";
+import { FULL_SELECT, SET_COLOR, CLEAR } from "../actions/other";
 
 const initialState = [];
 

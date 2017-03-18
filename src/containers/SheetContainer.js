@@ -4,7 +4,7 @@ import { panSheet, zoomSheet } from "../actions/sheet";
 import { createNode, moveNode } from "../actions/node";
 import { deleteEdge, dropEdge, moveEdgeHandle } from "../actions/edge";
 import { emptyHand, panHand, startEdgeHand } from "../actions/hand";
-import { noSelect } from "../actions/meta";
+import { noSelect } from "../actions/other";
 
 const mapStateToProps = state => ({
   ...state.sheet,
@@ -17,14 +17,14 @@ const mapDispatchToProps = dispatch => ({
   panSheet: shift => {
     dispatch(panSheet(shift));
   },
-  zoomSheet: (zoomLoc, zoomFactor) => {
-    dispatch(zoomSheet(zoomLoc, zoomFactor));
+  zoomSheet: (zoomPt, zoomFactor) => {
+    dispatch(zoomSheet(zoomPt, zoomFactor));
   },
-  createNode: initNodePt => {
-    dispatch(createNode(initNodePt));
+  createNode: initPt => {
+    dispatch(createNode(initPt));
   },
-  moveNode: (id, newNodePt) => {
-    dispatch(moveNode(id, newNodePt));
+  moveNode: (id, newPt) => {
+    dispatch(moveNode(id, newPt));
   },
   deleteEdge: id => {
     dispatch(deleteEdge(id));
@@ -32,17 +32,17 @@ const mapDispatchToProps = dispatch => ({
   dropEdge: () => {
     dispatch(dropEdge());
   },
-  moveEdgeHandle: (id, newHandleLoc) => {
-    dispatch(moveEdgeHandle(id, newHandleLoc));
+  moveEdgeHandle: (id, newHandlePt) => {
+    dispatch(moveEdgeHandle(id, newHandlePt));
   },
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  panHand: grabLoc => {
-    dispatch(panHand(grabLoc));
+  panHand: grabPt => {
+    dispatch(panHand(grabPt));
   },
-  startEdgeHand: moveLoc => {
-    dispatch(startEdgeHand(moveLoc));
+  startEdgeHand: handPt => {
+    dispatch(startEdgeHand(handPt));
   },
   noSelect: () => {
     dispatch(noSelect());

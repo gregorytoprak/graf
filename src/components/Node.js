@@ -5,13 +5,14 @@ import { vec } from "../utils";
 class Node extends Component {
   handleMouseDown = e => {
     e.stopPropagation();
-    const grabLoc = this.props.getLoc(e);
     if (e.metaKey) {
+      const handPt = this.props.getPt(e);
       this.props.startEdge();
-      this.props.startEdgeHand(grabLoc);
+      this.props.startEdgeHand(handPt);
     } else {
-      const relGrabLoc = vec.sub(this.props.nodePt, grabLoc);
-      this.props.moveNodeHand(relGrabLoc);
+      const grabPt = this.props.getPt(e);
+      const relGrabPt = vec.sub(this.props.pt, grabPt);
+      this.props.moveNodeHand(relGrabPt);
     }
   };
 
@@ -38,12 +39,12 @@ class Node extends Component {
   };
 
   render() {
-    const loc = this.props.nodePt;
+    const centerPt = this.props.pt;
     return (
       <circle
         className="Node"
-        cx={loc[0]}
-        cy={loc[1]}
+        cx={centerPt[0]}
+        cy={centerPt[1]}
         r="1"
         stroke={
           this.props.selected

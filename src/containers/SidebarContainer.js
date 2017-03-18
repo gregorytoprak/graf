@@ -1,22 +1,23 @@
 import { connect } from "react-redux";
 import Sidebar from "../components/Sidebar";
-import { fullSelect, setColor } from "../actions/meta";
-
-const mapStateToProps = state => ({});
+import { toggleWelcome, fullSelect, setColor } from "../actions/other";
 
 const mapDispatchToProps = dispatch => ({
+  toggleWelcome: () => {
+    dispatch(toggleWelcome());
+  },
   fullSelect: selectStatus => {
     dispatch(fullSelect(selectStatus));
-  },
-  resetColor: () => {
-    dispatch(setColor(null));
   },
   setColor: rawColor => {
     const newColor = rawColor.hex;
     dispatch(setColor(newColor));
+  },
+  resetColor: () => {
+    dispatch(setColor(null));
   }
 });
 
-const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+const SidebarContainer = connect(null, mapDispatchToProps)(Sidebar);
 
 export default SidebarContainer;

@@ -9,9 +9,9 @@ export const panSheet = shift => ({
   payload: { shift }
 });
 
-export const zoomSheet = (zoomLoc, zoomFactor) => ({
+export const zoomSheet = (zoomPt, zoomFactor) => ({
   type: ZOOM_SHEET,
-  payload: { zoomLoc, zoomFactor }
+  payload: { zoomPt, zoomFactor }
 });
 
 export const resizeViewport = () => ({

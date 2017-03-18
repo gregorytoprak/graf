@@ -9,22 +9,22 @@ export const emptyHand = () => ({
   payload: { palm: EMPTY_HAND }
 });
 
-export const panHand = grabLoc => ({
+export const panHand = grabPt => ({
   type: PAN_HAND,
-  payload: { palm: PAN_HAND, grabLoc }
+  payload: { palm: PAN_HAND, grabPt }
 });
 
-export const moveNodeHand = (id, relGrabLoc) => ({
+export const moveNodeHand = (id, relGrabPt) => ({
   type: MOVE_NODE_HAND,
-  payload: { palm: MOVE_NODE_HAND, id, relGrabLoc }
+  payload: { palm: MOVE_NODE_HAND, id, relGrabPt }
 });
 
-export const startEdgeHand = moveLoc => ({
+export const startEdgeHand = handPt => ({
   type: START_EDGE_HAND,
-  payload: { palm: START_EDGE_HAND, moveLoc }
+  payload: { palm: START_EDGE_HAND, handPt }
 });
 
-export const moveEdgeHandleHand = (id, relGrabLoc) => ({
+export const moveEdgeHandleHand = (id, relGrabPt) => ({
   type: MOVE_EDGE_HANDLE_HAND,
-  payload: { palm: MOVE_EDGE_HANDLE_HAND, id, relGrabLoc }
+  payload: { palm: MOVE_EDGE_HANDLE_HAND, id, relGrabPt }
 });

@@ -36,20 +36,19 @@ class Edge extends Component {
       onClick: this.handleClick,
       onDoubleClick: this.handleDoubleClick
     };
-    if (this.props.endNodeId === this.props.startNodeId) {
-      const loc = vec.add(
-        this.props.startPt,
-        vec.scl(1 / 2, this.props.handleLoc)
-      );
-      const r = vec.len(this.props.handleLoc) / 2;
-      return <circle {...baseProps} cx={loc[0]} cy={loc[1]} r={r} />;
-    }
     const { startPt, endPt } = this.props;
-    const midPt = vec.scl(1 / 2, vec.add(startPt, endPt));
-    const controlPt = vec.add(midPt, this.props.handleLoc);
-    const p = x => `${x[0]},${x[1]}`;
-    const d = `M ${p(startPt)} Q ${p(controlPt)} ${p(endPt)}`;
-    return <path {...baseProps} d={d} />;
+    const midPt = vec.scl(0.5, vec.add(startPt, endPt));
+    if (this.props.endNodeId === this.props.startNodeId) {
+      const loopCenterLoc = vec.scl(0.5, this.props.handleLoc);
+      const centerPt = vec.add(midPt, loopCenterLoc);
+      const r = vec.len(loopCenterLoc);
+      return <circle {...baseProps} cx={centerPt[0]} cy={centerPt[1]} r={r} />;
+    } else {
+      const controlPt = vec.add(midPt, this.props.handleLoc);
+      const p = x => `${x[0]},${x[1]}`;
+      const d = `M ${p(startPt)} Q ${p(controlPt)} ${p(endPt)}`;
+      return <path {...baseProps} d={d} />;
+    }
   }
 }
 

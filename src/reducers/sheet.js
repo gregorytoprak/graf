@@ -1,5 +1,5 @@
-import { CLEAR } from "../actions/meta";
 import { PAN_SHEET, ZOOM_SHEET, RESIZE_VIEWPORT } from "../actions/sheet";
+import { CLEAR } from "../actions/other";
 import { vec } from "../utils";
 
 const initialState = {
@@ -9,30 +9,29 @@ const initialState = {
 };
 
 const sheet = (state = initialState, action) => {
-  const { center, dims, vdims } = state;
   switch (action.type) {
     case PAN_SHEET:
       const { shift } = action.payload;
       return {
         ...state,
-        center: vec.add(center, shift)
+        center: vec.add(state.center, shift)
       };
     case ZOOM_SHEET:
-      const { zoomLoc, zoomFactor } = action.payload;
+      const { zoomPt, zoomFactor } = action.payload;
       return {
         ...state,
         center: vec.add(
-          vec.scl(zoomFactor, center),
-          vec.scl(1 - zoomFactor, zoomLoc)
+          vec.scl(zoomFactor, state.center),
+          vec.scl(1 - zoomFactor, zoomPt)
         ),
-        dims: vec.scl(zoomFactor, dims)
+        dims: vec.scl(zoomFactor, state.dims)
       };
     case RESIZE_VIEWPORT:
       const { vdimsNew } = action.payload;
       return {
         ...state,
         // Keeping the 'scale' of the screen means maintaining dims / vdims ratio
-        dims: vec.prd(vdimsNew, vec.div(dims, vdims)),
+        dims: vec.prd(vdimsNew, vec.div(state.dims, state.vdims)),
         vdims: vdimsNew
       };
     case CLEAR:

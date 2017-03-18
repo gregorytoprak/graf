@@ -5,7 +5,7 @@ import {
   MOVE_EDGE_HANDLE,
   SELECT_EDGE
 } from "../actions/edge";
-import { FULL_SELECT, SET_COLOR } from "../actions/meta";
+import { FULL_SELECT, SET_COLOR } from "../actions/other";
 
 const initialState = {
   id: undefined,
@@ -20,35 +20,42 @@ const initialState = {
 const edge = (state = initialState, action) => {
   switch (action.type) {
     case START_EDGE:
+      const { id, startNodeId } = action.payload;
       return {
         ...state,
-        id: action.payload.id,
-        startNodeId: action.payload.startNodeId
+        id: id,
+        startNodeId: startNodeId
       };
     case COMPLETE_EDGE:
+      const { endNodeId } = action.payload;
       return {
         ...state,
-        endNodeId: action.payload.endNodeId,
-        handleLoc: [0, action.payload.endNodeId === state.startNodeId ? -2 : 0]
+        endNodeId: endNodeId,
+        handleLoc: [0, 0],
+        selected: endNodeId === state.startNodeId
       };
     case RESET_EDGE_HANDLE:
       return {
         ...state,
-        handleLoc: [0, state.endNodeId === state.startNodeId ? -2 : 0],
-        selected: false
+        handleLoc: [0, 0]
       };
     case MOVE_EDGE_HANDLE:
+      const { newHandleLoc } = action.payload;
       return {
         ...state,
-        handleLoc: action.payload.newHandleLoc,
+        handleLoc: newHandleLoc,
         moving: true
       };
     case SELECT_EDGE:
-      return {
-        ...state,
-        selected: state.moving ? state.selected : !state.selected,
-        moving: false
-      };
+      return state.moving
+        ? {
+            ...state,
+            moving: false
+          }
+        : {
+            ...state,
+            selected: !state.selected
+          };
     case FULL_SELECT:
       const { selectStatus } = action.payload;
       return {

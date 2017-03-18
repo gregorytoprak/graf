@@ -4,9 +4,9 @@ import { vec } from "../utils";
 class EdgeHandle extends Component {
   handleMouseDown = e => {
     e.stopPropagation();
-    const grabLoc = this.props.getLoc(e);
-    const relGrabLoc = vec.sub(this.props.handleLoc, grabLoc);
-    this.props.moveEdgeHandleHand(relGrabLoc);
+    const grabPt = this.props.getPt(e);
+    const relGrabPt = vec.sub(this.props.handleLoc, grabPt);
+    this.props.moveEdgeHandleHand(relGrabPt);
   };
 
   handleMouseUp = e => {
@@ -30,12 +30,14 @@ class EdgeHandle extends Component {
     if (!this.props.selected) {
       return null;
     }
-    const pt = vec.add(this.props.midPt, this.props.handleLoc);
+    const { startPt, endPt } = this.props;
+    const midPt = vec.scl(0.5, vec.add(startPt, endPt));
+    const centerPt = vec.add(midPt, this.props.handleLoc);
     return (
       <circle
         className="EdgeHandle"
-        cx={pt[0]}
-        cy={pt[1]}
+        cx={centerPt[0]}
+        cy={centerPt[1]}
         r="0.5"
         stroke="dodgerblue"
         strokeWidth="0.05"

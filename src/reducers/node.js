@@ -1,9 +1,9 @@
 import { CREATE_NODE, MOVE_NODE, SELECT_NODE } from "../actions/node";
-import { FULL_SELECT, SET_COLOR } from "../actions/meta";
+import { FULL_SELECT, SET_COLOR } from "../actions/other";
 
 const initialState = {
   id: undefined,
-  nodePt: [0, 0],
+  pt: [0, 0],
   color: null,
   selected: false,
   moving: false
@@ -12,17 +12,17 @@ const initialState = {
 const node = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NODE:
-      const { id, initNodePt } = action.payload;
+      const { id, initPt } = action.payload;
       return {
         ...state,
         id: id,
-        nodePt: initNodePt
+        pt: initPt
       };
     case MOVE_NODE:
-      const { newNodePt } = action.payload;
+      const { newPt } = action.payload;
       return {
         ...state,
-        nodePt: newNodePt,
+        pt: newPt,
         moving: true
       };
     case SELECT_NODE:

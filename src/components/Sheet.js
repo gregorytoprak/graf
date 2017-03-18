@@ -11,29 +11,46 @@ import {
 import { vec } from "../utils";
 
 class Sheet extends Component {
-  getLoc = event => {
+  getPt = e => {
     const { center, dims, vdims } = this.props;
-    const zeroPt = vec.sub(center, vec.scl(1 / 2, dims));
+    const zeroPt = vec.sub(center, vec.scl(0.5, dims));
     const scale = vec.div(dims, vdims);
-    const raw = [event.clientX, event.clientY];
-    return vec.add(vec.prd(raw, scale), zeroPt);
+    const rawPt = [e.clientX, e.clientY];
+    return vec.add(vec.prd(rawPt, scale), zeroPt);
+  };
+
+  handleMouseMove = e => {
+    const h = this.props.hand;
+    const handPt = this.getPt(e);
+    if (h.palm === PAN_HAND) {
+      const shift = vec.sub(h.grabPt, handPt);
+      this.props.panSheet(shift);
+    } else if (h.palm === MOVE_NODE_HAND) {
+      const newPt = vec.add(h.relGrabPt, handPt);
+      this.props.moveNode(h.id, newPt);
+    } else if (h.palm === START_EDGE_HAND) {
+      this.props.startEdgeHand(handPt);
+    } else if (h.palm === MOVE_EDGE_HANDLE_HAND) {
+      const newHandleLoc = vec.add(h.relGrabPt, handPt);
+      this.props.moveEdgeHandle(h.id, newHandleLoc);
+    }
   };
 
   handleWheel = e => {
     e.preventDefault();
-    const zoomLoc = this.getLoc(e);
+    const zoomPt = this.getPt(e);
     let zoomFactor = 1.02 ** e.deltaY;
-    if (this.props.h * zoomFactor > 100) {
-      zoomFactor = 100 / this.props.h;
-    } else if (this.props.h * zoomFactor < 1) {
-      zoomFactor = 1 / this.props.h;
+    if (this.props.dims[0] * zoomFactor > 100) {
+      zoomFactor = 100 / this.props.dims[0];
+    } else if (this.props.dims[0] * zoomFactor < 1) {
+      zoomFactor = 1 / this.props.dims[0];
     }
-    this.props.zoomSheet(zoomLoc, zoomFactor);
+    this.props.zoomSheet(zoomPt, zoomFactor);
   };
 
   handleMouseDown = e => {
-    const grabLoc = this.getLoc(e);
-    this.props.panHand(grabLoc);
+    const grabPt = this.getPt(e);
+    this.props.panHand(grabPt);
   };
 
   handleMouseUp = e => {
@@ -45,39 +62,18 @@ class Sheet extends Component {
   };
 
   handleDoubleClick = e => {
-    const initNodePt = this.getLoc(e);
-    this.props.createNode(initNodePt);
-  };
-
-  handleMouseMove = e => {
-    const h = this.props.hand;
-    if (h.palm === PAN_HAND) {
-      const moveLoc = this.getLoc(e);
-      const shift = vec.sub(h.grabLoc, moveLoc);
-      this.props.panSheet(shift);
-    } else if (h.palm === MOVE_NODE_HAND) {
-      const moveLoc = this.getLoc(e);
-      const newNodePt = vec.add(h.relGrabLoc, moveLoc);
-      this.props.moveNode(h.id, newNodePt);
-    } else if (h.palm === START_EDGE_HAND) {
-      const moveLoc = this.getLoc(e);
-      this.props.startEdgeHand(moveLoc);
-    } else if (h.palm === MOVE_EDGE_HANDLE_HAND) {
-      const moveLoc = this.getLoc(e);
-      const newHandleLoc = vec.add(h.relGrabLoc, moveLoc);
-      this.props.moveEdgeHandle(h.id, newHandleLoc);
-    }
+    const initPt = this.getPt(e);
+    this.props.createNode(initPt);
   };
 
   render() {
     const { center, dims } = this.props;
-    const zeroPt = vec.sub(center, vec.scl(1 / 2, dims));
-    const vb = [zeroPt, dims];
+    const zeroPt = vec.sub(center, vec.scl(0.5, dims));
     return (
       <svg
-        className="Sheet"
-        viewBox={`${vb[0][0]} ${vb[0][1]} ${vb[1][0]} ${vb[1][1]}`}
         xmlns="http://www.w3.org/2000/svg"
+        className="Sheet"
+        viewBox={`${zeroPt[0]} ${zeroPt[1]} ${dims[0]} ${dims[1]}`}
         onWheel={this.handleWheel}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
@@ -86,10 +82,10 @@ class Sheet extends Component {
       >
         {this.props.edgeIds.map(id => <EdgeContainer key={id} id={id} />)}
         {this.props.nodeIds.map(id => (
-          <NodeContainer key={id} id={id} getLoc={this.getLoc} />
+          <NodeContainer key={id} id={id} getPt={this.getPt} />
         ))}
         {this.props.edgeIds.map(id => (
-          <EdgeHandleContainer key={id} id={id} getLoc={this.getLoc} />
+          <EdgeHandleContainer key={id} id={id} getPt={this.getPt} />
         ))}
       </svg>
     );

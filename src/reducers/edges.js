@@ -9,7 +9,7 @@ import {
   SELECT_EDGE
 } from "../actions/edge";
 import { DELETE_NODE } from "../actions/node";
-import { FULL_SELECT, SET_COLOR, CLEAR } from "../actions/meta";
+import { FULL_SELECT, SET_COLOR, CLEAR } from "../actions/other";
 
 const initialState = [];
 
