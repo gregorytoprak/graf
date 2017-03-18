@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import Sidebar from "../components/Sidebar";
-import { fullSelect, resetColors, setColor } from "../actions/meta";
+import { fullSelect, setColor } from "../actions/meta";
 
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-  fullSelect: selected => {
-    dispatch(fullSelect(selected));
+  fullSelect: selectStatus => {
+    dispatch(fullSelect(selectStatus));
   },
-  resetColors: () => {
-    dispatch(resetColors());
+  resetColor: () => {
+    dispatch(setColor(null));
   },
   setColor: rawColor => {
     const newColor = rawColor.hex;

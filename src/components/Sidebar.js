@@ -21,7 +21,7 @@ class Sidebar extends Component {
           </Button>
         </ButtonGroup>
         <h4>Set color of selected</h4>
-        <Button onClick={() => this.props.resetColors()}>Reset</Button>
+        <Button onClick={() => this.props.resetColor()}>Reset</Button>
         <div className="ColorPickerWrapper">
           <CirclePicker onChange={this.props.setColor} />
         </div>

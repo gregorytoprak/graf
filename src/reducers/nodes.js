@@ -1,12 +1,11 @@
 import node from "./node";
-import { CLEAR } from "../actions/meta";
-import { FULL_SELECT, RESET_COLORS, SET_COLOR } from "../actions/meta";
 import {
   CREATE_NODE,
   DELETE_NODE,
-  SELECT_NODE,
-  MOVE_NODE
+  MOVE_NODE,
+  SELECT_NODE
 } from "../actions/node";
+import { FULL_SELECT, SET_COLOR, CLEAR } from "../actions/meta";
 
 const initialState = [];
 
@@ -16,15 +15,14 @@ const nodes = (state = initialState, action) => {
       return [...state, node(undefined, action)];
     case DELETE_NODE:
       return state.filter(nd => nd.id !== action.payload.id);
-    case FULL_SELECT:
-    case RESET_COLORS:
-    case SET_COLOR:
-      return state.map(nd => node(nd, action));
-    case SELECT_NODE:
     case MOVE_NODE:
+    case SELECT_NODE:
       return state.map(
         nd => nd.id === action.payload.id ? node(nd, action) : nd
       );
+    case FULL_SELECT:
+    case SET_COLOR:
+      return state.map(nd => node(nd, action));
     case CLEAR:
       return initialState;
     default:

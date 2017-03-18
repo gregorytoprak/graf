@@ -39,7 +39,7 @@ class Sheet extends Component {
   handleMouseUp = e => {
     const h = this.props.hand;
     if (h.palm === START_EDGE_HAND) {
-      this.props.deleteEdge(h.id);
+      this.props.dropEdge();
     }
     this.props.emptyHand();
   };
@@ -61,7 +61,7 @@ class Sheet extends Component {
       this.props.moveNode(h.id, newNodePt);
     } else if (h.palm === START_EDGE_HAND) {
       const moveLoc = this.getLoc(e);
-      this.props.startEdgeHand(h.id, moveLoc);
+      this.props.startEdgeHand(moveLoc);
     } else if (h.palm === MOVE_CONTROL_HAND) {
       const moveLoc = this.getLoc(e);
       const newControlPt = vec.add(h.relGrabLoc, moveLoc);

@@ -7,7 +7,8 @@ class Node extends Component {
     e.stopPropagation();
     const grabLoc = this.props.getLoc(e);
     if (e.metaKey) {
-      this.props.startEdge(grabLoc);
+      this.props.startEdge();
+      this.props.startEdgeHand(grabLoc);
     } else {
       const relGrabLoc = vec.sub(this.props.nodePt, grabLoc);
       this.props.moveNodeHand(relGrabLoc);
@@ -18,7 +19,7 @@ class Node extends Component {
     e.stopPropagation();
     const h = this.props.hand;
     if (h.palm === START_EDGE_HAND) {
-      this.props.completeEdge(h.id);
+      this.props.completeEdge();
     }
     this.props.emptyHand();
   };

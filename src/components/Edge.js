@@ -36,24 +36,19 @@ class Edge extends Component {
       onClick: this.handleClick,
       onDoubleClick: this.handleDoubleClick
     };
-    if (this.props.loop) {
+    if (this.props.endNodeId === this.props.startNodeId) {
       const loc = vec.add(
-        this.props.startLoc,
+        this.props.startPt,
         vec.scl(1 / 2, this.props.controlPt)
       );
       const r = vec.len(this.props.controlPt) / 2;
       return <circle {...baseProps} cx={loc[0]} cy={loc[1]} r={r} />;
     }
-    const startLoc = this.props.startLoc;
-    const endLoc = this.props.complete
-      ? this.props.endLoc
-      : this.props.hand.loc;
-    const midPt = vec.scl(1 / 2, vec.add(startLoc, endLoc));
+    const { startPt, endPt } = this.props;
+    const midPt = vec.scl(1 / 2, vec.add(startPt, endPt));
     const controlLoc = vec.add(midPt, this.props.controlPt);
     const p = x => `${x[0]},${x[1]}`;
-    const d = this.props.moved
-      ? `M ${p(startLoc)} Q ${p(controlLoc)} ${p(endLoc)}`
-      : `M ${p(startLoc)} L ${p(endLoc)}`;
+    const d = `M ${p(startPt)} Q ${p(controlLoc)} ${p(endPt)}`;
     return <path {...baseProps} d={d} />;
   }
 }

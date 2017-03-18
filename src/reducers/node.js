@@ -1,22 +1,21 @@
-import { FULL_SELECT, RESET_COLORS, SET_COLOR } from "../actions/meta";
-import { CREATE_NODE, SELECT_NODE, MOVE_NODE } from "../actions/node";
+import { CREATE_NODE, MOVE_NODE, SELECT_NODE } from "../actions/node";
+import { FULL_SELECT, SET_COLOR } from "../actions/meta";
 
 const initialState = {
   id: undefined,
-  color: null,
   nodePt: [0, 0],
+  color: null,
   selected: false,
   moving: false
 };
 
 const node = (state = initialState, action) => {
-  const { color, selected, moving } = state;
   switch (action.type) {
     case CREATE_NODE:
-      const { initId, initNodePt } = action.payload;
+      const { id, initNodePt } = action.payload;
       return {
         ...state,
-        id: initId,
+        id: id,
         nodePt: initNodePt
       };
     case MOVE_NODE:
@@ -26,28 +25,30 @@ const node = (state = initialState, action) => {
         nodePt: newNodePt,
         moving: true
       };
-    case FULL_SELECT:
-      return {
-        ...state,
-        ...action.payload
-      };
     case SELECT_NODE:
+      return state.moving
+        ? {
+            ...state,
+            moving: false
+          }
+        : {
+            ...state,
+            selected: !state.selected
+          };
+    case FULL_SELECT:
+      const { selectStatus } = action.payload;
       return {
         ...state,
-        selected: moving ? selected : !selected,
-        moving: false
-      };
-    case RESET_COLORS:
-      return {
-        ...state,
-        color: selected ? null : color
+        selected: selectStatus
       };
     case SET_COLOR:
       const { newColor } = action.payload;
-      return {
-        ...state,
-        color: selected ? newColor : color
-      };
+      return state.selected
+        ? {
+            ...state,
+            color: newColor
+          }
+        : state;
     default:
       return state;
   }

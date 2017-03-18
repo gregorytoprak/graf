@@ -3,7 +3,6 @@ import Node from "../components/Node";
 import { deleteNode, selectNode } from "../actions/node";
 import { startEdge, completeEdge } from "../actions/edge";
 import { emptyHand, moveNodeHand, startEdgeHand } from "../actions/hand";
-import { makeId } from "../utils";
 
 const mapStateToProps = (state, { id }) => {
   const node = state.nodes.find(nd => nd.id === id);
@@ -23,13 +22,14 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  startEdge: loc => {
-    const edgeId = makeId("edge");
-    dispatch(startEdge(edgeId, id));
-    dispatch(startEdgeHand(edgeId, loc));
+  startEdge: () => {
+    dispatch(startEdge(id));
   },
-  completeEdge: edgeId => {
-    dispatch(completeEdge(edgeId, id));
+  startEdgeHand: grabLoc => {
+    dispatch(startEdgeHand(grabLoc));
+  },
+  completeEdge: () => {
+    dispatch(completeEdge(id));
   },
   moveNodeHand: relGrabLoc => {
     dispatch(moveNodeHand(id, relGrabLoc));

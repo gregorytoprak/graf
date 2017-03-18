@@ -27,7 +27,7 @@ class Control extends Component {
   };
 
   render() {
-    if (!this.props.complete || !this.props.selected) {
+    if (!this.props.selected) {
       return null;
     }
     const loc = vec.add(this.props.midPt, this.props.controlPt);
