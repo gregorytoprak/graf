@@ -4,8 +4,8 @@ export const START_EDGE = "START_EDGE";
 export const COMPLETE_EDGE = "COMPLETE_EDGE";
 export const DELETE_EDGE = "DELETE_EDGE";
 export const DROP_EDGE = "DROP_EDGE";
-export const RESET_CONTROL = "RESET_CONTROL";
-export const MOVE_CONTROL = "MOVE_CONTROL";
+export const RESET_EDGE_HANDLE = "RESET_EDGE_HANDLE";
+export const MOVE_EDGE_HANDLE = "MOVE_EDGE_HANDLE";
 export const SELECT_EDGE = "SELECT_EDGE";
 
 export const startEdge = startNodeId => ({
@@ -28,14 +28,14 @@ export const dropEdge = () => ({
   payload: {}
 });
 
-export const resetControl = id => ({
-  type: RESET_CONTROL,
+export const resetEdgeHandle = id => ({
+  type: RESET_EDGE_HANDLE,
   payload: { id }
 });
 
-export const moveControl = (id, newControlPt) => ({
-  type: MOVE_CONTROL,
-  payload: { id, newControlPt }
+export const moveEdgeHandle = (id, newHandleLoc) => ({
+  type: MOVE_EDGE_HANDLE,
+  payload: { id, newHandleLoc }
 });
 
 export const selectEdge = id => ({

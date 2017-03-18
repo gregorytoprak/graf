@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import NodeContainer from "../containers/NodeContainer";
 import EdgeContainer from "../containers/EdgeContainer";
-import ControlContainer from "../containers/ControlContainer";
+import EdgeHandleContainer from "../containers/EdgeHandleContainer";
 import {
   PAN_HAND,
   MOVE_NODE_HAND,
   START_EDGE_HAND,
-  MOVE_CONTROL_HAND
+  MOVE_EDGE_HANDLE_HAND
 } from "../actions/hand";
 import { vec } from "../utils";
 
@@ -62,10 +62,10 @@ class Sheet extends Component {
     } else if (h.palm === START_EDGE_HAND) {
       const moveLoc = this.getLoc(e);
       this.props.startEdgeHand(moveLoc);
-    } else if (h.palm === MOVE_CONTROL_HAND) {
+    } else if (h.palm === MOVE_EDGE_HANDLE_HAND) {
       const moveLoc = this.getLoc(e);
-      const newControlPt = vec.add(h.relGrabLoc, moveLoc);
-      this.props.moveControl(h.id, newControlPt);
+      const newHandleLoc = vec.add(h.relGrabLoc, moveLoc);
+      this.props.moveEdgeHandle(h.id, newHandleLoc);
     }
   };
 
@@ -89,7 +89,7 @@ class Sheet extends Component {
           <NodeContainer key={id} id={id} getLoc={this.getLoc} />
         ))}
         {this.props.edgeIds.map(id => (
-          <ControlContainer key={id} id={id} getLoc={this.getLoc} />
+          <EdgeHandleContainer key={id} id={id} getLoc={this.getLoc} />
         ))}
       </svg>
     );

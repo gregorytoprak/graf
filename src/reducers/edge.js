@@ -1,8 +1,8 @@
 import {
   START_EDGE,
   COMPLETE_EDGE,
-  RESET_CONTROL,
-  MOVE_CONTROL,
+  RESET_EDGE_HANDLE,
+  MOVE_EDGE_HANDLE,
   SELECT_EDGE
 } from "../actions/edge";
 import { FULL_SELECT, SET_COLOR } from "../actions/meta";
@@ -11,7 +11,7 @@ const initialState = {
   id: undefined,
   startNodeId: undefined,
   endNodeId: undefined,
-  controlPt: [0, 0],
+  handleLoc: [0, 0],
   color: null,
   selected: false,
   moving: false
@@ -29,18 +29,18 @@ const edge = (state = initialState, action) => {
       return {
         ...state,
         endNodeId: action.payload.endNodeId,
-        controlPt: [0, action.payload.endNodeId === state.startNodeId ? -2 : 0]
+        handleLoc: [0, action.payload.endNodeId === state.startNodeId ? -2 : 0]
       };
-    case RESET_CONTROL:
+    case RESET_EDGE_HANDLE:
       return {
         ...state,
-        controlPt: [0, state.endNodeId === state.startNodeId ? -2 : 0],
+        handleLoc: [0, state.endNodeId === state.startNodeId ? -2 : 0],
         selected: false
       };
-    case MOVE_CONTROL:
+    case MOVE_EDGE_HANDLE:
       return {
         ...state,
-        controlPt: action.payload.newControlPt,
+        handleLoc: action.payload.newHandleLoc,
         moving: true
       };
     case SELECT_EDGE:

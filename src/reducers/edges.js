@@ -4,8 +4,8 @@ import {
   COMPLETE_EDGE,
   DELETE_EDGE,
   DROP_EDGE,
-  RESET_CONTROL,
-  MOVE_CONTROL,
+  RESET_EDGE_HANDLE,
+  MOVE_EDGE_HANDLE,
   SELECT_EDGE
 } from "../actions/edge";
 import { DELETE_NODE } from "../actions/node";
@@ -23,8 +23,8 @@ const edges = (state = initialState, action) => {
       return state.filter(ed => ed.id !== action.payload.id);
     case DROP_EDGE:
       return state.filter(ed => ed.endNodeId);
-    case RESET_CONTROL:
-    case MOVE_CONTROL:
+    case RESET_EDGE_HANDLE:
+    case MOVE_EDGE_HANDLE:
     case SELECT_EDGE:
       return state.map(
         ed => ed.id === action.payload.id ? edge(ed, action) : ed

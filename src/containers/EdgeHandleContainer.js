@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import Control from "../components/Control";
-import { selectEdge, resetControl } from "../actions/edge";
-import { emptyHand, moveControlHand } from "../actions/hand";
+import EdgeHandle from "../components/EdgeHandle";
+import { selectEdge, resetEdgeHandle } from "../actions/edge";
+import { emptyHand, moveEdgeHandleHand } from "../actions/hand";
 import { vec } from "../utils";
 
 const mapStateToProps = (state, { id }) => {
@@ -18,17 +18,19 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   selectEdge: () => {
     dispatch(selectEdge(id));
   },
-  resetControl: () => {
-    dispatch(resetControl(id));
+  resetEdgeHandle: () => {
+    dispatch(resetEdgeHandle(id));
   },
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  moveControlHand: relGrabLoc => {
-    dispatch(moveControlHand(id, relGrabLoc));
+  moveEdgeHandleHand: relGrabLoc => {
+    dispatch(moveEdgeHandleHand(id, relGrabLoc));
   }
 });
 
-const ControlContainer = connect(mapStateToProps, mapDispatchToProps)(Control);
+const EdgeHandleContainer = connect(mapStateToProps, mapDispatchToProps)(
+  EdgeHandle
+);
 
-export default ControlContainer;
+export default EdgeHandleContainer;

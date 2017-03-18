@@ -39,16 +39,16 @@ class Edge extends Component {
     if (this.props.endNodeId === this.props.startNodeId) {
       const loc = vec.add(
         this.props.startPt,
-        vec.scl(1 / 2, this.props.controlPt)
+        vec.scl(1 / 2, this.props.handleLoc)
       );
-      const r = vec.len(this.props.controlPt) / 2;
+      const r = vec.len(this.props.handleLoc) / 2;
       return <circle {...baseProps} cx={loc[0]} cy={loc[1]} r={r} />;
     }
     const { startPt, endPt } = this.props;
     const midPt = vec.scl(1 / 2, vec.add(startPt, endPt));
-    const controlLoc = vec.add(midPt, this.props.controlPt);
+    const controlPt = vec.add(midPt, this.props.handleLoc);
     const p = x => `${x[0]},${x[1]}`;
-    const d = `M ${p(startPt)} Q ${p(controlLoc)} ${p(endPt)}`;
+    const d = `M ${p(startPt)} Q ${p(controlPt)} ${p(endPt)}`;
     return <path {...baseProps} d={d} />;
   }
 }

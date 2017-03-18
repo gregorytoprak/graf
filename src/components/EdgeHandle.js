@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { vec } from "../utils";
 
-class Control extends Component {
+class EdgeHandle extends Component {
   handleMouseDown = e => {
     e.stopPropagation();
     const grabLoc = this.props.getLoc(e);
-    const relGrabLoc = vec.sub(this.props.controlPt, grabLoc);
-    this.props.moveControlHand(relGrabLoc);
+    const relGrabLoc = vec.sub(this.props.handleLoc, grabLoc);
+    this.props.moveEdgeHandleHand(relGrabLoc);
   };
 
   handleMouseUp = e => {
@@ -16,7 +16,7 @@ class Control extends Component {
   handleClick = e => {
     e.stopPropagation();
     if (e.shiftKey) {
-      this.props.resetControl();
+      this.props.resetEdgeHandle();
     } else {
       this.props.selectEdge();
     }
@@ -30,12 +30,12 @@ class Control extends Component {
     if (!this.props.selected) {
       return null;
     }
-    const loc = vec.add(this.props.midPt, this.props.controlPt);
+    const pt = vec.add(this.props.midPt, this.props.handleLoc);
     return (
       <circle
-        className="Control"
-        cx={loc[0]}
-        cy={loc[1]}
+        className="EdgeHandle"
+        cx={pt[0]}
+        cy={pt[1]}
         r="0.5"
         stroke="dodgerblue"
         strokeWidth="0.05"
@@ -49,4 +49,4 @@ class Control extends Component {
   }
 }
 
-export default Control;
+export default EdgeHandle;

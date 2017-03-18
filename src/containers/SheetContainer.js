@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import Sheet from "../components/Sheet";
 import { panSheet, zoomSheet } from "../actions/sheet";
 import { createNode, moveNode } from "../actions/node";
-import { deleteEdge, dropEdge, moveControl } from "../actions/edge";
+import { deleteEdge, dropEdge, moveEdgeHandle } from "../actions/edge";
 import { emptyHand, panHand, startEdgeHand } from "../actions/hand";
 import { noSelect } from "../actions/meta";
 
@@ -32,8 +32,8 @@ const mapDispatchToProps = dispatch => ({
   dropEdge: () => {
     dispatch(dropEdge());
   },
-  moveControl: (id, newControlPt) => {
-    dispatch(moveControl(id, newControlPt));
+  moveEdgeHandle: (id, newHandleLoc) => {
+    dispatch(moveEdgeHandle(id, newHandleLoc));
   },
   emptyHand: () => {
     dispatch(emptyHand());

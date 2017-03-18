@@ -4,7 +4,7 @@ import {
   PAN_HAND,
   MOVE_NODE_HAND,
   START_EDGE_HAND,
-  MOVE_CONTROL_HAND
+  MOVE_EDGE_HANDLE_HAND
 } from "../actions/hand";
 
 const initialState = {
@@ -17,7 +17,7 @@ const sheet = (state = initialState, action) => {
     case PAN_HAND:
     case MOVE_NODE_HAND:
     case START_EDGE_HAND:
-    case MOVE_CONTROL_HAND:
+    case MOVE_EDGE_HANDLE_HAND:
       return action.payload;
     case CLEAR:
       return initialState;
