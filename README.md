@@ -1,30 +1,26 @@
-# graph-maker
+# Graph Maker
 
 [graph.gdt.io](http://graph.gdt.io/)
 
-## Features
+Draw mathematical graphs with an intuitive drag-and-drop interface!
 
-- Create a node: double-click
-- Move a node: drag
-- Create an edge: command-drag from one node to another
-- Curve an edge: select then drag handle
-- Select a node or edge: click
-- Delete a node or edge: shift-click
-- Pan the sheet: drag
-- Zoom the sheet: scroll
+### Usage
+
+- Double-click to create a node
+- Create an edge by metakey-dragging
+- Click to select; shift-click to delete
+- Each edge has a handle to control its curvature
+- Drag-and-drop a node or handle to position it
+- Edit colors in the **style** menu
+- Pan and zoom like a map application
 - Automatic saving to cookies
 - Manual saving to svg
-- Edit colors of selected
 
 ## Todo
 
-- [ ] Cleaning
-  - move more modifications to the reducers themselves
 - [ ] Axes
 
 ### Consider
 
 - [ ] Arrows
 - [ ] Initial graphs
-- [ ] Edge maintains shape and scale when attached edges move
-- [ ] Edge handle goes on the edge rather than as distant control point

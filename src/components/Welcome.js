@@ -6,7 +6,8 @@ import {
   OverlayTrigger,
   Tooltip,
   DropdownButton,
-  MenuItem
+  MenuItem,
+  Glyphicon
 } from "react-bootstrap";
 
 class Welcome extends Component {
@@ -23,18 +24,20 @@ class Welcome extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <p>
+            Draw mathematical graphs with an intuitive drag-and-drop interface!
+          </p>
+          <h3>Usage</h3>
           <ul>
-            <li>Create a node: double-click</li>
-            <li>Move a node: drag</li>
-            <li>Create an edge: command-drag from one node to another</li>
-            <li>Curve an edge: select then drag handle</li>
-            <li>Select a node or edge: click</li>
-            <li>Delete a node or edge: shift-click</li>
-            <li>Pan the sheet: drag</li>
-            <li>Zoom the sheet: scroll</li>
+            <li>Double-click to create a node</li>
+            <li>Create an edge by metakey-dragging</li>
+            <li>Click to select; shift-click to delete</li>
+            <li>Each edge has a handle to control its curvature</li>
+            <li>Drag-and-drop a node or handle to position it</li>
+            <li>Edit colors in the <Glyphicon glyph="sunglasses" /> menu</li>
+            <li>Pan and zoom like a map application</li>
             <li>Automatic saving to cookies</li>
             <li>Manual saving to svg</li>
-            <li>Edit colors of selected</li>
           </ul>
         </Modal.Body>
         <Modal.Footer>
