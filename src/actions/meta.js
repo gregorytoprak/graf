@@ -18,7 +18,7 @@ export const resetColors = () => ({
   payload: {}
 });
 
-export const setColor = color => ({
+export const setColor = newColor => ({
   type: SET_COLOR,
-  payload: { color }
+  payload: { newColor }
 });

@@ -5,9 +5,9 @@ export const DELETE_NODE = "DELETE_NODE";
 export const SELECT_NODE = "SELECT_NODE";
 export const MOVE_NODE = "MOVE_NODE";
 
-export const createNode = nodePt => ({
+export const createNode = initNodePt => ({
   type: CREATE_NODE,
-  payload: { id: makeId("node"), nodePt }
+  payload: { initId: makeId("node"), initNodePt }
 });
 
 export const deleteNode = id => ({

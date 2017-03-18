@@ -10,12 +10,21 @@ const initialState = {
 };
 
 const node = (state = initialState, action) => {
+  const { color, selected, moving } = state;
   switch (action.type) {
     case CREATE_NODE:
+      const { initId, initNodePt } = action.payload;
       return {
         ...state,
-        id: action.payload.id,
-        nodePt: action.payload.nodePt
+        id: initId,
+        nodePt: initNodePt
+      };
+    case MOVE_NODE:
+      const { newNodePt } = action.payload;
+      return {
+        ...state,
+        nodePt: newNodePt,
+        moving: true
       };
     case FULL_SELECT:
       return {
@@ -25,24 +34,19 @@ const node = (state = initialState, action) => {
     case SELECT_NODE:
       return {
         ...state,
-        selected: state.moving ? state.selected : !state.selected,
+        selected: moving ? selected : !selected,
         moving: false
       };
     case RESET_COLORS:
       return {
         ...state,
-        color: state.selected ? null : state.color
+        color: selected ? null : color
       };
     case SET_COLOR:
+      const { newColor } = action.payload;
       return {
         ...state,
-        color: state.selected ? action.payload.color : state.color
-      };
-    case MOVE_NODE:
-      return {
-        ...state,
-        nodePt: action.payload.newNodePt,
-        moving: true
+        color: selected ? newColor : color
       };
     default:
       return state;

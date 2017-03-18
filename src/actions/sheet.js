@@ -4,9 +4,9 @@ export const PAN_SHEET = "PAN_SHEET";
 export const ZOOM_SHEET = "ZOOM_SHEET";
 export const RESIZE_VIEWPORT = "RESIZE_VIEWPORT";
 
-export const panSheet = newCenter => ({
+export const panSheet = shift => ({
   type: PAN_SHEET,
-  payload: { newCenter }
+  payload: { shift }
 });
 
 export const zoomSheet = (zoomLoc, zoomFactor) => ({

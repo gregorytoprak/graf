@@ -65,7 +65,7 @@ const edge = (state = initialState, action) => {
     case SET_COLOR:
       return {
         ...state,
-        color: state.selected ? action.payload.color : state.color
+        color: state.selected ? action.payload.newColor : state.color
       };
     case FULL_SELECT:
       return {

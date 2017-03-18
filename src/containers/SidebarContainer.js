@@ -11,8 +11,9 @@ const mapDispatchToProps = dispatch => ({
   resetColors: () => {
     dispatch(resetColors());
   },
-  setColor: color => {
-    dispatch(setColor(color.hex));
+  setColor: rawColor => {
+    const newColor = rawColor.hex;
+    dispatch(setColor(newColor));
   }
 });
 

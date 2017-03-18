@@ -36,12 +36,25 @@ class Sheet extends Component {
     this.props.panHand(grabLoc);
   };
 
+  handleMouseUp = e => {
+    const h = this.props.hand;
+    if (h.palm === START_EDGE_HAND) {
+      this.props.deleteEdge(h.id);
+    }
+    this.props.emptyHand();
+  };
+
+  handleDoubleClick = e => {
+    const initNodePt = this.getLoc(e);
+    this.props.createNode(initNodePt);
+  };
+
   handleMouseMove = e => {
     const h = this.props.hand;
     if (h.palm === PAN_HAND) {
       const moveLoc = this.getLoc(e);
-      const newCenter = vec.add(this.props.center, vec.sub(h.grabLoc, moveLoc));
-      this.props.panSheet(newCenter);
+      const shift = vec.sub(h.grabLoc, moveLoc);
+      this.props.panSheet(shift);
     } else if (h.palm === MOVE_NODE_HAND) {
       const moveLoc = this.getLoc(e);
       const newNodePt = vec.add(h.relGrabLoc, moveLoc);
@@ -56,19 +69,6 @@ class Sheet extends Component {
     }
   };
 
-  handleMouseUp = e => {
-    const h = this.props.hand;
-    if (h.palm === START_EDGE_HAND) {
-      this.props.deleteEdge(h.id);
-    }
-    this.props.emptyHand();
-  };
-
-  handleDoubleClick = e => {
-    const nodePt = this.getLoc(e);
-    this.props.createNode(nodePt);
-  };
-
   render() {
     const { center, dims } = this.props;
     const zeroPt = vec.sub(center, vec.scl(1 / 2, dims));
@@ -80,9 +80,9 @@ class Sheet extends Component {
         xmlns="http://www.w3.org/2000/svg"
         onWheel={this.handleWheel}
         onMouseDown={this.handleMouseDown}
-        onMouseMove={this.handleMouseMove}
         onMouseUp={this.handleMouseUp}
         onDoubleClick={this.handleDoubleClick}
+        onMouseMove={this.handleMouseMove}
       >
         {this.props.edgeIds.map(id => <EdgeContainer key={id} id={id} />)}
         {this.props.nodeIds.map(id => (

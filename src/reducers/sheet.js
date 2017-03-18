@@ -12,10 +12,10 @@ const sheet = (state = initialState, action) => {
   const { center, dims, vdims } = state;
   switch (action.type) {
     case PAN_SHEET:
-      const { newCenter } = action.payload;
+      const { shift } = action.payload;
       return {
         ...state,
-        center: newCenter
+        center: vec.add(center, shift)
       };
     case ZOOM_SHEET:
       const { zoomLoc, zoomFactor } = action.payload;

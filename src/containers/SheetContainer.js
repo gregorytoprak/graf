@@ -14,14 +14,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  panSheet: newCenter => {
-    dispatch(panSheet(newCenter));
+  panSheet: shift => {
+    dispatch(panSheet(shift));
   },
   zoomSheet: (zoomLoc, zoomFactor) => {
     dispatch(zoomSheet(zoomLoc, zoomFactor));
   },
-  createNode: nodePt => {
-    dispatch(createNode(nodePt));
+  createNode: initNodePt => {
+    dispatch(createNode(initNodePt));
   },
   moveNode: (id, newNodePt) => {
     dispatch(moveNode(id, newNodePt));
