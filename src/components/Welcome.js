@@ -60,10 +60,7 @@ class Welcome extends Component {
             <DropdownButton id="new-graph" bsStyle="danger" title="New Graph">
               <MenuItem onClick={this.props.newGraph}>Empty Graph</MenuItem>
             </DropdownButton>
-            <Button
-              bsStyle="info"
-              href="http://github.com/gdtoprak/graph-maker/"
-            >
+            <Button href="http://github.com/gdtoprak/graph-maker/">
               GitHub
             </Button>
             <Button bsStyle="link" href="http://gdt.io/">by GDT</Button>
