@@ -39,9 +39,9 @@ export const moveEdgeHandle = (id, newHandleLoc) => ({
   payload: { id, newHandleLoc }
 });
 
-export const toggleArrow = () => ({
+export const toggleArrow = index => ({
   type: TOGGLE_ARROW,
-  payload: {}
+  payload: { index }
 });
 
 export const selectEdge = id => ({

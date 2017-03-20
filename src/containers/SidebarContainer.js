@@ -4,8 +4,8 @@ import { toggleArrow } from "../actions/edge";
 import { toggleWelcome, fullSelect, setColor } from "../actions/other";
 
 const mapDispatchToProps = dispatch => ({
-  toggleArrow: () => {
-    dispatch(toggleArrow());
+  toggleArrow: index => {
+    dispatch(toggleArrow(index));
   },
   toggleWelcome: () => {
     dispatch(toggleWelcome());

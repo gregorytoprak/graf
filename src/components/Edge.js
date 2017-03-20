@@ -49,7 +49,7 @@ class Edge extends Component {
       return (
         <g>
           <circle {...baseProps} cx={centerPt[0]} cy={centerPt[1]} r={r} />
-          {this.props.arrow
+          {this.props.arrows[1]
             ? <Arrow baseProps={baseProps} endPt={endPt} dir={dir} />
             : null}
         </g>
@@ -64,7 +64,7 @@ class Edge extends Component {
       return (
         <g>
           <path {...baseProps} d={d} />
-          {this.props.arrow
+          {this.props.arrows[1]
             ? <Arrow baseProps={baseProps} endPt={endPt} dir={dir} />
             : null}
         </g>

@@ -14,7 +14,7 @@ const initialState = {
   endNodeId: undefined,
   handleLoc: [0, 0],
   color: null,
-  arrow: true,
+  arrows: [false, true],
   selected: false,
   moving: false
 };
@@ -37,9 +37,12 @@ const edge = (state = initialState, action) => {
         selected: endNodeId === state.startNodeId
       };
     case TOGGLE_ARROW:
+      const { index } = action.payload;
       return {
         ...state,
-        arrow: !state.arrow
+        arrows: state.arrows.map(
+          (arrow, thisIndex) => thisIndex === index ? !arrow : arrow
+        )
       };
     case RESET_EDGE_HANDLE:
       return {
