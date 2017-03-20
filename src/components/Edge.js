@@ -80,10 +80,38 @@ class Edge extends Component {
       );
     } else {
       const controlPt = vec.add(midPt, this.props.handleLoc);
-      const d = `M ${p(startPt)} Q ${p(controlPt)} ${p(endPt)}`;
+      const arrowTips = [
+        pt.moveToward(startPt, 1, controlPt),
+        pt.moveToward(endPt, 1, controlPt)
+      ];
+      const linePts = [
+        this.props.arrows[0]
+          ? pt.moveToward(arrowTips[0], 0.25, controlPt)
+          : startPt,
+        this.props.arrows[1]
+          ? pt.moveToward(arrowTips[1], 0.25, controlPt)
+          : endPt
+      ];
+
+      const d = `M ${p(linePts[0])} Q ${p(controlPt)} ${p(linePts[1])}`;
       return (
         <g>
           <path {...baseProps} d={d} />
+          {this.props.arrows[0]
+            ? <Arrow
+                baseProps={baseProps}
+                tipPt={arrowTips[0]}
+                dir={pt.dirToward(controlPt, startPt)}
+              />
+            : null}
+          {this.props.arrows[1]
+            ? <Arrow
+                baseProps={baseProps}
+                tipPt={arrowTips[1]}
+                dir={pt.dirToward(controlPt, endPt)}
+              />
+            : null}
+
         </g>
       );
     }
