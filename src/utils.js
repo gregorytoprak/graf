@@ -11,6 +11,21 @@ export const vec = {
   len: x => (x[0] ** 2 + x[1] ** 2) ** 0.5
 };
 
+export const pt = {
+  move: (basePt, dist, dir) => {
+    const trig = [Math.cos(dir), Math.sin(dir)];
+    return vec.add(basePt, vec.scl(dist, trig));
+  },
+  dirToward: (ptA, ptB) => {
+    const oShiftPt = vec.sub(ptB, ptA);
+    return Math.atan2(oShiftPt[1], oShiftPt[0]);
+  },
+  moveToward: (basePt, dist, refPt) => {
+    const dir = pt.dirToward(basePt, refPt);
+    return pt.move(basePt, dist, dir);
+  }
+};
+
 export const persistence = {
   save: state => {
     Cookies.set("graph", JSON.stringify(state));
