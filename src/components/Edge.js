@@ -42,12 +42,38 @@ class Edge extends Component {
       const loopCenterLoc = vec.scl(0.5, this.props.handleLoc);
       const centerPt = vec.add(midPt, loopCenterLoc);
       const r = vec.len(loopCenterLoc);
-      return <circle {...baseProps} cx={centerPt[0]} cy={centerPt[1]} r={r} />;
+      return (
+        <g>
+          <circle {...baseProps} cx={centerPt[0]} cy={centerPt[1]} r={r} />
+          {this.props.arrow
+            ? <circle
+                {...baseProps}
+                className="Arrow"
+                cx={endPt[0]}
+                cy={endPt[1]}
+                r={2}
+              />
+            : null}
+        </g>
+      );
     } else {
       const controlPt = vec.add(midPt, this.props.handleLoc);
       const p = x => `${x[0]},${x[1]}`;
       const d = `M ${p(startPt)} Q ${p(controlPt)} ${p(endPt)}`;
-      return <path {...baseProps} d={d} />;
+      return (
+        <g>
+          <path {...baseProps} d={d} />
+          {this.props.arrow
+            ? <circle
+                {...baseProps}
+                className="Arrow"
+                cx={endPt[0]}
+                cy={endPt[1]}
+                r={2}
+              />
+            : null}
+        </g>
+      );
     }
   }
 }

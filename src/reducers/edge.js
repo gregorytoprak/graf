@@ -1,6 +1,7 @@
 import {
   START_EDGE,
   COMPLETE_EDGE,
+  TOGGLE_ARROW,
   RESET_EDGE_HANDLE,
   MOVE_EDGE_HANDLE,
   SELECT_EDGE
@@ -13,6 +14,7 @@ const initialState = {
   endNodeId: undefined,
   handleLoc: [0, 0],
   color: null,
+  arrow: true,
   selected: false,
   moving: false
 };
@@ -33,6 +35,11 @@ const edge = (state = initialState, action) => {
         endNodeId: endNodeId,
         handleLoc: [0, 0],
         selected: endNodeId === state.startNodeId
+      };
+    case TOGGLE_ARROW:
+      return {
+        ...state,
+        arrow: !state.arrow
       };
     case RESET_EDGE_HANDLE:
       return {
@@ -64,12 +71,10 @@ const edge = (state = initialState, action) => {
       };
     case SET_COLOR:
       const { newColor } = action.payload;
-      return state.selected
-        ? {
-            ...state,
-            color: newColor
-          }
-        : state;
+      return {
+        ...state,
+        color: newColor
+      };
     default:
       return state;
   }

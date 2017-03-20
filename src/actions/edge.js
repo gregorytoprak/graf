@@ -4,6 +4,7 @@ export const START_EDGE = "START_EDGE";
 export const COMPLETE_EDGE = "COMPLETE_EDGE";
 export const DELETE_EDGE = "DELETE_EDGE";
 export const DROP_EDGE = "DROP_EDGE";
+export const TOGGLE_ARROW = "TOGGLE_ARROW";
 export const RESET_EDGE_HANDLE = "RESET_EDGE_HANDLE";
 export const MOVE_EDGE_HANDLE = "MOVE_EDGE_HANDLE";
 export const SELECT_EDGE = "SELECT_EDGE";
@@ -36,6 +37,11 @@ export const resetEdgeHandle = id => ({
 export const moveEdgeHandle = (id, newHandleLoc) => ({
   type: MOVE_EDGE_HANDLE,
   payload: { id, newHandleLoc }
+});
+
+export const toggleArrow = () => ({
+  type: TOGGLE_ARROW,
+  payload: {}
 });
 
 export const selectEdge = id => ({

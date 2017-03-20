@@ -21,8 +21,9 @@ const nodes = (state = initialState, action) => {
         nd => nd.id === action.payload.id ? node(nd, action) : nd
       );
     case FULL_SELECT:
-    case SET_COLOR:
       return state.map(nd => node(nd, action));
+    case SET_COLOR:
+      return state.map(nd => nd.selected ? node(nd, action) : nd);
     case CLEAR:
       return initialState;
     default:

@@ -4,6 +4,7 @@ import {
   COMPLETE_EDGE,
   DELETE_EDGE,
   DROP_EDGE,
+  TOGGLE_ARROW,
   RESET_EDGE_HANDLE,
   MOVE_EDGE_HANDLE,
   SELECT_EDGE
@@ -23,6 +24,8 @@ const edges = (state = initialState, action) => {
       return state.filter(ed => ed.id !== action.payload.id);
     case DROP_EDGE:
       return state.filter(ed => ed.endNodeId);
+    case TOGGLE_ARROW:
+      return state.map(ed => ed.selected ? edge(ed, action) : ed);
     case RESET_EDGE_HANDLE:
     case MOVE_EDGE_HANDLE:
     case SELECT_EDGE:
@@ -36,8 +39,9 @@ const edges = (state = initialState, action) => {
           ed.endNodeId !== action.payload.id
       );
     case FULL_SELECT:
-    case SET_COLOR:
       return state.map(ed => edge(ed, action));
+    case SET_COLOR:
+      return state.map(ed => ed.selected ? edge(ed, action) : ed);
     case CLEAR:
       return initialState;
     default:

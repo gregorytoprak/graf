@@ -26,7 +26,6 @@ class Sidebar extends Component {
               id="style-editor"
               title="Style Editor"
             >
-              <h4>Set color of selected</h4>
               <ButtonGroup>
                 <Button onClick={() => this.props.fullSelect(true)}>
                   Select All
@@ -34,10 +33,17 @@ class Sidebar extends Component {
                 <Button onClick={() => this.props.fullSelect(false)}>
                   Select None
                 </Button>
+              </ButtonGroup>
+              <h3>Edit selected</h3>
+              <ButtonGroup>
+                <Button onClick={() => this.props.toggleArrow()}>
+                  Toggle Arrow
+                </Button>
                 <Button onClick={() => this.props.resetColor()}>
                   Reset Color
                 </Button>
               </ButtonGroup>
+              <h4>Set color</h4>
               <div className="ColorPickerWrapper">
                 <CirclePicker onChange={this.props.setColor} />
               </div>
