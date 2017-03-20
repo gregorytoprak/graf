@@ -43,12 +43,10 @@ const node = (state = initialState, action) => {
       };
     case SET_COLOR:
       const { newColor } = action.payload;
-      return state.selected
-        ? {
-            ...state,
-            color: newColor
-          }
-        : state;
+      return {
+        ...state,
+        color: newColor
+      };
     default:
       return state;
   }
