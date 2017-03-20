@@ -10,7 +10,7 @@ class Arrow extends Component {
     };
     const { tipPt, dir } = this.props;
     const length = 0.5;
-    const width = 0.5;
+    const width = length * 2 / Math.sqrt(3); // equilateral
     const tau = 2 * Math.PI;
     const leftPt = pt.move(tipPt, length, dir + tau / 2);
     const topPt = pt.move(leftPt, width / 2, dir + tau / 4);

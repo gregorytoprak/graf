@@ -14,7 +14,7 @@ const initialState = {
   endNodeId: undefined,
   handleLoc: [0, 0],
   color: null,
-  arrows: [true, true],
+  arrows: [false, true],
   selected: false,
   moving: false
 };

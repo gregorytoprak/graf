@@ -18,5 +18,4 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 ## Todo
 
-- [ ] Arrows
 - [ ] Axes
