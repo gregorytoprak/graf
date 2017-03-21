@@ -33,7 +33,19 @@ class AxisPlace extends Component {
     const crossWidth = 0.5;
     const qor = 2 * Math.PI / 4;
     const crossPts = [0, 1, 2, 3].map(dirNum =>
-      pt.move(placePt, crossWidth / 2, outDir + dirNum * qor));
+      pt.move(
+        placePt,
+        (dirNum % 2 === 0 ? 0.5 : 0.25) * crossWidth,
+        outDir + dirNum * qor
+      ));
+    const range = (n, s = 0) => [...Array(n).keys()].map(k => k + s);
+    const makeLeg = dir =>
+      `M ${p(placePt)} L ${p(pt.move(placePt, 0.5 * crossWidth, dir))}`;
+    const d = this.props.num
+      ? range(this.props.num)
+          .map(k => makeLeg(outDir + 4 * qor * k / this.props.num))
+          .join(" ")
+      : `M ${p(crossPts[0])} L ${p(crossPts[2])} M ${p(crossPts[1])} L ${p(crossPts[3])}`;
     const h = this.props.hand;
     const active = [
       h.palm === MOVE_NODE_HAND,
@@ -48,10 +60,7 @@ class AxisPlace extends Component {
           stroke={this.props.selected ? "dodgerblue" : "black"}
           strokeWidth="0.05"
           fill="none"
-          d={
-            `M ${p(crossPts[0])} L ${p(crossPts[2])}
-             M ${p(crossPts[1])} L ${p(crossPts[3])}`
-          }
+          d={d}
           onClick={this.props.handleClick}
           onDoubleClick={this.props.handleDoubleClick}
         />

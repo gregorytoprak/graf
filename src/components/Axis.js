@@ -47,7 +47,7 @@ class Axis extends Component {
   render() {
     const originPt = this.props.originPt;
     const unitPt = vec.add(originPt, this.props.unitLoc);
-    const range = n => [...Array(n).keys()];
+    const range = (n, s = 0) => [...Array(n).keys()].map(k => k + s);
     return (
       <g>
         {this.props.selected
@@ -80,17 +80,34 @@ class Axis extends Component {
               />
             </g>
           : null}
+        <AxisPlace
+          key="0,0"
+          num={this.props.num}
+          selected={this.props.selected}
+          handleClick={this.handleClickOrigin}
+          handleDoubleClick={this.handleDoubleClick}
+          placePt={originPt}
+          outDir={pt.dirToward([0, 0], this.props.unitLoc)}
+          magnetNode={this.props.magnetNode}
+          magnetEdgeHandle={this.props.magnetEdgeHandle}
+          magnetAxisOrigin={this.props.magnetAxisOrigin}
+          magnetAxisUnit={this.props.magnetAxisUnit}
+          hand={this.props.hand}
+          emptyHand={this.props.emptyHand}
+        />
+
         {range(this.props.num).map(k => {
           const n = this.props.num;
           const tau = 2 * Math.PI;
           const outDir = tau * (k / n) +
             pt.dirToward([0, 0], this.props.unitLoc);
-          return range(25).map(distNum => {
+          return range(24, 1).map(distNum => {
             const dist = distNum * vec.len(this.props.unitLoc);
             const placePt = pt.move(originPt, dist, outDir);
             return (
               <AxisPlace
                 key={`${k},${distNum}`}
+                num={false}
                 selected={this.props.selected}
                 handleClick={this.handleClickOrigin}
                 handleDoubleClick={this.handleDoubleClick}

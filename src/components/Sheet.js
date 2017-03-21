@@ -72,7 +72,7 @@ class Sheet extends Component {
 
   handleClick = e => {
     if (e.metaKey) {
-      const num = 6;
+      const num = 5;
       const initOriginPt = this.getPt(e);
       this.props.createAxis(num, initOriginPt, vec.add(initOriginPt, [0, -3]));
     }

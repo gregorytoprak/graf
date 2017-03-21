@@ -12,5 +12,6 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 ### TODO
 
-- draw some other symbol at the center of the axis
+- aligning the unit of an axis should point it in the closest cardinal direction
 - need to be able to select/delete thing while it's magnetized
+- some way of choosing how many rays an axis has --- on creation?
