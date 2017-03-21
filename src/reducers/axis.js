@@ -27,9 +27,14 @@ const axis = (state = initialState, action) => {
         originPt: initOriginPt
       };
     case ALIGN_AXIS:
+      const [x, y] = state.unitLoc;
+      const baseDir = Math.abs(x) <= y
+        ? [0, 1]
+        : Math.abs(y) <= x ? [1, 0] : Math.abs(x) <= -y ? [0, -1] : [-1, 0];
+      const len = vec.len(state.unitLoc);
       return {
         ...state,
-        unitLoc: [0, -vec.len(state.unitLoc)]
+        unitLoc: vec.scl(len, baseDir)
       };
     case MOVE_AXIS_ORIGIN:
       const { newOriginPt } = action.payload;
