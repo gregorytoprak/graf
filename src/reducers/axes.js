@@ -1,6 +1,7 @@
 import axis from "./axis";
 import {
   CREATE_AXIS,
+  ALIGN_AXIS,
   DELETE_AXIS,
   MOVE_AXIS_ORIGIN,
   MOVE_AXIS_UNIT,
@@ -16,6 +17,7 @@ const axes = (state = initialState, action) => {
       return [...state, axis(undefined, action)];
     case DELETE_AXIS:
       return state.filter(ax => ax.id !== action.payload.id);
+    case ALIGN_AXIS:
     case MOVE_AXIS_ORIGIN:
     case MOVE_AXIS_UNIT:
     case SELECT_AXIS:

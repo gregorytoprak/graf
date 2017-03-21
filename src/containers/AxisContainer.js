@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import Axis from "../components/Axis";
 import {
   deleteAxis,
+  alignAxis,
   selectAxis,
   moveAxisOrigin,
   moveAxisUnit
@@ -25,6 +26,9 @@ const mapStateToProps = (state, { id }) => {
 const mapDispatchToProps = (dispatch, { id }) => ({
   deleteAxis: () => {
     dispatch(deleteAxis(id));
+  },
+  alignAxis: () => {
+    dispatch(alignAxis(id));
   },
   selectAxis: () => {
     dispatch(selectAxis(id));

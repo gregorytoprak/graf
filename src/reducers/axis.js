@@ -1,9 +1,11 @@
 import {
   CREATE_AXIS,
+  ALIGN_AXIS,
   MOVE_AXIS_ORIGIN,
   MOVE_AXIS_UNIT,
   SELECT_AXIS
 } from "../actions/axis";
+import { vec } from "../utils";
 
 const initialState = {
   id: undefined,
@@ -23,6 +25,11 @@ const axis = (state = initialState, action) => {
         id: id,
         num: num,
         originPt: initOriginPt
+      };
+    case ALIGN_AXIS:
+      return {
+        ...state,
+        unitLoc: [0, -vec.len(state.unitLoc)]
       };
     case MOVE_AXIS_ORIGIN:
       const { newOriginPt } = action.payload;

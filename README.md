@@ -12,5 +12,5 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 ### TODO
 
-- shift-click axis unit straightens it without changing distance
+- draw some other symbol at the center of the axis
 - need to be able to select/delete thing while it's magnetized

@@ -22,10 +22,19 @@ class Axis extends Component {
     this.props.emptyHand();
   };
 
-  handleClick = e => {
+  handleClickOrigin = e => {
     e.stopPropagation();
     if (e.shiftKey) {
       this.props.deleteAxis();
+    } else if (!e.metaKey) {
+      this.props.selectAxis();
+    }
+  };
+
+  handleClickUnit = e => {
+    e.stopPropagation();
+    if (e.shiftKey) {
+      this.props.alignAxis();
     } else if (!e.metaKey) {
       this.props.selectAxis();
     }
@@ -53,7 +62,7 @@ class Axis extends Component {
                 fill="white"
                 onMouseDown={this.handleMouseDownOrigin}
                 onMouseUp={this.handleMouseUp}
-                onClick={this.handleClick}
+                onClick={this.handleClickOrigin}
                 onDoubleClick={this.handleDoubleClick}
               />
               <circle
@@ -66,7 +75,7 @@ class Axis extends Component {
                 fill="white"
                 onMouseDown={this.handleMouseDownUnit}
                 onMouseUp={this.handleMouseUp}
-                onClick={this.handleClick}
+                onClick={this.handleClickUnit}
                 onDoubleClick={this.handleDoubleClick}
               />
             </g>
@@ -83,7 +92,7 @@ class Axis extends Component {
               <AxisPlace
                 key={`${k},${distNum}`}
                 selected={this.props.selected}
-                handleClick={this.handleClick}
+                handleClick={this.handleClickOrigin}
                 handleDoubleClick={this.handleDoubleClick}
                 placePt={placePt}
                 outDir={outDir}
