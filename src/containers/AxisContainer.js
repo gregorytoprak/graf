@@ -35,8 +35,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   moveAxisOriginHand: relGrabPt => {
     dispatch(moveAxisOriginHand(id, relGrabPt));
   },
-  moveAxisUnitHand: relGrabPt => {
-    dispatch(moveAxisUnitHand(id, relGrabPt));
+  moveAxisUnitHand: (relGrabPt, originPt) => {
+    dispatch(moveAxisUnitHand(id, relGrabPt, originPt));
   },
   magnetNode: (nodeId, newPt) => {
     dispatch(moveNode(nodeId, newPt));
@@ -47,8 +47,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   magnetAxisOrigin: (axisId, newOriginPt) => {
     dispatch(moveAxisOrigin(axisId, newOriginPt));
   },
-  magnetAxisUnit: (axisId, newUnitPt) => {
-    dispatch(moveAxisUnit(axisId, newUnitPt));
+  magnetAxisUnit: (axisId, newUnitLoc) => {
+    dispatch(moveAxisUnit(axisId, newUnitLoc));
   }
 });
 

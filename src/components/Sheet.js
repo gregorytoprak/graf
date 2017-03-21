@@ -40,8 +40,8 @@ class Sheet extends Component {
       const newOriginPt = vec.add(h.relGrabPt, handPt);
       this.props.moveAxisOrigin(h.id, newOriginPt);
     } else if (h.palm === MOVE_AXIS_UNIT_HAND) {
-      const newUnitPt = vec.add(h.relGrabPt, handPt);
-      this.props.moveAxisUnit(h.id, newUnitPt);
+      const newUnitLoc = vec.add(h.relGrabPt, handPt);
+      this.props.moveAxisUnit(h.id, newUnitLoc);
     }
   };
 

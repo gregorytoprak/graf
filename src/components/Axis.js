@@ -13,8 +13,9 @@ class Axis extends Component {
   handleMouseDownUnit = e => {
     e.stopPropagation();
     const grabPt = this.props.getPt(e);
-    const relGrabPt = vec.sub(this.props.unitPt, grabPt);
-    this.props.moveAxisUnitHand(relGrabPt);
+    const relGrabPt = vec.sub(this.props.unitLoc, grabPt);
+    const originPt = this.props.originPt;
+    this.props.moveAxisUnitHand(relGrabPt, originPt);
   };
 
   handleMouseUp = e => {
@@ -36,7 +37,7 @@ class Axis extends Component {
 
   render() {
     const originPt = this.props.originPt;
-    const unitPt = this.props.unitPt;
+    const unitPt = vec.add(originPt, this.props.unitLoc);
     const range = n => [...Array(n).keys()];
     return (
       <g>
@@ -73,9 +74,10 @@ class Axis extends Component {
         {range(this.props.num).map(k => {
           const n = this.props.num;
           const tau = 2 * Math.PI;
-          const outDir = tau * (k / n) + pt.dirToward(originPt, unitPt);
+          const outDir = tau * (k / n) +
+            pt.dirToward([0, 0], this.props.unitLoc);
           return range(25).map(distNum => {
-            const dist = distNum * vec.len(vec.sub(unitPt, originPt));
+            const dist = distNum * vec.len(this.props.unitLoc);
             const placePt = pt.move(originPt, dist, outDir);
             return (
               <AxisPlace

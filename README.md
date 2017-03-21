@@ -14,4 +14,3 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 - shift-click axis unit straightens it without changing distance
 - need to be able to select/delete thing while it's magnetized
-- unit should move in concert with origin

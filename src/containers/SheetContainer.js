@@ -37,14 +37,14 @@ const mapDispatchToProps = dispatch => ({
   moveEdgeHandle: (id, newHandlePt) => {
     dispatch(moveEdgeHandle(id, newHandlePt));
   },
-  createAxis: (num, initOriginPt, initUnitPt) => {
-    dispatch(createAxis(num, initOriginPt, initUnitPt));
+  createAxis: (num, initOriginPt) => {
+    dispatch(createAxis(num, initOriginPt));
   },
   moveAxisOrigin: (id, newOriginPt) => {
     dispatch(moveAxisOrigin(id, newOriginPt));
   },
-  moveAxisUnit: (id, newUnitPt) => {
-    dispatch(moveAxisUnit(id, newUnitPt));
+  moveAxisUnit: (id, newUnitLoc) => {
+    dispatch(moveAxisUnit(id, newUnitLoc));
   },
   emptyHand: () => {
     dispatch(emptyHand());

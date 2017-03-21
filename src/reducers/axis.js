@@ -9,7 +9,7 @@ const initialState = {
   id: undefined,
   num: 0,
   originPt: [0, 0],
-  unitPt: [0, -3],
+  unitLoc: [0, -3],
   selected: false,
   moving: false
 };
@@ -17,13 +17,12 @@ const initialState = {
 const axis = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_AXIS:
-      const { id, num, initOriginPt, initUnitPt } = action.payload;
+      const { id, num, initOriginPt } = action.payload;
       return {
         ...state,
         id: id,
         num: num,
-        originPt: initOriginPt,
-        unitPt: initUnitPt
+        originPt: initOriginPt
       };
     case MOVE_AXIS_ORIGIN:
       const { newOriginPt } = action.payload;
@@ -33,10 +32,10 @@ const axis = (state = initialState, action) => {
         moving: true
       };
     case MOVE_AXIS_UNIT:
-      const { newUnitPt } = action.payload;
+      const { newUnitLoc } = action.payload;
       return {
         ...state,
-        unitPt: newUnitPt,
+        unitLoc: newUnitLoc,
         moving: true
       };
     case SELECT_AXIS:

@@ -6,9 +6,9 @@ export const MOVE_AXIS_ORIGIN = "MOVE_AXIS_ORIGIN";
 export const MOVE_AXIS_UNIT = "MOVE_AXIS_UNIT";
 export const SELECT_AXIS = "SELECT_AXIS";
 
-export const createAxis = (num, initOriginPt, initUnitPt) => ({
+export const createAxis = (num, initOriginPt) => ({
   type: CREATE_AXIS,
-  payload: { id: makeId("axis"), num, initOriginPt, initUnitPt }
+  payload: { id: makeId("axis"), num, initOriginPt }
 });
 
 export const deleteAxis = id => ({
@@ -21,9 +21,9 @@ export const moveAxisOrigin = (id, newOriginPt) => ({
   payload: { id, newOriginPt }
 });
 
-export const moveAxisUnit = (id, newUnitPt) => ({
+export const moveAxisUnit = (id, newUnitLoc) => ({
   type: MOVE_AXIS_UNIT,
-  payload: { id, newUnitPt }
+  payload: { id, newUnitLoc }
 });
 
 export const selectAxis = id => ({

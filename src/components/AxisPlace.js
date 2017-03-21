@@ -21,8 +21,8 @@ class AxisPlace extends Component {
       const newOriginPt = this.props.placePt;
       this.props.magnetAxisOrigin(h.id, newOriginPt);
     } else if (h.palm === MOVE_AXIS_UNIT_HAND) {
-      const newUnitPt = this.props.placePt;
-      this.props.magnetAxisUnit(h.id, newUnitPt);
+      const newUnitLoc = vec.sub(this.props.placePt, h.originPt);
+      this.props.magnetAxisUnit(h.id, newUnitLoc);
     }
     this.props.emptyHand();
   };

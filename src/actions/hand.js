@@ -36,7 +36,7 @@ export const moveAxisOriginHand = (id, relGrabPt) => ({
   payload: { palm: MOVE_AXIS_ORIGIN_HAND, id, relGrabPt }
 });
 
-export const moveAxisUnitHand = (id, relGrabPt) => ({
+export const moveAxisUnitHand = (id, relGrabPt, originPt) => ({
   type: MOVE_AXIS_UNIT_HAND,
-  payload: { palm: MOVE_AXIS_UNIT_HAND, id, relGrabPt }
+  payload: { palm: MOVE_AXIS_UNIT_HAND, id, relGrabPt, originPt }
 });
