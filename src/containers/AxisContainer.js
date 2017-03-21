@@ -1,6 +1,11 @@
 import { connect } from "react-redux";
 import Axis from "../components/Axis";
-import { deleteAxis, selectAxis } from "../actions/axis";
+import {
+  deleteAxis,
+  selectAxis,
+  moveAxisOrigin,
+  moveAxisUnit
+} from "../actions/axis";
 import { moveNode } from "../actions/node";
 import { moveEdgeHandle } from "../actions/edge";
 import {
@@ -38,6 +43,12 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   },
   magnetEdgeHandle: (edgeId, newHandleLoc) => {
     dispatch(moveEdgeHandle(edgeId, newHandleLoc));
+  },
+  magnetAxisOrigin: (axisId, newOriginPt) => {
+    dispatch(moveAxisOrigin(axisId, newOriginPt));
+  },
+  magnetAxisUnit: (axisId, newUnitPt) => {
+    dispatch(moveAxisUnit(axisId, newUnitPt));
   }
 });
 

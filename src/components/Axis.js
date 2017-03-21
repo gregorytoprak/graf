@@ -84,6 +84,8 @@ class Axis extends Component {
                 outDir={outDir}
                 magnetNode={this.props.magnetNode}
                 magnetEdgeHandle={this.props.magnetEdgeHandle}
+                magnetAxisOrigin={this.props.magnetAxisOrigin}
+                magnetAxisUnit={this.props.magnetAxisUnit}
                 hand={this.props.hand}
                 emptyHand={this.props.emptyHand}
               />
