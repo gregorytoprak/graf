@@ -6,7 +6,9 @@ class EdgeHandle extends Component {
     e.stopPropagation();
     const grabPt = this.props.getPt(e);
     const relGrabPt = vec.sub(this.props.handleLoc, grabPt);
-    this.props.moveEdgeHandleHand(relGrabPt);
+    const { startPt, endPt } = this.props;
+    const midPt = vec.scl(0.5, vec.add(startPt, endPt));
+    this.props.moveEdgeHandleHand(relGrabPt, midPt);
   };
 
   handleMouseUp = e => {

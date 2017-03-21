@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   emptyHand: () => {
     dispatch(emptyHand());
   },
-  moveEdgeHandleHand: relGrabPt => {
-    dispatch(moveEdgeHandleHand(id, relGrabPt));
+  moveEdgeHandleHand: (relGrabPt, midPt) => {
+    dispatch(moveEdgeHandleHand(id, relGrabPt, midPt));
   }
 });
 

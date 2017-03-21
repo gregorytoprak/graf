@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { MOVE_NODE_HAND, MOVE_EDGE_HANDLE_HAND } from "../actions/hand";
-import { pt } from "../utils";
+import { vec, pt } from "../utils";
 
 class AxisPlace extends Component {
   handleMouseUp = e => {
     e.stopPropagation();
     const h = this.props.hand;
     if (h.palm === MOVE_NODE_HAND) {
-      this.props.magnetNode(h.id, this.props.placePt);
+      const newPt = this.props.placePt;
+      this.props.magnetNode(h.id, newPt);
     } else if (h.palm === MOVE_EDGE_HANDLE_HAND) {
-      this.props.magnetEdgeHandle(h.id, this.props.placePt);
+      const newHandleLoc = vec.sub(this.props.placePt, h.midPt);
+      this.props.magnetEdgeHandle(h.id, newHandleLoc);
     }
     this.props.emptyHand();
   };
@@ -22,8 +24,10 @@ class AxisPlace extends Component {
     const crossPts = [0, 1, 2, 3].map(dirNum =>
       pt.move(placePt, crossWidth / 2, outDir + dirNum * qor));
     const h = this.props.hand;
-    const active = h.palm === MOVE_NODE_HAND ||
-      h.palm === MOVE_EDGE_HANDLE_HAND;
+    const active = [
+      h.palm === MOVE_NODE_HAND,
+      h.palm === MOVE_EDGE_HANDLE_HAND
+    ];
     return (
       <g>
         <path
@@ -42,9 +46,9 @@ class AxisPlace extends Component {
           className="AxisPlaceArea"
           cx={placePt[0]}
           cy={placePt[1]}
-          r="1"
+          r={active[0] ? 1.5 : 0.75}
           stroke="none"
-          fill={active ? "transparent" : "none"}
+          fill={active[0] || active[1] ? "transparent" : "none"}
           onMouseUp={this.handleMouseUp}
         />
       </g>
