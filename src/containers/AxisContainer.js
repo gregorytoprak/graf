@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import Axis from "../components/Axis";
 import { deleteAxis, selectAxis } from "../actions/axis";
+import { moveNode } from "../actions/node";
+import { moveEdgeHandle } from "../actions/edge";
 import {
   emptyHand,
   moveAxisOriginHand,
@@ -10,7 +12,8 @@ import {
 const mapStateToProps = (state, { id }) => {
   const axis = state.axes.find(ax => ax.id === id);
   return {
-    ...axis
+    ...axis,
+    hand: state.hand
   };
 };
 
@@ -29,6 +32,12 @@ const mapDispatchToProps = (dispatch, { id }) => ({
   },
   moveAxisUnitHand: relGrabPt => {
     dispatch(moveAxisUnitHand(id, relGrabPt));
+  },
+  magnetNode: (nodeId, newPt) => {
+    dispatch(moveNode(nodeId, newPt));
+  },
+  magnetEdgeHandle: (edgeId, newHandleLoc) => {
+    dispatch(moveEdgeHandle(edgeId, newHandleLoc));
   }
 });
 

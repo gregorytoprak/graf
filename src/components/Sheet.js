@@ -98,15 +98,15 @@ class Sheet extends Component {
         onDoubleClick={this.handleDoubleClick}
         onMouseMove={this.handleMouseMove}
       >
-        {this.props.axisIds.map(id => (
-          <AxisContainer key={id} id={id} getPt={this.getPt} />
-        ))}
         {this.props.edgeIds.map(id => <EdgeContainer key={id} id={id} />)}
         {this.props.nodeIds.map(id => (
           <NodeContainer key={id} id={id} getPt={this.getPt} />
         ))}
         {this.props.edgeIds.map(id => (
           <EdgeHandleContainer key={id} id={id} getPt={this.getPt} />
+        ))}
+        {this.props.axisIds.map(id => (
+          <AxisContainer key={id} id={id} getPt={this.getPt} />
         ))}
       </svg>
     );

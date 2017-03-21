@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AxisPlace from "./AxisPlace";
 import { vec } from "../utils";
 
 class Axis extends Component {
@@ -36,34 +37,59 @@ class Axis extends Component {
   render() {
     const originPt = this.props.originPt;
     const unitPt = this.props.unitPt;
+    const range = n => [...Array(n).keys()];
     return (
       <g>
-        <circle
-          className="AxisOrigin"
-          cx={originPt[0]}
-          cy={originPt[1]}
-          r="0.5"
-          stroke={this.props.selected ? "dodgerblue" : "black"}
-          strokeWidth="0.05"
-          fill="white"
-          onMouseDown={this.handleMouseDownOrigin}
-          onMouseUp={this.handleMouseUp}
-          onClick={this.handleClick}
-          onDoubleClick={this.handleDoubleClick}
-        />
-        <circle
-          className="AxisUnit"
-          cx={unitPt[0]}
-          cy={unitPt[1]}
-          r="0.5"
-          stroke={this.props.selected ? "dodgerblue" : "black"}
-          strokeWidth="0.05"
-          fill="white"
-          onMouseDown={this.handleMouseDownUnit}
-          onMouseUp={this.handleMouseUp}
-          onClick={this.handleClick}
-          onDoubleClick={this.handleDoubleClick}
-        />
+        {this.props.selected
+          ? <g>
+              <circle
+                className="AxisOrigin"
+                cx={originPt[0]}
+                cy={originPt[1]}
+                r="0.5"
+                stroke={this.props.selected ? "dodgerblue" : "black"}
+                strokeWidth="0.05"
+                fill="white"
+                onMouseDown={this.handleMouseDownOrigin}
+                onMouseUp={this.handleMouseUp}
+                onClick={this.handleClick}
+                onDoubleClick={this.handleDoubleClick}
+              />
+              <circle
+                className="AxisUnit"
+                cx={unitPt[0]}
+                cy={unitPt[1]}
+                r="0.5"
+                stroke={this.props.selected ? "dodgerblue" : "black"}
+                strokeWidth="0.05"
+                fill="white"
+                onMouseDown={this.handleMouseDownUnit}
+                onMouseUp={this.handleMouseUp}
+                onClick={this.handleClick}
+                onDoubleClick={this.handleDoubleClick}
+              />
+            </g>
+          : null}
+        {range(this.props.num).map(dirNum => {
+          const outDir = 0;
+          return range(10).map(distNum => {
+            const placePt = [0, 0];
+            return (
+              <AxisPlace
+                key={`${dirNum},${distNum}`}
+                selected={this.props.selected}
+                handleClick={this.handleClick}
+                handleDoubleClick={this.handleDoubleClick}
+                placePt={placePt}
+                outDir={outDir}
+                magnetNode={this.props.magnetNode}
+                magnetEdgeHandle={this.props.magnetEdgeHandle}
+                hand={this.props.hand}
+                emptyHand={this.props.emptyHand}
+              />
+            );
+          });
+        })}
       </g>
     );
   }
