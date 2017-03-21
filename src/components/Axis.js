@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AxisPlace from "./AxisPlace";
-import { vec } from "../utils";
+import { vec, pt } from "../utils";
 
 class Axis extends Component {
   handleMouseDownOrigin = e => {
@@ -70,13 +70,16 @@ class Axis extends Component {
               />
             </g>
           : null}
-        {range(this.props.num).map(dirNum => {
-          const outDir = 0;
-          return range(10).map(distNum => {
-            const placePt = [0, 0];
+        {range(this.props.num).map(k => {
+          const n = this.props.num;
+          const tau = 2 * Math.PI;
+          const outDir = tau * (k / n) + pt.dirToward(originPt, unitPt);
+          return range(25).map(distNum => {
+            const dist = distNum * vec.len(vec.sub(unitPt, originPt));
+            const placePt = pt.move(originPt, dist, outDir);
             return (
               <AxisPlace
-                key={`${dirNum},${distNum}`}
+                key={`${k},${distNum}`}
                 selected={this.props.selected}
                 handleClick={this.handleClick}
                 handleDoubleClick={this.handleDoubleClick}

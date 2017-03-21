@@ -9,3 +9,9 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 - Move nodes and curve edges intuitively
 - Manipulate the sheet as a whole by panning and zooming like a map app
 - Save your completed graph drawing to SVG with the click of a button
+
+### TODO
+
+- shift-click axis unit straightens it without changing distance
+- need to be able to select/delete thing while it's magnetized
+- unit should move in concert with origin

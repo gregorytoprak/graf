@@ -9,7 +9,7 @@ const initialState = {
   id: undefined,
   num: 0,
   originPt: [0, 0],
-  unitPt: [0, -1],
+  unitPt: [0, -3],
   selected: false,
   moving: false
 };
