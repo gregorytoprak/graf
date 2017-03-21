@@ -31,17 +31,21 @@ class Sheet extends Component {
     } else if (h.palm === MOVE_NODE_HAND) {
       const newPt = vec.add(h.relGrabPt, handPt);
       this.props.moveNode(h.id, newPt);
+      this.props.handMoving();
     } else if (h.palm === START_EDGE_HAND) {
       this.props.startEdgeHand(handPt);
     } else if (h.palm === MOVE_EDGE_HANDLE_HAND) {
       const newHandleLoc = vec.add(h.relGrabPt, handPt);
       this.props.moveEdgeHandle(h.id, newHandleLoc);
+      this.props.handMoving();
     } else if (h.palm === MOVE_AXIS_ORIGIN_HAND) {
       const newOriginPt = vec.add(h.relGrabPt, handPt);
       this.props.moveAxisOrigin(h.id, newOriginPt);
+      this.props.handMoving();
     } else if (h.palm === MOVE_AXIS_UNIT_HAND) {
       const newUnitLoc = vec.add(h.relGrabPt, handPt);
       this.props.moveAxisUnit(h.id, newUnitLoc);
+      this.props.handMoving();
     }
   };
 

@@ -4,7 +4,7 @@ import { panSheet, zoomSheet } from "../actions/sheet";
 import { createNode, moveNode } from "../actions/node";
 import { deleteEdge, dropEdge, moveEdgeHandle } from "../actions/edge";
 import { createAxis, moveAxisOrigin, moveAxisUnit } from "../actions/axis";
-import { emptyHand, panHand, startEdgeHand } from "../actions/hand";
+import { emptyHand, panHand, startEdgeHand, handMoving } from "../actions/hand";
 import { noSelect } from "../actions/other";
 
 const mapStateToProps = state => ({
@@ -54,6 +54,9 @@ const mapDispatchToProps = dispatch => ({
   },
   startEdgeHand: handPt => {
     dispatch(startEdgeHand(handPt));
+  },
+  handMoving: () => {
+    dispatch(handMoving());
   },
   noSelect: () => {
     dispatch(noSelect());

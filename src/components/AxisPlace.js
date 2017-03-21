@@ -70,7 +70,7 @@ class AxisPlace extends Component {
           cy={placePt[1]}
           r={active[0] ? 1 : 0.5}
           stroke="none"
-          fill={active.some(a => a) ? "transparent" : "none"}
+          fill={active.some(a => a) && h.moving ? "transparent" : "none"}
           onMouseUp={this.handleMouseUp}
         />
       </g>
