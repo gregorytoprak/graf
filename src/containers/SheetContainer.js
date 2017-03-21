@@ -3,6 +3,7 @@ import Sheet from "../components/Sheet";
 import { panSheet, zoomSheet } from "../actions/sheet";
 import { createNode, moveNode } from "../actions/node";
 import { deleteEdge, dropEdge, moveEdgeHandle } from "../actions/edge";
+import { createAxis, moveAxisOrigin, moveAxisUnit } from "../actions/axis";
 import { emptyHand, panHand, startEdgeHand } from "../actions/hand";
 import { noSelect } from "../actions/other";
 
@@ -10,6 +11,7 @@ const mapStateToProps = state => ({
   ...state.sheet,
   nodeIds: state.nodes.map(nd => nd.id),
   edgeIds: state.edges.map(ed => ed.id),
+  axisIds: state.axes.map(ax => ax.id),
   hand: state.hand
 });
 
@@ -34,6 +36,15 @@ const mapDispatchToProps = dispatch => ({
   },
   moveEdgeHandle: (id, newHandlePt) => {
     dispatch(moveEdgeHandle(id, newHandlePt));
+  },
+  createAxis: (num, initOriginPt, initUnitPt) => {
+    dispatch(createAxis(num, initOriginPt, initUnitPt));
+  },
+  moveAxisOrigin: (id, newOriginPt) => {
+    dispatch(moveAxisOrigin(id, newOriginPt));
+  },
+  moveAxisUnit: (id, newUnitPt) => {
+    dispatch(moveAxisUnit(id, newUnitPt));
   },
   emptyHand: () => {
     dispatch(emptyHand());

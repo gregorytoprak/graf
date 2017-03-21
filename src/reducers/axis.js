@@ -9,7 +9,7 @@ const initialState = {
   id: undefined,
   num: 0,
   originPt: [0, 0],
-  unitPt: [0, 1],
+  unitPt: [0, -1],
   selected: false,
   moving: false
 };
@@ -39,7 +39,7 @@ const axis = (state = initialState, action) => {
         unitPt: newUnitPt,
         moving: true
       };
-    case SELECT_NODE:
+    case SELECT_AXIS:
       return state.moving
         ? {
             ...state,
