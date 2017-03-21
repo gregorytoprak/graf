@@ -12,5 +12,4 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 ### TODO
 
-- need to be able to select/delete thing while it's magnetized
 - some way of choosing how many rays an axis has --- on creation?

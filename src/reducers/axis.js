@@ -41,14 +41,14 @@ const axis = (state = initialState, action) => {
       return {
         ...state,
         originPt: newOriginPt,
-        moving: true
+        moving: action.payload.moving
       };
     case MOVE_AXIS_UNIT:
       const { newUnitLoc } = action.payload;
       return {
         ...state,
         unitLoc: newUnitLoc,
-        moving: true
+        moving: action.payload.moving
       };
     case SELECT_AXIS:
       return state.moving

@@ -15,9 +15,9 @@ export const deleteNode = id => ({
   payload: { id }
 });
 
-export const moveNode = (id, newPt) => ({
+export const moveNode = (id, newPt, moving = true) => ({
   type: MOVE_NODE,
-  payload: { id, newPt }
+  payload: { id, newPt, moving }
 });
 
 export const selectNode = id => ({

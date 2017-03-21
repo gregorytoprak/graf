@@ -43,16 +43,16 @@ const mapDispatchToProps = (dispatch, { id }) => ({
     dispatch(moveAxisUnitHand(id, relGrabPt, originPt));
   },
   magnetNode: (nodeId, newPt) => {
-    dispatch(moveNode(nodeId, newPt));
+    dispatch(moveNode(nodeId, newPt, false));
   },
   magnetEdgeHandle: (edgeId, newHandleLoc) => {
-    dispatch(moveEdgeHandle(edgeId, newHandleLoc));
+    dispatch(moveEdgeHandle(edgeId, newHandleLoc, false));
   },
   magnetAxisOrigin: (axisId, newOriginPt) => {
-    dispatch(moveAxisOrigin(axisId, newOriginPt));
+    dispatch(moveAxisOrigin(axisId, newOriginPt, false));
   },
   magnetAxisUnit: (axisId, newUnitLoc) => {
-    dispatch(moveAxisUnit(axisId, newUnitLoc));
+    dispatch(moveAxisUnit(axisId, newUnitLoc, false));
   }
 });
 

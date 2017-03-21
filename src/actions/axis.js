@@ -22,14 +22,14 @@ export const alignAxis = id => ({
   payload: { id }
 });
 
-export const moveAxisOrigin = (id, newOriginPt) => ({
+export const moveAxisOrigin = (id, newOriginPt, moving = true) => ({
   type: MOVE_AXIS_ORIGIN,
-  payload: { id, newOriginPt }
+  payload: { id, newOriginPt, moving }
 });
 
-export const moveAxisUnit = (id, newUnitLoc) => ({
+export const moveAxisUnit = (id, newUnitLoc, moving = true) => ({
   type: MOVE_AXIS_UNIT,
-  payload: { id, newUnitLoc }
+  payload: { id, newUnitLoc, moving }
 });
 
 export const selectAxis = id => ({
