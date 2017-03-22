@@ -5,11 +5,12 @@ import {
   MOVE_AXIS_UNIT,
   SELECT_AXIS
 } from "../actions/axis";
+import { FULL_SELECT, SET_LEGS } from "../actions/other";
 import { vec } from "../utils";
 
 const initialState = {
   id: undefined,
-  num: 0,
+  num: 6,
   originPt: [0, 0],
   unitLoc: [0, -3],
   selected: false,
@@ -60,6 +61,19 @@ const axis = (state = initialState, action) => {
             ...state,
             selected: !state.selected
           };
+    case FULL_SELECT:
+      const { selectStatus } = action.payload;
+      return {
+        ...state,
+        selected: selectStatus
+      };
+    case SET_LEGS:
+      const { numLegs } = action.payload;
+      return {
+        ...state,
+        num: numLegs
+      };
+
     default:
       return state;
   }

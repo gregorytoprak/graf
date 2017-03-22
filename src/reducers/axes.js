@@ -7,7 +7,7 @@ import {
   MOVE_AXIS_UNIT,
   SELECT_AXIS
 } from "../actions/axis";
-import { CLEAR } from "../actions/other";
+import { FULL_SELECT, SET_LEGS, CLEAR } from "../actions/other";
 
 const initialState = [];
 
@@ -24,6 +24,10 @@ const axes = (state = initialState, action) => {
       return state.map(
         ax => ax.id === action.payload.id ? axis(ax, action) : ax
       );
+    case FULL_SELECT:
+      return state.map(ax => axis(ax, action));
+    case SET_LEGS:
+      return state.map(ax => ax.selected ? axis(ax, action) : ax);
     case CLEAR:
       return initialState;
     default:
