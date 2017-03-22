@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import range from "lodash/range";
 import AxisPlace from "./AxisPlace";
 import { vec, pt } from "../utils";
 
@@ -47,7 +48,6 @@ class Axis extends Component {
   render() {
     const originPt = this.props.originPt;
     const unitPt = vec.add(originPt, this.props.unitLoc);
-    const range = (n, s = 0) => [...Array(n).keys()].map(k => k + s);
     return (
       <g>
         {this.props.selected
@@ -95,13 +95,11 @@ class Axis extends Component {
           hand={this.props.hand}
           emptyHand={this.props.emptyHand}
         />
-
         {range(this.props.num).map(k => {
           const n = this.props.num;
           const tau = 2 * Math.PI;
-          const outDir = tau * (k / n) +
-            pt.dirToward([0, 0], this.props.unitLoc);
-          return range(24, 1).map(distNum => {
+          const outDir = tau * k / n + pt.dirToward([0, 0], this.props.unitLoc);
+          return range(1, 26).map(distNum => {
             const dist = distNum * vec.len(this.props.unitLoc);
             const placePt = pt.move(originPt, dist, outDir);
             return (

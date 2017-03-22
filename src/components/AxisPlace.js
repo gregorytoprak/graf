@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import range from "lodash/range";
 import {
   MOVE_NODE_HAND,
   MOVE_EDGE_HANDLE_HAND,
@@ -38,7 +39,6 @@ class AxisPlace extends Component {
         (dirNum % 2 === 0 ? 0.5 : 0.25) * crossWidth,
         outDir + dirNum * qor
       ));
-    const range = (n, s = 0) => [...Array(n).keys()].map(k => k + s);
     const makeLeg = dir =>
       `M ${p(placePt)} L ${p(pt.move(placePt, 0.5 * crossWidth, dir))}`;
     const d = this.props.num
