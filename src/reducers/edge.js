@@ -50,11 +50,11 @@ const edge = (state = initialState, action) => {
         handleLoc: [0, 0]
       };
     case MOVE_EDGE_HANDLE:
-      const { newHandleLoc } = action.payload;
+      const { newHandleLoc, moving } = action.payload;
       return {
         ...state,
         handleLoc: newHandleLoc,
-        moving: true
+        moving: moving
       };
     case SELECT_EDGE:
       return state.moving

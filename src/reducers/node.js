@@ -19,11 +19,11 @@ const node = (state = initialState, action) => {
         pt: initPt
       };
     case MOVE_NODE:
-      const { newPt } = action.payload;
+      const { newPt, moving } = action.payload;
       return {
         ...state,
         pt: newPt,
-        moving: true
+        moving: moving
       };
     case SELECT_NODE:
       return state.moving

@@ -11,10 +11,10 @@ class Arrow extends Component {
     const { tipPt, dir } = this.props;
     const length = 0.5;
     const width = length * 2 / Math.sqrt(3); // equilateral
-    const tau = 2 * Math.PI;
-    const leftPt = pt.move(tipPt, length, dir + tau / 2);
-    const topPt = pt.move(leftPt, width / 2, dir + tau / 4);
-    const botPt = pt.move(leftPt, width / 2, dir - tau / 4);
+    const qor = 2 * Math.PI / 4;
+    const leftPt = pt.move(tipPt, length, dir + 2 * qor);
+    const topPt = pt.move(leftPt, width / 2, dir + qor);
+    const botPt = pt.move(leftPt, width / 2, dir - qor);
     const p = x => `${x[0]},${x[1]}`;
     return (
       <polygon

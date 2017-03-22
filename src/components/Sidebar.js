@@ -9,6 +9,7 @@ import {
   Glyphicon
 } from "react-bootstrap";
 import { CirclePicker } from "react-color";
+import LegForm from "./LegForm";
 
 class Sidebar extends Component {
   render() {
@@ -40,6 +41,8 @@ class Sidebar extends Component {
         <div className="ColorPickerWrapper">
           <CirclePicker onChange={this.props.setColor} />
         </div>
+        <h5>Set the number of legs (for axes)</h5>
+        <LegForm setLegs={this.props.setLegs} />
       </Popover>
     );
     return (

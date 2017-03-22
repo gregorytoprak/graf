@@ -4,18 +4,8 @@
 
 Draw mathematical graphs with an intuitive drag-and-drop interface!
 
-### Usage
-
-- Double-click to create a node
-- Create an edge by metakey-dragging
-- Click to select; shift-click to delete
-- Each edge has a handle to control its curvature
-- Drag-and-drop a node or handle to position it
-- Edit colors (and arrows on edges) in the **style** menu
-- Pan and zoom like a map application
-- Automatic saving to cookies
-- Manual saving to svg
-
-## Todo
-
-- [ ] Axes
+- Create nodes, and edges between them
+- Choose colors and for edges to have arrows
+- Move nodes and curve edges intuitively
+- Manipulate the sheet as a whole by panning and zooming like a map app
+- Save your completed graph drawing to SVG with the click of a button

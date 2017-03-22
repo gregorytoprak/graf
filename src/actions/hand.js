@@ -3,6 +3,9 @@ export const PAN_HAND = "PAN_HAND";
 export const MOVE_NODE_HAND = "MOVE_NODE_HAND";
 export const START_EDGE_HAND = "START_EDGE_HAND";
 export const MOVE_EDGE_HANDLE_HAND = "MOVE_EDGE_HANDLE_HAND";
+export const MOVE_AXIS_ORIGIN_HAND = "MOVE_AXIS_ORIGIN_HAND";
+export const MOVE_AXIS_UNIT_HAND = "MOVE_AXIS_UNIT_HAND";
+export const HAND_MOVING = "HAND_MOVING";
 
 export const emptyHand = () => ({
   type: EMPTY_HAND,
@@ -24,7 +27,22 @@ export const startEdgeHand = handPt => ({
   payload: { palm: START_EDGE_HAND, handPt }
 });
 
-export const moveEdgeHandleHand = (id, relGrabPt) => ({
+export const moveEdgeHandleHand = (id, relGrabPt, midPt) => ({
   type: MOVE_EDGE_HANDLE_HAND,
-  payload: { palm: MOVE_EDGE_HANDLE_HAND, id, relGrabPt }
+  payload: { palm: MOVE_EDGE_HANDLE_HAND, id, relGrabPt, midPt }
+});
+
+export const moveAxisOriginHand = (id, relGrabPt) => ({
+  type: MOVE_AXIS_ORIGIN_HAND,
+  payload: { palm: MOVE_AXIS_ORIGIN_HAND, id, relGrabPt }
+});
+
+export const moveAxisUnitHand = (id, relGrabPt, originPt) => ({
+  type: MOVE_AXIS_UNIT_HAND,
+  payload: { palm: MOVE_AXIS_UNIT_HAND, id, relGrabPt, originPt }
+});
+
+export const handMoving = () => ({
+  type: HAND_MOVING,
+  payload: {}
 });

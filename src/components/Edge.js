@@ -73,11 +73,11 @@ class Edge extends Component {
       const controlPt = vec.add(midPt, this.props.handleLoc);
       const dist = vec.len(this.props.handleLoc);
       const dir = pt.dirToward(controlPt, midPt);
-      const tau = 2 * Math.PI;
-      const arrowsAngle = tau / 8;
+      const qor = 2 * Math.PI / 4;
+      const loopAngle = qor / 2;
       const controlPts = [
-        pt.move(controlPt, Math.tan(arrowsAngle / 2) * dist, dir + tau / 4),
-        pt.move(controlPt, Math.tan(arrowsAngle / 2) * dist, dir - tau / 4)
+        pt.move(controlPt, Math.tan(loopAngle / 2) * dist, dir + qor),
+        pt.move(controlPt, Math.tan(loopAngle / 2) * dist, dir - qor)
       ];
       const arrowTips = [
         pt.moveToward(startPt, 1, controlPts[0]),
