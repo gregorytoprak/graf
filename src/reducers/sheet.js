@@ -28,10 +28,11 @@ const sheet = (state = initialState, action) => {
       };
     case RESIZE_VIEWPORT:
       const { vdimsNew } = action.payload;
+      const dimsNew = vec.prd(vdimsNew, vec.div(state.dims, state.vdims));
+      // Keeping the 'scale' of the screen means maintaining dims / vdims ratio
       return {
         ...state,
-        // Keeping the 'scale' of the screen means maintaining dims / vdims ratio
-        dims: vec.prd(vdimsNew, vec.div(state.dims, state.vdims)),
+        dims: dimsNew,
         vdims: vdimsNew
       };
     case CLEAR:

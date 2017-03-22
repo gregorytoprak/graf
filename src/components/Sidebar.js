@@ -37,7 +37,6 @@ class Sidebar extends Component {
             Reset Color
           </Button>
         </ButtonGroup>
-        <h5>Set color</h5>
         <div className="ColorPickerWrapper">
           <CirclePicker onChange={this.props.setColor} />
         </div>

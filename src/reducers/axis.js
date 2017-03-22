@@ -29,9 +29,13 @@ const axis = (state = initialState, action) => {
       };
     case ALIGN_AXIS:
       const [x, y] = state.unitLoc;
-      const baseDir = Math.abs(x) <= y
-        ? [0, 1]
-        : Math.abs(y) <= x ? [1, 0] : Math.abs(x) <= -y ? [0, -1] : [-1, 0];
+      const compassQuadrants = [
+        { coords: Math.abs(x) <= y, dir: [0, 1] },
+        { coords: Math.abs(y) <= x, dir: [1, 0] },
+        { coords: Math.abs(x) <= -y, dir: [0, -1] },
+        { coords: Math.abs(y) <= -x, dir: [-1, 0] }
+      ];
+      const baseDir = compassQuadrants.find(quad => quad.coords).dir;
       const len = vec.len(state.unitLoc);
       return {
         ...state,

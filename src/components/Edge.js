@@ -41,6 +41,7 @@ class Edge extends Component {
     const p = x => `${x[0]},${x[1]}`;
     const midPt = vec.scl(0.5, vec.add(startPt, endPt));
     if (!this.props.endNodeId) {
+      // incomplete edge
       const arrowTips = [pt.moveToward(startPt, 1, endPt), endPt];
       const linePts = [
         this.props.arrows[0]
@@ -70,6 +71,7 @@ class Edge extends Component {
         </g>
       );
     } else if (this.props.startNodeId === this.props.endNodeId) {
+      // loop edge
       const controlPt = vec.add(midPt, this.props.handleLoc);
       const dist = vec.len(this.props.handleLoc);
       const dir = pt.dirToward(controlPt, midPt);
@@ -91,14 +93,10 @@ class Edge extends Component {
           ? pt.moveToward(arrowTips[1], 0.25, controlPts[1])
           : arrowTips[1]
       ];
-      // const loopCenterLoc = vec.scl(0.5, this.props.handleLoc);
-      // const centerPt = vec.add(midPt, loopCenterLoc);
-      // const r = vec.len(loopCenterLoc);
       const d = `M ${p(linePts[0])} C ${p(controlPts[0])} ${p(controlPts[1])} ${p(linePts[1])}`;
       return (
         <g>
           <path {...baseProps} d={d} />
-          {/*<circle {...baseProps} cx={centerPt[0]} cy={centerPt[1]} r={r} />*/}
           {this.props.arrows[0]
             ? <Arrow
                 baseProps={baseProps}
@@ -116,6 +114,7 @@ class Edge extends Component {
         </g>
       );
     } else {
+      // regular straight or curved edge
       const controlPt = vec.add(midPt, this.props.handleLoc);
       const arrowTips = [
         pt.moveToward(startPt, 1, controlPt),
