@@ -31,7 +31,7 @@ class Welcome extends Component {
           <ul>
             <li>Double-click to create a node</li>
             <li>Create an edge by command-dragging from node to node</li>
-            <li>Create an axis by command-clicking the empty sheet</li>
+            <li>Create an axis by command-double-clicking the empty sheet</li>
             <li>Click to select; shift-click to delete</li>
             <li>Each edge has a handle to control its curvature</li>
             <li>Drag-and-drop a node or handle to position it</li>
