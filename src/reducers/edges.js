@@ -4,7 +4,7 @@ import {
   COMPLETE_EDGE,
   DELETE_EDGE,
   DROP_EDGE,
-  TOGGLE_ARROW,
+  SET_ARROWS,
   RESET_EDGE_HANDLE,
   MOVE_EDGE_HANDLE,
   SELECT_EDGE
@@ -24,7 +24,7 @@ const edges = (state = initialState, action) => {
       return state.filter(ed => ed.id !== action.payload.id);
     case DROP_EDGE:
       return state.filter(ed => ed.endNodeId);
-    case TOGGLE_ARROW:
+    case SET_ARROWS:
       return state.map(ed => ed.selected ? edge(ed, action) : ed);
     case RESET_EDGE_HANDLE:
     case MOVE_EDGE_HANDLE:

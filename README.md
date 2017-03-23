@@ -12,9 +12,9 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 ## Gallery of Examples
 
-
-<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-screenshot-1.png" width="50%"
-  /><img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-kap-1.gif" width="50%" />
-<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-screenshot-2.png" width="50%"
-  /><img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-screenshot-3.png" width="50%" />
-<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-screenshot-4.png" width="50%" />
+<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-k8.png" width="50%" />
+<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-loops.png" width="50%" />
+<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-icosahedron.png" width="50%" />
+<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-leaf.png" width="50%" />
+<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-cayley.png" width="50%" />
+<img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-colors.png" width="50%" />

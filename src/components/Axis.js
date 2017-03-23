@@ -50,7 +50,7 @@ class Axis extends Component {
     const unitPt = vec.add(originPt, this.props.unitLoc);
     const basePropsHandle = {
       r: "0.5",
-      stroke: this.props.selected ? "dodgerblue" : "black",
+      stroke: this.props.selected ? "silver" : "black",
       strokeWidth: "0.05",
       fill: "white",
       onMouseUp: this.handleMouseUp,

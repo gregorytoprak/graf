@@ -57,7 +57,7 @@ class AxisPlace extends Component {
       <g>
         <path
           className="AxisPlaceCross"
-          stroke={this.props.selected ? "dodgerblue" : "black"}
+          stroke={this.props.selected ? "silver" : "black"}
           strokeWidth="0.05"
           fill="none"
           d={d}

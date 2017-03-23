@@ -41,7 +41,7 @@ class EdgeHandle extends Component {
         cx={centerPt[0]}
         cy={centerPt[1]}
         r="0.5"
-        stroke="dodgerblue"
+        stroke="silver"
         strokeWidth="0.05"
         fill={this.props.color ? this.props.color : "white"}
         onMouseDown={this.handleMouseDown}

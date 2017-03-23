@@ -28,7 +28,7 @@ class Edge extends Component {
     const baseProps = {
       className: "Edge",
       stroke: this.props.selected
-        ? "dodgerblue"
+        ? "silver"
         : this.props.color ? this.props.color : "black",
       strokeWidth: "0.1",
       fill: "none",

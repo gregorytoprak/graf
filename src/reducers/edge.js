@@ -1,7 +1,7 @@
 import {
   START_EDGE,
   COMPLETE_EDGE,
-  TOGGLE_ARROW,
+  SET_ARROWS,
   RESET_EDGE_HANDLE,
   MOVE_EDGE_HANDLE,
   SELECT_EDGE
@@ -36,13 +36,11 @@ const edge = (state = initialState, action) => {
         handleLoc: [0, 0],
         selected: endNodeId === state.startNodeId
       };
-    case TOGGLE_ARROW:
-      const { index } = action.payload;
+    case SET_ARROWS:
+      const { arrows } = action.payload;
       return {
         ...state,
-        arrows: state.arrows.map(
-          (arrow, thisIndex) => thisIndex === index ? !arrow : arrow
-        )
+        arrows: arrows
       };
     case RESET_EDGE_HANDLE:
       return {

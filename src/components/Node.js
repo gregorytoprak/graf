@@ -48,7 +48,7 @@ class Node extends Component {
         r="1"
         stroke={
           this.props.selected
-            ? "dodgerblue"
+            ? "silver"
             : this.props.color ? this.props.color : "black"
         }
         strokeWidth="0.05"

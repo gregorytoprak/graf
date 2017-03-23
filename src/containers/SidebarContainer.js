@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 import Sidebar from "../components/Sidebar";
-import { toggleArrow } from "../actions/edge";
+import { setArrows } from "../actions/edge";
 import { toggleWelcome, fullSelect, setColor, setLegs } from "../actions/other";
 
 const mapDispatchToProps = dispatch => ({
-  toggleArrow: index => {
-    dispatch(toggleArrow(index));
+  setArrows: arrows => {
+    dispatch(setArrows(arrows));
   },
   toggleWelcome: () => {
     dispatch(toggleWelcome());

@@ -74,17 +74,14 @@ class Sheet extends Component {
     this.props.emptyHand();
   };
 
-  handleClick = e => {
-    if (e.metaKey) {
-      const num = 6;
-      const initOriginPt = this.getPt(e);
-      this.props.createAxis(num, initOriginPt, vec.add(initOriginPt, [0, -3]));
-    }
-  };
-
   handleDoubleClick = e => {
-    const initPt = this.getPt(e);
-    this.props.createNode(initPt);
+    if (e.metaKey) {
+      const initOriginPt = this.getPt(e);
+      this.props.createAxis(6, initOriginPt, vec.add(initOriginPt, [0, -3]));
+    } else {
+      const initPt = this.getPt(e);
+      this.props.createNode(initPt);
+    }
   };
 
   render() {
@@ -98,7 +95,6 @@ class Sheet extends Component {
         onWheel={this.handleWheel}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
-        onClick={this.handleClick}
         onDoubleClick={this.handleDoubleClick}
         onMouseMove={this.handleMouseMove}
       >
