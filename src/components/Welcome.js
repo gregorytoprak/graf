@@ -42,6 +42,11 @@ class Welcome extends Component {
             <li>Pan and zoom like a map application</li>
             <li>Automatic saving to cookies</li>
             <li>Manual saving to svg</li>
+            <li>
+              <a href="https://github.com/gdtoprak/graph-maker/wiki">
+                Full 'How To Use It'
+              </a>
+            </li>
           </ul>
         </Modal.Body>
         <Modal.Footer>

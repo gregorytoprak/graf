@@ -10,6 +10,8 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 - Manipulate the sheet as a whole by panning and zooming like a map app
 - Save your completed graph drawing to SVG with the click of a button
 
+[Full 'How To Use It'](https://github.com/gdtoprak/graph-maker/wiki)
+
 ## Gallery of Examples
 
   <img src="https://github.com/gdtoprak/graph-maker/blob/master/gallery/graph-k8.png" width="50%"
