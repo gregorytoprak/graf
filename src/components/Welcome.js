@@ -43,8 +43,13 @@ class Welcome extends Component {
             <li>Automatic saving to cookies</li>
             <li>Manual saving to svg</li>
             <li>
-              <a href="https://github.com/gdtoprak/graph-maker/wiki">
-                Full 'How To Use It'
+              <a href="https://github.com/gdtoprak/graph-maker/wiki/Full-Usage">
+                Full Usage
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/gdtoprak/graph-maker/wiki/Gallery">
+                Gallery
               </a>
             </li>
           </ul>

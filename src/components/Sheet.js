@@ -105,9 +105,9 @@ class Sheet extends Component {
         {this.props.edgeIds.map(id => (
           <EdgeHandleContainer key={id} id={id} getPt={this.getPt} />
         ))}
-        {this.props.axisIds.map(id => (
-          <AxisContainer key={id} id={id} getPt={this.getPt} />
-        ))}
+        {this.props.axisIds
+          .reverse()
+          .map(id => <AxisContainer key={id} id={id} getPt={this.getPt} />)}
       </svg>
     );
   }
