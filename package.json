@@ -1,11 +1,19 @@
 {
   "name": "graph-maker",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "homepage": "http://graph.gdt.io/",
   "private": true,
+  "scripts": {
+    "deploy": "react-scripts build && surge ./build graph.gdt.io && open http://graph.gdt.io/",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
   "devDependencies": {
     "prettier": "^0.22.0",
-    "react-scripts": "0.8.5"
+    "react-scripts": "0.8.5",
+    "surge": "^0.19.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -18,12 +26,5 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "verge": "^1.9.1"
-  },
-  "scripts": {
-    "deploy": "react-scripts build && surge ./build graph.gdt.io && open http://graph.gdt.io/",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   }
 }
