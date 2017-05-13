@@ -1,19 +1,20 @@
 {
   "name": "graph-maker",
   "version": "1.2.3",
-  "homepage": "http://graph.gdt.io/",
+  "homepage": "https://gdtoprak.github.io/graph-maker",
+  "author": "gdtoprak",
   "private": true,
   "scripts": {
-    "deploy": "react-scripts build && surge ./build graph.gdt.io && open http://graph.gdt.io/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "prettier": "^0.22.0",
-    "react-scripts": "0.8.5",
-    "surge": "^0.19.0"
+    "gh-pages": "^1.0.0",
+    "react-scripts": "0.8.5"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
