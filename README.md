@@ -1,4 +1,4 @@
-# [graph-maker](https://gdtoprak.github.io/graph-maker)
+# [graph-maker](http://graph.gdt.io/)
 
 Draw mathematical graphs with an intuitive drag-and-drop interface!
 

@@ -1,7 +1,7 @@
 {
   "name": "graph-maker",
   "version": "1.2.3",
-  "homepage": "https://gdtoprak.github.io/graph-maker",
+  "homepage": "http://graph.gdt.io/",
   "author": "gdtoprak",
   "private": true,
   "scripts": {
