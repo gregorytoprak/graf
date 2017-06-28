@@ -77,7 +77,7 @@ class Welcome extends Component {
             <Button href="http://github.com/gdtoprak/graph-maker/">
               GitHub
             </Button>
-            <Button bsStyle="link" href="http://gdt.io/">by GDT</Button>
+            <Button bsStyle="link" href="https://gdt.io/">by GDT</Button>
           </ButtonToolbar>
         </Modal.Footer>
       </Modal>
