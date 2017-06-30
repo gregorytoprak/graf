@@ -1,4 +1,4 @@
-# [graph-maker](https://graph.gdt.io/)
+# [graf](https://graf.gdt.io/)
 
 Draw mathematical graphs with an intuitive drag-and-drop interface!
 
@@ -8,6 +8,6 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 - Manipulate the sheet as a whole by panning and zooming like a map app
 - Save your completed graph drawing to SVG with the click of a button
 
-[Full Usage](https://github.com/gdtoprak/graph-maker/wiki/Full-Usage)
+[Full Usage](https://github.com/gdtoprak/graf/wiki/Full-Usage)
 
-[Gallery](https://github.com/gdtoprak/graph-maker/wiki/Gallery)
+[Gallery](https://github.com/gdtoprak/graf/wiki/Gallery)

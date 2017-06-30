@@ -20,7 +20,7 @@ class Welcome extends Component {
       >
         <Modal.Header>
           <Modal.Title componentClass="h1">
-            Graph Maker <small>graph.gdt.io</small>
+            Graph Maker <small>graf.gdt.io</small>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -43,12 +43,12 @@ class Welcome extends Component {
             <li>Automatic saving to cookies</li>
             <li>Manual saving to svg</li>
             <li>
-              <a href="https://github.com/gdtoprak/graph-maker/wiki/Full-Usage">
+              <a href="https://github.com/gdtoprak/graf/wiki/Full-Usage">
                 Full Usage
               </a>
             </li>
             <li>
-              <a href="https://github.com/gdtoprak/graph-maker/wiki/Gallery">
+              <a href="https://github.com/gdtoprak/graf/wiki/Gallery">
                 Gallery
               </a>
             </li>
@@ -74,7 +74,7 @@ class Welcome extends Component {
             <DropdownButton id="new-graph" bsStyle="danger" title="New Graph">
               <MenuItem onClick={this.props.newGraph}>Empty Graph</MenuItem>
             </DropdownButton>
-            <Button href="http://github.com/gdtoprak/graph-maker/">
+            <Button href="http://github.com/gdtoprak/graf/">
               GitHub
             </Button>
             <Button bsStyle="link" href="https://gdt.io/">by GDT</Button>
