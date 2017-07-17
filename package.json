@@ -2,9 +2,13 @@
   "name": "graf",
   "version": "1.3.0",
   "homepage": "https://graf.gdt.io/",
+  "description": "Graph Maker: Draw mathematical graphs with an intuitive drag-and-drop interface!",
   "author": "gdtoprak",
+  "license": "MIT",
   "private": true,
   "scripts": {
+    "deploy": "cd build && now deploy && now alias",
+    "predeploy": "npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
