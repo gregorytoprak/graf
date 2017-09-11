@@ -42,16 +42,6 @@ class Welcome extends Component {
             <li>Pan and zoom like a map application</li>
             <li>Automatic saving to cookies</li>
             <li>Manual saving to svg</li>
-            <li>
-              <a href="https://github.com/gdtoprak/graf/wiki/Full-Usage">
-                Full Usage
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/gdtoprak/graf/wiki/Gallery">
-                Gallery
-              </a>
-            </li>
           </ul>
         </Modal.Body>
         <Modal.Footer>
