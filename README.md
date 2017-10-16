@@ -10,11 +10,11 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 
 ## Gallery
 
-  <img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-k8.png" width="45%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-loops.png" width="45%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-icosahedron.png" width="45%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-leaf.png" width="45%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-cayley.png" width="45%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-colors.png" width="45%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-rotate.gif" width="45%"
+  <img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-k8.png" width="50%"
+/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-loops.png" width="50%"
+/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-icosahedron.png" width="50%"
+/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-leaf.png" width="50%"
+/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-cayley.png" width="50%"
+/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-colors.png" width="50%"
+/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-rotate.gif" width="100%"
 />
