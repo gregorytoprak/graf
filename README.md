@@ -8,13 +8,5 @@ Draw mathematical graphs with an intuitive drag-and-drop interface!
 - Manipulate the sheet as a whole by panning and zooming like a map app
 - Save your completed graph drawing to SVG with the click of a button
 
-## Gallery
+Check out some example images in the gallery directory!
 
-  <img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-k8.png" width="50%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-loops.png" width="50%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-icosahedron.png" width="50%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-leaf.png" width="50%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-cayley.png" width="50%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-colors.png" width="50%"
-/><img src="https://github.com/gdtoprak/graf/blob/master/gallery/graph-rotate.gif" width="100%"
-/>
