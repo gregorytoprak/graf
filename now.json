@@ -1,10 +1,10 @@
 {
   "name": "graf.gdt.io",
   "alias": "graf.gdt.io",
-  "type": "static",
-  "type": "static",
   "static": {
     "public": "build"
-  }
+  },
+  "type": "static",
+  "files": ["build"]
 }
 
