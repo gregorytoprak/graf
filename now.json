@@ -1,5 +1,5 @@
 {
-  "name": "graf.gdt.io",
+  "name": "graf",
   "alias": "graf.gdt.io",
   "static": {
     "public": "build"
