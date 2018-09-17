@@ -1,4 +1,4 @@
-# [Graph Maker](https://graf.gdt.io/)
+# [Graph Maker](graf.gdt.io)
 
 Draw mathematical graphs with an intuitive drag-and-drop interface!
 
