@@ -1,7 +1,4 @@
 {
-  "name": "graf",
-  "version": "1.0.0",
-  "private": true,
   "scripts": {
     "now-build": "react-scripts build && mv build dist",
     "start": "react-scripts start",

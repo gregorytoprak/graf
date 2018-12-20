@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "graf",
+  "name": "graf.gdt.io",
   "alias": "graf.gdt.io",
   "builds": [{ "src": "package.json", "use": "@now/static-build" }],
   "routes": [
