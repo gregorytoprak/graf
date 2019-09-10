@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   Modal,
   ButtonToolbar,
@@ -7,8 +7,8 @@ import {
   Tooltip,
   DropdownButton,
   MenuItem,
-  Glyphicon
-} from "react-bootstrap";
+  Glyphicon,
+} from "react-bootstrap"
 
 class Welcome extends Component {
   render() {
@@ -20,7 +20,7 @@ class Welcome extends Component {
       >
         <Modal.Header>
           <Modal.Title componentClass="h1">
-            Graph Maker <small>graf.gdt.io</small>
+            Graph Maker <small>graf.gregorytoprak.com</small>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -36,8 +36,8 @@ class Welcome extends Component {
             <li>Each edge has a handle to control its curvature</li>
             <li>Drag-and-drop a node or handle to position it</li>
             <li>
-              Edit colors, arrows on edges, and leg-count on axes in
-              the <Glyphicon glyph="sunglasses" /> menu
+              Edit colors, arrows on edges, and leg-count on axes in the{" "}
+              <Glyphicon glyph="sunglasses" /> menu
             </li>
             <li>Pan and zoom like a map application</li>
             <li>Automatic saving to cookies</li>
@@ -64,17 +64,19 @@ class Welcome extends Component {
             <DropdownButton id="new-graph" bsStyle="danger" title="New Graph">
               <MenuItem onClick={this.props.newGraph}>Empty Graph</MenuItem>
             </DropdownButton>
-            { /*
+            {/*
             <Button href="https://github.com/gdtoprak/graf/">
               GitHub
             </Button>
-            */ }
-            <Button bsStyle="link" href="https://gdt.io/">by GDT</Button>
+            */}
+            <Button bsStyle="link" href="https://gregorytoprak.com/">
+              by GDT
+            </Button>
           </ButtonToolbar>
         </Modal.Footer>
       </Modal>
-    );
+    )
   }
 }
 
-export default Welcome;
+export default Welcome
